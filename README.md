@@ -2,7 +2,7 @@
 # RufoofReaderSDK
 
 ## Overview
-A brief description of what MyMobileSDK does.
+
 
 ### Usage
 1. Create MethodChannel named `rufoof_plugin`:
