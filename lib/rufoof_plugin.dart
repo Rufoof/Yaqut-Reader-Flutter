@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:rufoof_plugin/models/rufoof_book.dart';
 import 'package:rufoof_plugin/models/rufoof_reader_style.dart';
@@ -26,6 +28,4 @@ class RufoofPlugin {
   Future<bool> checkIfLocal(int bookId, int bookFileId) {
     return RufoofPluginPlatform.instance.checkIfLocal(bookId, bookFileId);
   }
-
-  void initialize({required Function(int, int) onPositionChanged}) {}
 }

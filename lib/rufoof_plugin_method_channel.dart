@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:rufoof_plugin/constants/constants.dart';
@@ -12,22 +14,30 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('rufoof_plugin');
 
-  @override
-  void initialize({required Function(int, int) onPositionChanged}) {
-    methodChannel.setMethodCallHandler((MethodCall call) async {
-      switch (call.method) {
-        case 'onPositionChanged':
-          final Map<String, dynamic> data =
-              Map<String, dynamic>.from(call.arguments);
-          int position = data['position'] as int;
-          int bookId = data['book_id'] as int;
-          onPositionChanged(position, bookId);
-          break;
-        default:
-          throw MissingPluginException(
-              'Method ${call.method} not implemented.');
-      }
-    });
+  final StreamController<MethodCall> callbackStreamController =
+      StreamController<MethodCall>.broadcast();
+  Stream<MethodCall> get callbackStream => callbackStreamController.stream;
+
+  // @override
+  // void initialize({required Function(int, int) onPositionChanged}) {
+  // methodChannel.setMethodCallHandler((MethodCall call) async {
+  //   switch (call.method) {
+  //     case 'onPositionChanged':
+  //       final Map<String, dynamic> data =
+  //           Map<String, dynamic>.from(call.arguments);
+  //       int position = data['position'] as int;
+  //       int bookId = data['book_id'] as int;
+  //       onPositionChanged(position, bookId);
+  //       break;
+  //     default:
+  //       throw MissingPluginException(
+  //           'Method ${call.method} not implemented.');
+  //   }
+  // });
+  // }
+
+  void sendCallback(MethodCall data) {
+    callbackStreamController.add(data);
   }
 
   @override
@@ -52,6 +62,10 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
         constAccessToken: accessToken,
         constBook: book.toJson(),
         constStyle: style.toJson()
+      });
+
+      methodChannel.setMethodCallHandler((MethodCall call) async {
+        sendCallback(call);
       });
     } on PlatformException catch (e) {
       if (kDebugMode) {

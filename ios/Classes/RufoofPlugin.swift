@@ -37,7 +37,6 @@ public class RufoofPlugin: NSObject, FlutterPlugin {
                         "book_id": bookId,
                         "book_file_id": bookFileId,
                     ]
-                    channel?.invokeMethod("onLocalChecked", arguments: data)
                     result(isLocal)
                     return
                 }
