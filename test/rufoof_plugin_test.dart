@@ -22,6 +22,12 @@ class MockRufoofPluginPlatform
     // TODO: implement startReader
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> checkIfLocal(int bookId, int bookFileId) {
+    // TODO: implement checkIfLocal
+    throw UnimplementedError();
+  }
 }
 
 void main() {

@@ -40,4 +40,20 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
       }
     }
   }
+
+  @override
+  Future<bool> checkIfLocal(int bookId, int bookFileId) async {
+    bool isLocal = false;
+    try {
+      isLocal = await methodChannel.invokeMethod('checkIfLocal', {
+        'book_id': bookId,
+        'book_file_id': bookFileId,
+      });
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        debugPrint("Failed to call native method: '${e.message}'.");
+      }
+    }
+    return isLocal;
+  }
 }

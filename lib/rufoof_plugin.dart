@@ -21,4 +21,8 @@ class RufoofPlugin {
         book: book,
         style: style);
   }
+
+  Future<void> checkIfLocal(int bookId, int bookFileId) {
+    return RufoofPluginPlatform.instance.checkIfLocal(bookId, bookFileId);
+  }
 }

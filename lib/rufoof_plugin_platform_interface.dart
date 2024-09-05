@@ -37,4 +37,8 @@ abstract class RufoofPluginPlatform extends PlatformInterface {
       required RufoofReaderStyle style}) {
     throw UnimplementedError('startReader() has not been implemented.');
   }
+
+  Future<void> checkIfLocal(int bookId, int bookFileId) {
+    throw UnimplementedError('checkIfLocal() has not been implemented.');
+  }
 }
