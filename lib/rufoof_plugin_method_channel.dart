@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:rufoof_plugin/constants/constants.dart';
-import 'package:rufoof_plugin/models/book.dart';
-import 'package:rufoof_plugin/models/reader_style.dart';
+import 'package:rufoof_plugin/models/rufoof_book.dart';
+import 'package:rufoof_plugin/models/rufoof_reader_style.dart';
 
 import 'rufoof_plugin_platform_interface.dart';
 
@@ -24,8 +24,8 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
       {required String? header,
       required String? path,
       required String? accessToken,
-      required Book book,
-      required ReaderStyle style}) async {
+      required RufoofBook book,
+      required RufoofReaderStyle style}) async {
     try {
       await methodChannel.invokeMethod('startReader', {
         constHeader: header,

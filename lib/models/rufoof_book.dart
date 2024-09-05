@@ -1,4 +1,4 @@
-class Book {
+class RufoofBook {
   final int bookId;
   final String title;
   final String? subtitle;
@@ -10,7 +10,7 @@ class Book {
   final double? retailPrice;
   final double? rating;
 
-  Book({
+  RufoofBook({
     required this.bookId,
     required this.title,
     this.subtitle,
@@ -23,8 +23,8 @@ class Book {
     this.rating,
   });
 
-  factory Book.fromJson(Map<String, dynamic> json) {
-    return Book(
+  factory RufoofBook.fromJson(Map<String, dynamic> json) {
+    return RufoofBook(
       bookId: json['bookId'] as int,
       title: json['title'] as String,
       subtitle: json['subtitle'] as String?,

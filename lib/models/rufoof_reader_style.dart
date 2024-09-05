@@ -1,11 +1,11 @@
-class ReaderStyle {
+class RufoofReaderStyle {
   int readerColor;
   int textSize;
   bool isJustified;
   int lineSpacing;
   int font;
 
-  ReaderStyle(
+  RufoofReaderStyle(
       {required this.readerColor,
       required this.textSize,
       required this.isJustified,
