@@ -14,42 +14,26 @@ rufoof_plugin:
 
 
 ### Usage
-1. Create MethodChannel named `rufoof_plugin`:
+1. Create an instance from `RufoofPlugin`:
     ```dart
-    static const MethodChannel channel = MethodChannel('rufoof_plugin');
+    RufoofPlugin rufoofPlugin = RufoofPlugin();
     ```
 
-2. Check if book already downloaded by calling invokeMethod `checkIfLocal` with arguments `book_id, book_file_id`:
+2. Check if book already downloaded by calling `checkIfLocal` with arguments `book_id, book_file_id`:
     ```dart
-    channel.invokeMethod('checkIfLocal', {'book_id': book_id, 'book_file_id': book_file_id});
+    bool isLocal = await rufoofPlugin.checkIfLocal(bookId, fileId);
     ```
 
-3. On the `readerListener` check the call method `onLocalChecked` to get the result:
-    ```dart
-        var data = call.arguments as Map;
-        bool isLocal = data['is_local'];
-        int bookId = data['book_id'];
-        int bookFileId = data['book_file_id'];
-    ```
-
-4. If you received the `is_local` value as `false`,
+3. If you received the `isLocal` value as `false`,
     you need to download the book sample file and save it in the document directory for iOS.
 
     **Note:** it must be named as ‘book_id.yaqut’, for example, ‘123456.yaqut’
 
-    4.1 Create `readerStyle` as `Map<String, dynamic>`
-    ```dart
-        Map<String, dynamic> style = {
-            'readerColor': readerColor,
-            'textSize': textSize,
-            'isJustified': isJustified,
-            'lineSpacing': lineSpacing,
-            'font': font
-        }
-    ```
+    3.1 Create `RufoofReaderStyle` object
 
-    4.2 Create `rufoofPlugin` from `RufoofPlugin` and call `startReader`.
-    you need to pass `book`, `style` as `Map<String, dynamic>` and the book `path`
+    3.2 Create `RufoofBook` object
+
+    you need to pass `RufoofReaderStyle`, `RufoofBook` and the book `path`
     ```dart
         RufoofPlugin rufoofPlugin = RufoofPlugin();
         rufoofPlugin.startReader(
@@ -60,21 +44,13 @@ rufoof_plugin:
         style: style);
     ``` 
 
-5. If you received the `is_local` value as `true`, you need to do the following:
+4. If you received the `is_local` value as `true`, you need to do the following:
 
-    5.1 Create `readerStyle` as `Map<String, dynamic>`
-    ```dart
-        Map<String, dynamic> style = {
-            'readerColor': readerColor,
-            'textSize': textSize,
-            'isJustified': isJustified,
-            'lineSpacing': lineSpacing,
-            'font': font
-        }
-    ```
+    4.1 Create `RufoofReaderStyle` object
 
-    5.2 Create `rufoofPlugin` from `RufoofPlugin` and call `startReader`.
-    you need to pass `book` and `style` as `Map<String, dynamic>`
+    4.2 Create `RufoofBook` object
+
+    you need to pass `book` and `style`
     ```dart
         RufoofPlugin rufoofPlugin = RufoofPlugin();
         rufoofPlugin.startReader(
@@ -85,9 +61,41 @@ rufoof_plugin:
         style: style);
     ```
 
-6. On the `readerListener` check the following call methods
+6. On the `callbackStream` check the following callbacks
     `onPositionChanged`, `onReaderClosed`, `onStyleChanged`, `onSyncNotes`, `onSampleEnded`,
     `onBookDetailsCLicked`, `onSaveBookClicked`, `onShareBook`, `onDownloadBook`, `onReadingSessionEnd`
+
+    ```dart
+        rufoofPlugin.callbackStream.listen((data) {
+      switch (data.method) {
+        case 'onPositionChanged':
+            var data = data.arguments as Map;
+            int position = data[constPosition];
+            int bookId = data[constBookId];
+        case 'onReaderClosed':
+            ...
+        case 'onStyleChanged':
+            ...
+        case 'onSyncNotes':
+            List<Map<String, dynamic>> rows = [];
+            final List<dynamic> marks = call.arguments;
+            for (var mark in marks) {
+                var bookId = mark[constBookId];
+                var fromOffset = mark[constFromOffset];
+                var toOffset = mark[constToOffset];
+                var markColor = mark[constMarkColor];
+                var displayText = mark[constDisplayText];
+                var type = mark[constType];
+                var deleted = mark[constDeleted];
+                var local = mark[constLocal];
+            }
+        default:
+          if (kDebugMode) {
+            debugPrint('Unknown method');
+          }
+      }
+    });
+    ```
 
 ## Contributing
 Information on how to contribute to the project.
