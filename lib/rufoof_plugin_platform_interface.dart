@@ -29,17 +29,4 @@ abstract class RufoofPluginPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
-
-  Future<MethodCall?> startReader(
-      {required String? header,
-      required String? path,
-      required String? accessToken,
-      required RufoofBook book,
-      required RufoofReaderStyle style}) {
-    throw UnimplementedError('startReader() has not been implemented.');
-  }
-
-  Future<bool> checkIfLocal(int bookId, int bookFileId) {
-    throw UnimplementedError('checkIfLocal() has not been implemented.');
-  }
 }

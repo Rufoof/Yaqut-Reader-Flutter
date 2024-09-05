@@ -12,28 +12,6 @@ class MockRufoofPluginPlatform
     implements RufoofPluginPlatform {
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
-
-  @override
-  Future<MethodCall?> startReader(
-      {required String? header,
-      required String? path,
-      required String? accessToken,
-      required RufoofBook? book,
-      required RufoofReaderStyle? style}) {
-    // TODO: implement startReader
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> checkIfLocal(int bookId, int bookFileId) {
-    // TODO: implement checkIfLocal
-    throw UnimplementedError();
-  }
-
-  @override
-  void initialize({required Function(int p1, int p2) onPositionChanged}) {
-    // TODO: implement initialize
-  }
 }
 
 void main() {
