@@ -24,7 +24,7 @@ class MockRufoofPluginPlatform
   }
 
   @override
-  Future<void> checkIfLocal(int bookId, int bookFileId) {
+  Future<bool> checkIfLocal(int bookId, int bookFileId) {
     // TODO: implement checkIfLocal
     throw UnimplementedError();
   }

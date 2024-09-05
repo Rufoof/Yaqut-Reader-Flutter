@@ -22,7 +22,7 @@ class RufoofPlugin {
         style: style);
   }
 
-  Future<void> checkIfLocal(int bookId, int bookFileId) {
+  Future<bool> checkIfLocal(int bookId, int bookFileId) {
     return RufoofPluginPlatform.instance.checkIfLocal(bookId, bookFileId);
   }
 }
