@@ -21,4 +21,14 @@ class RufoofReaderStyle {
       'font': font
     };
   }
+
+  factory RufoofReaderStyle.fromJson(Map<String, dynamic> json) {
+    return RufoofReaderStyle(
+      readerColor: json['readerColor'] as int,
+      textSize: json['textSize'] as int,
+      isJustified: json['isJustified'] as bool,
+      lineSpacing: json['lineSpacing'] as int,
+      font: json['font'] as int,
+    );
+  }
 }
