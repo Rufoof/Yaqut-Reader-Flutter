@@ -16,31 +16,34 @@ class RufoofPlugin {
     callbackStreamController.add(data);
   }
 
-  Future<MethodCall?> startReader(
+  Future<void> startReader(
       {required String? header,
       required String? path,
       required String? accessToken,
       required RufoofBook book,
       required RufoofReaderStyle style}) async {
-    MethodCall? method;
+    methodChannel.setMethodCallHandler(readerListener);
     try {
-      method = await methodChannel.invokeMethod<MethodCall>('startReader', {
+      await methodChannel.invokeMethod('startReader', {
         constHeader: header,
         constPath: path,
         constAccessToken: accessToken,
         constBook: book.toJson(),
         constStyle: style.toJson()
       });
-
-      methodChannel.setMethodCallHandler((MethodCall call) async {
-        sendCallback(call);
-      });
     } on PlatformException catch (e) {
       if (kDebugMode) {
         debugPrint("Failed to call native method: '${e.message}'.");
       }
     }
-    return method;
+  }
+
+  Future<void> readerListener(MethodCall call) async {
+    if (kDebugMode) {
+      debugPrint(
+          "$constReaderPluginTag readerListener Called method: ${call.method}");
+    }
+    sendCallback(call);
   }
 
   Future<bool> checkIfLocal(int bookId, int bookFileId) async {
