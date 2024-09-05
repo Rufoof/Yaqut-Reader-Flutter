@@ -14,7 +14,7 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
 
   @override
   void initialize({required Function(int, int) onPositionChanged}) {
-    methodChannel.setMethodCallHandler((call) async {
+    methodChannel.setMethodCallHandler((MethodCall call) async {
       switch (call.method) {
         case 'onPositionChanged':
           final Map<String, dynamic> data =
