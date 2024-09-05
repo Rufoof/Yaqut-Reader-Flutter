@@ -29,6 +29,11 @@ class MockRufoofPluginPlatform
     // TODO: implement checkIfLocal
     throw UnimplementedError();
   }
+
+  @override
+  void initialize({required Function(int p1, int p2) onPositionChanged}) {
+    // TODO: implement initialize
+  }
 }
 
 void main() {

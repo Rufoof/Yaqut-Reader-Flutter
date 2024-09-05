@@ -42,4 +42,6 @@ abstract class RufoofPluginPlatform extends PlatformInterface {
   Future<bool> checkIfLocal(int bookId, int bookFileId) {
     throw UnimplementedError('checkIfLocal() has not been implemented.');
   }
+
+  void initialize({required Function(int, int) onPositionChanged}) {}
 }

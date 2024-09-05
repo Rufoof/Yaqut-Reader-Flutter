@@ -26,4 +26,6 @@ class RufoofPlugin {
   Future<bool> checkIfLocal(int bookId, int bookFileId) {
     return RufoofPluginPlatform.instance.checkIfLocal(bookId, bookFileId);
   }
+
+  void initialize({required Function(int, int) onPositionChanged}) {}
 }
