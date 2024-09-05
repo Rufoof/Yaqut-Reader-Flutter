@@ -33,8 +33,8 @@ abstract class RufoofPluginPlatform extends PlatformInterface {
       {required String? header,
       required String? path,
       required String? accessToken,
-      required Map<String, dynamic>? book,
-      required Map<String, dynamic>? style}) {
+      required Book book,
+      required ReaderStyle style}) {
     throw UnimplementedError('startReader() has not been implemented.');
   }
 }

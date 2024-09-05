@@ -24,15 +24,15 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
       {required String? header,
       required String? path,
       required String? accessToken,
-      required Map<String, dynamic>? book,
-      required Map<String, dynamic>? style}) async {
+      required Book book,
+      required ReaderStyle style}) async {
     try {
       await methodChannel.invokeMethod('startReader', {
         constHeader: header,
         constPath: path,
         constAccessToken: accessToken,
-        constBook: book,
-        constStyle: style
+        constBook: book.toJson(),
+        constStyle: style.toJson()
       });
     } on PlatformException catch (e) {
       if (kDebugMode) {

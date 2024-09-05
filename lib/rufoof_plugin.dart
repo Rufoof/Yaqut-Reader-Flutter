@@ -12,8 +12,8 @@ class RufoofPlugin {
       {required String? header,
       required String? path,
       required String? accessToken,
-      required Map<String, dynamic>? book,
-      required Map<String, dynamic>? style}) {
+      required Book book,
+      required ReaderStyle style}) {
     return RufoofPluginPlatform.instance.startReader(
         header: header,
         path: path,
