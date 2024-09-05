@@ -38,6 +38,7 @@ public class RufoofPlugin: NSObject, FlutterPlugin {
                         "book_file_id": bookFileId,
                     ]
                     channel?.invokeMethod("onLocalChecked", arguments: data)
+                    result(isLocal)
                     return
                 }
                 result("AppDelegate Falied response")
