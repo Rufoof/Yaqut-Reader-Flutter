@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:rufoof_plugin/models/rufoof_book.dart';
 import 'package:rufoof_plugin/models/rufoof_reader_style.dart';
@@ -29,7 +30,7 @@ abstract class RufoofPluginPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<void> startReader(
+  Future<MethodCall?> startReader(
       {required String? header,
       required String? path,
       required String? accessToken,
@@ -38,7 +39,7 @@ abstract class RufoofPluginPlatform extends PlatformInterface {
     throw UnimplementedError('startReader() has not been implemented.');
   }
 
-  Future<void> checkIfLocal(int bookId, int bookFileId) {
+  Future<bool> checkIfLocal(int bookId, int bookFileId) {
     throw UnimplementedError('checkIfLocal() has not been implemented.');
   }
 }

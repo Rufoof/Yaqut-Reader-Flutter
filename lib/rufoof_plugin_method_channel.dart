@@ -20,14 +20,15 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
   }
 
   @override
-  Future<void> startReader(
+  Future<MethodCall?> startReader(
       {required String? header,
       required String? path,
       required String? accessToken,
       required RufoofBook book,
       required RufoofReaderStyle style}) async {
+    MethodCall? method;
     try {
-      await methodChannel.invokeMethod('startReader', {
+      method = await methodChannel.invokeMethod<MethodCall>('startReader', {
         constHeader: header,
         constPath: path,
         constAccessToken: accessToken,
@@ -39,6 +40,7 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
         debugPrint("Failed to call native method: '${e.message}'.");
       }
     }
+    return method;
   }
 
   @override

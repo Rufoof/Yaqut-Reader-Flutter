@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rufoof_plugin/models/rufoof_book.dart';
 import 'package:rufoof_plugin/models/rufoof_reader_style.dart';
@@ -13,7 +14,7 @@ class MockRufoofPluginPlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  Future<void> startReader(
+  Future<MethodCall?> startReader(
       {required String? header,
       required String? path,
       required String? accessToken,

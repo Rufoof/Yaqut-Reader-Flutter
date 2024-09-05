@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:rufoof_plugin/models/rufoof_book.dart';
 import 'package:rufoof_plugin/models/rufoof_reader_style.dart';
 
@@ -8,7 +9,7 @@ class RufoofPlugin {
     return RufoofPluginPlatform.instance.getPlatformVersion();
   }
 
-  Future<void> startReader(
+  Future<MethodCall?> startReader(
       {required String? header,
       required String? path,
       required String? accessToken,
