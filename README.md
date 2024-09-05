@@ -1,7 +1,16 @@
 
 # RufoofReaderSDK
 
-## Overview
+## Installation
+1. Open `pubspec.yaml` file.
+2. Under `dependencies` add the following:
+
+```dart
+rufoof_plugin:
+    git:
+      url: https://github.com/Rufoof/Reader-Flutter-Framework.git
+      ref: master
+```
 
 
 ### Usage
