@@ -27,7 +27,7 @@
     you need to download the book sample file and save it in the document directory for iOS.
 
     **Note:** it must be named as ‘book_id.yaqut’, for example, ‘123456.yaqut’
-    
+
     4.1 Create `readerStyle` as `Map<String, dynamic>`
     ```dart
         Map<String, dynamic> style = {
@@ -52,6 +52,7 @@
     ``` 
 
 5. If you received the `is_local` value as `true`, you need to do the following:
+
     5.1 Create `readerStyle` as `Map<String, dynamic>`
     ```dart
         Map<String, dynamic> style = {
