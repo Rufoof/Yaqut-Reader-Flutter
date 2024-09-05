@@ -30,24 +30,6 @@ class MethodChannelRufoofPlugin extends RufoofPluginPlatform {
     });
   }
 
-  static Future<void> _methodCallHandler(MethodCall call) async {
-    switch (call.method) {
-      case 'onPositionChanged':
-        final Map<String, dynamic> data =
-            Map<String, dynamic>.from(call.arguments);
-        int position = data['position'] as int;
-        int bookId = data['book_id'] as int;
-        // Now, you can handle this value in Flutter, such as updating the UI or saving the position.
-        if (kDebugMode) {
-          print('Position changed: $position for bookId: $bookId');
-        }
-        break;
-      // Handle other methods similarly
-      default:
-        throw MissingPluginException('Method ${call.method} not implemented.');
-    }
-  }
-
   @override
   Future<String?> getPlatformVersion() async {
     final version =
