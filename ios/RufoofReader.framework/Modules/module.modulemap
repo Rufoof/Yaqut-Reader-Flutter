@@ -1,0 +1,11 @@
+framework module RufoofReader {
+  umbrella header "RufoofReader.h"
+  export *
+
+  module * { export * }
+}
+
+module RufoofReader.Swift {
+  header "RufoofReader-Swift.h"
+  requires objc
+}

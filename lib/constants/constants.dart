@@ -1,0 +1,25 @@
+const String constBookFileId = 'book_file_id';
+const String constFromOffset = 'from_offset';
+const String constToOffset = 'to_offset';
+const String constMarkColor = 'mark_color';
+const String constDisplayText = 'display_text';
+const String constType = 'type';
+const String constDeleted = 'deleted';
+const String constLocal = 'local';
+const String constLineSpace = 'line_space';
+const String constLayout = 'layout';
+const String constOrientation = 'orientation';
+const String constFontSize = 'font_size';
+const String constFont = 'font';
+const String constReaderColor = 'reader_color';
+const String constPosition = 'position';
+const String constHeader = 'header';
+const String constPath = 'path';
+const String constBook = 'book';
+const String constBookId = 'book_id';
+const String constAccessToken = 'access_token';
+const String constStyle = 'style';
+const String constIsLocal = 'is_local';
+
+const String constReaderPluginTag = "ReaderPlugin";
+const String constUserToken = '293b93611890b5cf8470ddf657f2b4f7cb52cd3a';
