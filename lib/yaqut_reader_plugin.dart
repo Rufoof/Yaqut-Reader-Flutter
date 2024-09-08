@@ -126,7 +126,7 @@ class YaqutReaderPlugin {
         YaqutReaderStyle style = YaqutReaderStyle(
             readerColor: readerColor,
             textSize: fontSize,
-            isJustified: layout == 0 ? true : false,
+            isJustified: layout,
             lineSpacing: lineSpace,
             font: font);
         onStyleChangedCallback(style);
