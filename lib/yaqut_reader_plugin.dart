@@ -42,8 +42,7 @@ class YaqutReaderPlugin {
   Stream<String> get onSaveBookClicked =>
       onSaveBookClickedStreamController.stream;
   Stream<String> get onShareBook => onShareBookStreamController.stream;
-  Stream<String> get onDownloadBookCLicked =>
-      onDownloadBookStreamController.stream;
+  Stream<String> get onDownloadBook => onDownloadBookStreamController.stream;
   Stream<int> get onReaderClosed => onReaderClosedStreamController.stream;
   Stream<String> get onSampleEnded => onSampleEndedStreamController.stream;
   Stream<YaqutReaderReadingSession> get onSyncReadingSession =>
