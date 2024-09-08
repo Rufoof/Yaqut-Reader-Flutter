@@ -117,7 +117,7 @@ class YaqutReaderPlugin {
     }
     switch (call.method) {
       case 'onStyleChanged':
-        var data = call.arguments as Map<String, dynamic>;
+        var data = call.arguments as Map;
         var lineSpace = data[constLineSpace];
         var layout = data[constLayout];
         var fontSize = data[constFontSize];
@@ -126,7 +126,7 @@ class YaqutReaderPlugin {
         YaqutReaderStyle style = YaqutReaderStyle(
             readerColor: readerColor,
             textSize: fontSize,
-            isJustified: layout,
+            isJustified: layout == 1 ? true : false,
             lineSpacing: lineSpace,
             font: font);
         onStyleChangedCallback(style);
