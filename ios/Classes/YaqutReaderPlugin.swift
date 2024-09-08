@@ -2,13 +2,13 @@ import Flutter
 import UIKit
 import RufoofReader
 
-public class YaqutPlugin: NSObject, FlutterPlugin {
+public class YaqutReaderPlugin: NSObject, FlutterPlugin {
     var readerBuilder: ReaderBuilder?
     var channel: FlutterMethodChannel?
     var bookId: Int?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let instance = YaqutPlugin()
+        let instance = YaqutReaderPlugin()
         instance.setAppearnce()
         instance.channel = FlutterMethodChannel(name: "yaqut_reader_plugin", binaryMessenger: registrar.messenger())
         registrar.addMethodCallDelegate(instance, channel: instance.channel!)
@@ -141,7 +141,7 @@ public class YaqutPlugin: NSObject, FlutterPlugin {
     }
 }
 
-extension YaqutPlugin: ReaderDelegate {
+extension YaqutReaderPlugin: ReaderDelegate {
     public func onStyleChanged(style: ReaderStyle) {
         let linespace = style.lineSpacing.rawValue
         let readerColor = style.readerColor
@@ -207,7 +207,7 @@ extension YaqutPlugin: ReaderDelegate {
     }
 }
 
-extension YaqutPlugin: StatsSessionDelegate {
+extension YaqutReaderPlugin: StatsSessionDelegate {
     public func onReadingSessionEnd(session: RufoofReader.RRReadingSession) {
         channel?.invokeMethod("onReadingSessionEnd", arguments: [:])
     }
