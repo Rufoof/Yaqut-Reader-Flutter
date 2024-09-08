@@ -130,6 +130,9 @@ class YaqutReaderPlugin {
             lineSpacing: lineSpace,
             font: font);
         onStyleChangedCallback(style);
+        if (kDebugMode) {
+          debugPrint("...onStyleChangedCallback...");
+        }
       case 'onPositionChanged':
         var data = call.arguments as Map;
         int position = data[constPosition];
