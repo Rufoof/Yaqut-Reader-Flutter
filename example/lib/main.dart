@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:rufoof_plugin/rufoof_plugin.dart';
+import 'package:yaqut_reader_plugin/yaqut_reader_plugin.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _rufoofPlugin = RufoofPlugin();
+  final _rufoofPlugin = YaqutReaderPlugin();
 
   @override
   void initState() {

@@ -20,6 +20,15 @@ const String constBookId = 'book_id';
 const String constAccessToken = 'access_token';
 const String constStyle = 'style';
 const String constIsLocal = 'is_local';
+const String constPagesRead = 'pages_read';
+const String constStartOffset = 'start_offset';
+const String constEndOffset = 'end_offset';
+const String constCoveredOffset = 'covered_offset';
+const String constCoveredLength = 'covered_length';
+const String constStartTime = 'start_time';
+const String constEndTime = 'end_time';
+const String constMd5 = 'md5';
+const String constUuid = 'uuid';
 
 const String constReaderPluginTag = "ReaderPlugin";
 const String constUserToken = '293b93611890b5cf8470ddf657f2b4f7cb52cd3a';

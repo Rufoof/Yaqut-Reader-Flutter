@@ -1,4 +1,4 @@
-# rufoof_plugin_example
+# yaqut_reader_example
 
 Demonstrates how to use the rufoof_plugin plugin.
 
