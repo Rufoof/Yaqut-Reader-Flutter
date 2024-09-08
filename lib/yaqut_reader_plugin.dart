@@ -117,7 +117,7 @@ class YaqutReaderPlugin {
     }
     switch (call.method) {
       case 'onStyleChanged':
-        var data = call.arguments as Map;
+        var data = call.arguments as Map<String, dynamic>;
         var lineSpace = data[constLineSpace];
         var layout = data[constLayout];
         var fontSize = data[constFontSize];
