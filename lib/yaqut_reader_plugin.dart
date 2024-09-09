@@ -113,7 +113,7 @@ class YaqutReaderPlugin {
   Future<void> readerListener(MethodCall call) async {
     if (kDebugMode) {
       debugPrint(
-          "$constReaderPluginTag readerListener Called method: ${call.method}");
+          "$constYaqutReaderPluginTag readerListener Called method: ${call.method}");
     }
     switch (call.method) {
       case 'onStyleChanged':

@@ -30,5 +30,4 @@ const String constEndTime = 'end_time';
 const String constMd5 = 'md5';
 const String constUuid = 'uuid';
 
-const String constReaderPluginTag = "ReaderPlugin";
-const String constUserToken = '293b93611890b5cf8470ddf657f2b4f7cb52cd3a';
+const String constYaqutReaderPluginTag = "YaqutReaderPlugin";
