@@ -1,5 +1,5 @@
 
-# RufoofReaderSDK
+# YaqutReaderSDK
 
 ## Installation
 1. Open `pubspec.yaml` file.
@@ -29,11 +29,11 @@ rufoof_plugin:
 
     **Note:** it must be named as ‘book_id.yaqut’, for example, ‘123456.yaqut’
 
-    3.1 Create `RufoofReaderStyle` object
+    3.1 Create `YaqutReaderStyle` object
 
-    3.2 Create `RufoofBook` object
+    3.2 Create `YaqutBook` object
 
-    you need to pass `RufoofReaderStyle`, `RufoofBook` and the book `path`
+    you need to pass `YaqutReaderStyle`, `YaqutBook` and the book `path`
     ```dart
         RufoofPlugin rufoofPlugin = RufoofPlugin();
         rufoofPlugin.startReader(
@@ -46,9 +46,9 @@ rufoof_plugin:
 
 4. If you received the `is_local` value as `true`, you need to do the following:
 
-    4.1 Create `RufoofReaderStyle` object
+    4.1 Create `YaqutReaderStyle` object
 
-    4.2 Create `RufoofBook` object
+    4.2 Create `YaqutBook` object
 
     you need to pass `book` and `style`
     ```dart

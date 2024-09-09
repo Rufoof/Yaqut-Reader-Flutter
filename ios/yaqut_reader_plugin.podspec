@@ -14,9 +14,9 @@ A new Flutter project.
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
-  s.preserve_paths = 'RufoofReader.framework'
-  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework RufoofReader' }
-  s.vendored_frameworks = 'RufoofReader.framework'
+  s.preserve_paths = 'YaqutReader.framework'
+  s.xcconfig = { 'OTHER_LDFLAGS' => '-framework YaqutReader' }
+  s.vendored_frameworks = 'YaqutReader.framework'
   s.dependency 'Flutter'
   s.platform = :ios, '11.0'
 

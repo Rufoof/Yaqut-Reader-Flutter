@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import RufoofReader
+import YaqutReader
 
 public class YaqutReaderPlugin: NSObject, FlutterPlugin {
     var readerBuilder: ReaderBuilder?
@@ -181,7 +181,7 @@ extension YaqutReaderPlugin: ReaderDelegate {
         channel?.invokeMethod("onDownloadBook", arguments: [:])
     }
 
-    public func onSyncNotesAndMarks(list: [RufoofReader.NotesAndMarks]) {
+    public func onSyncNotesAndMarks(list: [YaqutReader.NotesAndMarks]) {
         var items = [[String: Any]]()
         for mark in list {
             let item: [String: Any] = [
@@ -208,7 +208,7 @@ extension YaqutReaderPlugin: ReaderDelegate {
 }
 
 extension YaqutReaderPlugin: StatsSessionDelegate {
-    public func onReadingSessionEnd(session: RufoofReader.RRReadingSession) {
+    public func onReadingSessionEnd(session: YaqutReader.RRReadingSession) {
         channel?.invokeMethod("onReadingSessionEnd", arguments: [:])
     }
 }
