@@ -1,5 +1,5 @@
 name: yaqut_reader_plugin
-description: "The Reader Plugin offers comprehensive support for a wide range of formats, including EPUB, PDF, and audiobooks. It provides customizable reading experiences with multiple layouts for EPUBs (vertical, horizontal), text alignment options (justified, right-to-left), various font choices, adjustable font sizes, and multiple themes (dark, light, brown, green). Readers can also choose between different line spacings (small, medium, large) for enhanced readability.\nThe plugin supports advanced features like the ability to return to previous reading points, add notes, bookmarks, and highlights. Users can share their books, and most settings and progress are saved automatically, ensuring a seamless reading experience across sessions."
+description: "This plugin is designed to open and manage books in EPUB, PDF, and audiobook formats, adhering to specific requirements for customizable reading experiences. It provides extensive layout configurations, font and theme options, and the ability to add bookmarks, notes, and highlights, all while ensuring user preferences and reading progress are seamlessly saved across sessions."
 version: 1.0.0
 homepage:
 
