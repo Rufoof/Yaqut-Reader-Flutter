@@ -8,8 +8,8 @@
 ```dart
 rufoof_plugin:
     git:
-      url: https://github.com/Rufoof/Reader-Flutter-Framework.git
-      ref: master
+      url: https://github.com/Rufoof/Yaqut-Reader-Flutter.git
+      ref: 1.0.0
 ```
 
 
