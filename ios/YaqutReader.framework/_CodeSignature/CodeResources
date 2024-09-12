@@ -90,15 +90,15 @@
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		Mvqgu1CXCNj947LjWvo0FR3xj/g=
+		+m1sxH4RDXoz7Wy7Gm9TJINClus=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		eM6iPREAu0jk2kiJbIMjzYx0fYY=
+		rq8uPmnNuL5kKmAN3abfMfY7/vY=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		ig/mq+cwK9Cjlt9iTUL8wTJqH3Y=
+		Zr9NFzoJYWOXEBbQSudTEjRTeuY=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		ig/mq+cwK9Cjlt9iTUL8wTJqH3Y=
+		Zr9NFzoJYWOXEBbQSudTEjRTeuY=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -497,21 +497,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			V2wCjyRgZ8tvran4mKnAVsZrVXbxAMGGreUnJs6PNxU=
+			N7Ppz24tANcMgk3iPG2Sn7tquovMQnB0N5139wlHlKU=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			b3pI2552GaQa13Z7S6gvZXSNhPAbbIBFffDW0TKXkf0=
+			y7eJiDVQGwUSQMqaWIF07M0KaP2EDlTv7JKzHdqoyEM=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			iOX2AM4aKh8gbAfhhKGkeY59BzsYNzM/DvoNWrlRPeU=
+			4yP9uJzKy6lf6DIuW+6L6GLaL5GYgLmK3HwR8dK9Mso=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -546,7 +546,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			iOX2AM4aKh8gbAfhhKGkeY59BzsYNzM/DvoNWrlRPeU=
+			4yP9uJzKy6lf6DIuW+6L6GLaL5GYgLmK3HwR8dK9Mso=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
