@@ -62,7 +62,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		tf0YcL1MUujCPC24FynJjFgXMXU=
+		Uajc0PVxvv4HhkmGPr5a7DeSi9Q=
 		</data>
 		<key>KVNProgressView.nib</key>
 		<data>
@@ -90,15 +90,15 @@
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		63+JWN33+5KqzHqcbizXgmp5YNM=
+		Mvqgu1CXCNj947LjWvo0FR3xj/g=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		MDk5GagMeid6k7YnJUf6PBlKJRU=
+		eM6iPREAu0jk2kiJbIMjzYx0fYY=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		uyLL2A/oBH1db9r4ezw0Ai+6nGY=
+		ig/mq+cwK9Cjlt9iTUL8wTJqH3Y=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		uyLL2A/oBH1db9r4ezw0Ai+6nGY=
+		ig/mq+cwK9Cjlt9iTUL8wTJqH3Y=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -497,21 +497,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bMhLJIObf2PGwRh9vZEQoiGyW/Nv+ggkanqwt7CrdHY=
+			V2wCjyRgZ8tvran4mKnAVsZrVXbxAMGGreUnJs6PNxU=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dETr2K+Zsk1fy4lDex01Sa1JcJ/NaXOaiG/U967ju4s=
+			b3pI2552GaQa13Z7S6gvZXSNhPAbbIBFffDW0TKXkf0=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VjArmP83xekjvUS6eIe89dutBgIXL3qdJWjaheEixLk=
+			iOX2AM4aKh8gbAfhhKGkeY59BzsYNzM/DvoNWrlRPeU=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -546,7 +546,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VjArmP83xekjvUS6eIe89dutBgIXL3qdJWjaheEixLk=
+			iOX2AM4aKh8gbAfhhKGkeY59BzsYNzM/DvoNWrlRPeU=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
