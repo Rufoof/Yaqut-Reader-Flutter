@@ -1,6 +1,6 @@
 name: yaqut_reader_plugin
 description: "This plugin is designed to open and manage books in EPUB, PDF, and audiobook formats, adhering to specific requirements for customizable reading experiences. It provides extensive layout configurations, font and theme options, and the ability to add bookmarks, notes, and highlights, all while ensuring user preferences and reading progress are seamlessly saved across sessions."
-version: 1.0.0
+version: 1.1.0
 homepage:
 
 environment:
