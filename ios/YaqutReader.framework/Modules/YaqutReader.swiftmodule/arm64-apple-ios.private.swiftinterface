@@ -1305,6 +1305,7 @@ extension YaqutReader.CS.BigInt : Swift.ExpressibleByIntegerLiteral {
 public class RRBookInfo {
   final public let length: Swift.Int
   final public let formatVersion: Swift.Int
+  final public let language: Swift.String
   public var type: Swift.String
   final public let pages: Swift.Int
   final public let isSample: Swift.Bool
