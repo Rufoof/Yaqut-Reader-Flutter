@@ -47,7 +47,6 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     private Context context;
 
     private ReaderBuilder readerBuilder;
-    private Integer bookId;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -67,17 +66,14 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
                 break;
-            case "saveBook":
+            case "startReader":
+                Map<String, Object> arguments = call.arguments();
                 String header = (String) arguments.get("header");
                 String path = (String) arguments.get("path");
                 String token = (String) arguments.get("access_token");
-                saveBook(path, header, token);
-                break;
-            case "startReader":
-                Map<String, Object> arguments = call.arguments();
                 Map<String, Object> book = (Map<String, Object>) arguments.get("book");
                 Map<String, Object> style = (Map<String, Object>) arguments.get("style");
-                startReader(book, style);
+                startReader(header, path, token, book, style);
                 break;
             case "checkIfLocal":
                 Map<String, Object> checkArgs = call.arguments();
@@ -92,7 +88,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
-    private void startReader(Map<String, Object> bookData, Map<String, Object> styleData) {
+    private void startReader(String header, String path, String token,Map<String, Object> bookData, Map<String, Object> styleData) {
         bookId = (Integer) bookData.get("bookId");
         String title = (String) bookData.get("title");
         int bookFileId = (Integer) ((Map<String, Object>) bookData.get("currentFile")).get("bookFileId");
@@ -119,7 +115,15 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         readerBuilder.setFileId(bookFileId);
         readerBuilder.setNotesAndMarks(null);
         readerBuilder.setSaveState(ReaderBuilder.SAVE_STATE_NOT_SAVED).setDownloadEnabled(false);
-        readerBuilder.build();
+
+        if (path.isEmpty()) {
+            readerBuilder.build();
+        } else {
+            boolean saved = saveBook(bookId, path, header, token);
+            if (saved) {
+                readerBuilder.build();
+            }
+        }
     }
 
     private void setAppearance() {
@@ -127,8 +131,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         // Colors and appearances can be customized via views and themes
     }
 
-    private void saveBook(String bodyPath, String header, String accessToken) {
-        SaveBookManager.save(context, bookId, bodyPath, header, accessToken);
+    private boolean saveBook(int bookId, String bodyPath, String header, String accessToken) {
+        return SaveBookManager.save(context, bookId, bodyPath, header, accessToken);
     }
     ReaderListener readerListener = new ReaderListener() {
         @Override
