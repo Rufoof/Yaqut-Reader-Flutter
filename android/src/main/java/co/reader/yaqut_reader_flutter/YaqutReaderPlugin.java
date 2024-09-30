@@ -77,8 +77,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
                 break;
             case "checkIfLocal":
                 Map<String, Object> checkArgs = call.arguments();
-                int bookId = (Integer) checkArgs.get("book_id");
-                int bookFileId = (Integer) checkArgs.get("book_file_id");
+                int bookId = (int) checkArgs.get("book_id");
+                int bookFileId = (int) checkArgs.get("book_file_id");
                 boolean isLocal = BookStorage.isBookLocal(context,bookId);
 
                 result.success(isLocal);
@@ -89,18 +89,18 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private void startReader(String header, String path, String token,Map<String, Object> bookData, Map<String, Object> styleData) {
-        bookId = (Integer) bookData.get("bookId");
+        bookId = (int) bookData.get("bookId");
         String title = (String) bookData.get("title");
-        int bookFileId = (Integer) ((Map<String, Object>) bookData.get("currentFile")).get("bookFileId");
+        int bookFileId = (int) ((Map<String, Object>) bookData.get("currentFile")).get("bookFileId");
         double previewPercentage = (Double) bookData.getOrDefault("samplePreviewPercentage", 0.15);
-        int position = (Integer) bookData.get("position");
+        int position = (int) bookData.get("position");
 
         // Handle Reader Style
-        int readerColor = (Integer) styleData.getOrDefault("readerColor", 0);
-        int textSize = (Integer) styleData.getOrDefault("textSize", 22);
+        int readerColor = (int) styleData.getOrDefault("readerColor", 0);
+        int textSize = (int) styleData.getOrDefault("textSize", 22);
         boolean isJustified = (Boolean) styleData.getOrDefault("isJustified", true);
-        int lineSpacing = (Integer) styleData.getOrDefault("lineSpacing", 1);
-        int font = (Integer) styleData.getOrDefault("font", 0);
+        int lineSpacing = (int) styleData.getOrDefault("lineSpacing", 1);
+        int font = (int) styleData.getOrDefault("font", 0);
 
         ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1 : 0, lineSpacing, font);
 
