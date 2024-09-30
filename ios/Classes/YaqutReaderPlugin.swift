@@ -49,7 +49,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
     
     private func startReader(header: String?, path: String?, accessToken: String?, bookData: [String: Any], style: [String: Any]) {
         let bookId = bookData["bookId"] as? Int ?? 0
-        let bookFileId = currentFile["bookFileId"] as? Int ?? 0
+        let bookFileId = bookData["bookFileId"] as? Int ?? 0
         let title = bookData["title"] as? String ?? ""
         let previewPercentage = bookData["samplePreviewPercentage"] as? Double ?? 0.15
         let position = bookData["position"] as? Int ?? 0
