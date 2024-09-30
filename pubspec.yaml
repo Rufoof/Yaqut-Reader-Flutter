@@ -37,8 +37,7 @@ flutter:
       ios:
         pluginClass: YaqutReaderPlugin
       android:
-        # package: co.reader.yaqut_reader_flutter
-        package: co.reader.yaqut_reader_plugin
+        package: co.reader.yaqut_reader_flutter
         pluginClass: YaqutReaderPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
