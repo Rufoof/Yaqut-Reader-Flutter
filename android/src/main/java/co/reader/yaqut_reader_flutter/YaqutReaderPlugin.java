@@ -62,7 +62,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
-        if (call.method.equal("checkIfLocal")){
+        String method = call.method;
+        if (method.equals("checkIfLocal")){
             Map<String, Object> checkArgs = call.arguments();
             int bookId = (int) checkArgs.get("book_id");
             int bookFileId = (int) checkArgs.get("book_file_id");
