@@ -62,6 +62,14 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
+        if (call.method.equal("checkIfLocal")){
+            Map<String, Object> checkArgs = call.arguments();
+            int bookId = (int) checkArgs.get("book_id");
+            int bookFileId = (int) checkArgs.get("book_file_id");
+            boolean isLocal = BookStorage.isBookLocal(context,bookId);
+            result.success(isLocal);
+            return;
+        }
         switch (call.method) {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
@@ -90,7 +98,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
     private void startReader(String header, String path, String token,Map<String, Object> bookData, Map<String, Object> styleData) {
         int bookId = (int) bookData.get("bookId");
-        
+
         String title = (String) bookData.get("title");
         int bookFileId = (int) ((Map<String, Object>) bookData.get("currentFile")).get("bookFileId");
         double previewPercentage = (Double) bookData.getOrDefault("samplePreviewPercentage", 0.15);
