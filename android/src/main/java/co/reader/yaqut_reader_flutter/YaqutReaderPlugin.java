@@ -50,6 +50,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        context = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
         setAppearance();
@@ -58,16 +59,16 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
         channel.setMethodCallHandler(null);
+        channel = null;
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
-        String method = call.method;
-        if (method.equals("checkIfLocal")){
+        if (call.method.equals("checkIfLocal")) {
             Map<String, Object> checkArgs = call.arguments();
             int bookId = (int) checkArgs.get("book_id");
             int bookFileId = (int) checkArgs.get("book_file_id");
-            boolean isLocal = BookStorage.isBookLocal(context,bookId);
+            boolean isLocal = BookStorage.isBookLocal(context, bookId);
             result.success(isLocal);
             return;
         }
