@@ -9,6 +9,7 @@ public class MainActivity extends FlutterActivity {
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
+        Log.d("TAG", "configureFlutterEngine");
         GeneratedPluginRegistrant.registerWith(flutterEngine);
     }
 }
