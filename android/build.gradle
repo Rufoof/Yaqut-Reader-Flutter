@@ -39,11 +39,15 @@ android {
         minSdk = 24
     }
 
+    allprojects {
     repositories {
+        google()
+        mavenCentral()
         flatDir {
-            dirs 'android/libs'
+            dirs 'libs'
         }
     }
+}
 
     dependencies {
         testImplementation("junit:junit:4.13.2")
@@ -58,7 +62,7 @@ android {
         implementation 'com.google.code.gson:gson:2.8.6'
         def multidex_version = "2.0.1"
         implementation "androidx.multidex:multidex:$multidex_version"
-        implementation(name: 'reader', ext: 'aar')
+        compileOnly fileTree(dir: 'libs', include: ['*.aar'])
     }
 
     testOptions {
