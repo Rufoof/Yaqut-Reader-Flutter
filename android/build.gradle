@@ -24,6 +24,11 @@ rootProject.allprojects {
 apply plugin: "com.android.library"
 
 android {
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
     if (project.android.hasProperty("namespace")) {
         namespace = "co.reader.yaqut_reader_flutter"
     }
@@ -43,6 +48,7 @@ android {
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.mockito:mockito-core:5.0.0")
         implementation files('lib/classes.jar')
+        implementation files('lib/YaqutHtmlConverter-v0.5.jar')
         implementation 'androidx.appcompat:appcompat:1.6.1'
         implementation 'com.google.android.material:material:1.12.0'
         implementation 'com.github.skydoves:expandablelayout:1.0.7'
