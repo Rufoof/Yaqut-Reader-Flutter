@@ -102,10 +102,10 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private void startReader(String header, String path, String token,Map<String, Object> bookData, Map<String, Object> styleData) {
-        int bookId = (int) bookData.get("bookId");
+        int bookId = (int) bookData.get("bookId"); 
 
         String title = (String) bookData.get("title");
-        int bookFileId = (int) ((Map<String, Object>) bookData.get("currentFile")).get("bookFileId");
+        int bookFileId = (int) bookData.get("bookFileId"); 
         double previewPercentage = (Double) bookData.getOrDefault("samplePreviewPercentage", 0.15);
         int position = (int) bookData.get("position");
 
