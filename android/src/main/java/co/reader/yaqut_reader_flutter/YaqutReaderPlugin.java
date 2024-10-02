@@ -107,7 +107,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         String title = (String) bookData.get("title");
         int bookFileId = (int) bookData.get("bookFileId"); 
         double previewPercentage = (Double) bookData.getOrDefault("samplePreviewPercentage", 0.15);
-        int position = (int) bookData.get("position");
+        int position = (int) bookData.getOrDefault("position", 0);
 
         // Handle Reader Style
         int readerColor = (int) styleData.getOrDefault("readerColor", 0);
