@@ -41,7 +41,7 @@ android {
 
     repositories {
         flatDir {
-            dirs 'libs'
+            dirs 'android/libs'
         }
     }
 
