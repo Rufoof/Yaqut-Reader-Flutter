@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <TextView
+        android:id="@+id/empty_hint"
+        android:gravity="right|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/med_grey"
+        android:text="@string/no_marks_and_notes"/>
+
+    <co.yaqut.reader.widgets.PinnedSectionListView
+        android:id="@+id/notes_list"
+        android:divider="@color/white"
+        android:dividerHeight="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>
