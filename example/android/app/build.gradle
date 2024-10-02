@@ -64,4 +64,16 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
