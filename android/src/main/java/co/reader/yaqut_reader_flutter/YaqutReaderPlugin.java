@@ -17,6 +17,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Parcel;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        context = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
         setAppearance();
@@ -58,10 +60,21 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
         channel.setMethodCallHandler(null);
+        channel = null;
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
+        Log.d("YaqutReaderPlugin", "Method called: " + call.method);
+        if (call.method.equals("checkIfLocal")) {
+            Log.d("YaqutReaderPlugin", "checkIfLocal invoked");
+            Map<String, Object> checkArgs = call.arguments();
+            int bookId = (int) checkArgs.get("book_id");
+            int bookFileId = (int) checkArgs.get("book_file_id");
+            boolean isLocal = BookStorage.isBookLocal(context, bookId);
+            result.success(isLocal);
+            return;
+        }
         switch (call.method) {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
@@ -90,7 +103,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
     private void startReader(String header, String path, String token,Map<String, Object> bookData, Map<String, Object> styleData) {
         int bookId = (int) bookData.get("bookId");
-        
+
         String title = (String) bookData.get("title");
         int bookFileId = (int) ((Map<String, Object>) bookData.get("currentFile")).get("bookFileId");
         double previewPercentage = (Double) bookData.getOrDefault("samplePreviewPercentage", 0.15);
