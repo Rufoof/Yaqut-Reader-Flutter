@@ -31,6 +31,7 @@ import co.yaqut.reader.api.SaveBookManager;
 import co.yaqut.reader.api.BookStorage;
 import co.yaqut.reader.api.NotesAndMarks;
 import co.yaqut.reader.api.ReaderStyle;
+import co.yaqut.reader.api.ReaderManager;
 
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         context = flutterPluginBinding.getApplicationContext();
+        ReaderManager.initialize(context);
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
         setAppearance();
