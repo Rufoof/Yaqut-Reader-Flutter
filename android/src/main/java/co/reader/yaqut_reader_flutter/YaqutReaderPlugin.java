@@ -59,7 +59,11 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         context = flutterPluginBinding.getApplicationContext();
-        ReaderManager.initialize(context);
+        if (context instanceof Application) {
+            ReaderManager.initialize((Application) context);
+        } else {
+            throw new IllegalStateException("Unable to obtain Application instance from context");
+        }
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
         setAppearance();
