@@ -42,6 +42,8 @@ import android.os.Parcelable;
 import co.reader.yaqut_reader_flutter.ReaderListenerImpl;
 import co.reader.yaqut_reader_flutter.StatsSessionListenerImpl;
 
+import android.app.Application;
+
 
 /**
  * YaqutReaderFlutterPlugin
