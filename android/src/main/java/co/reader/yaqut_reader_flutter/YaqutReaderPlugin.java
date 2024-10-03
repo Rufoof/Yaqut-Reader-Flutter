@@ -80,6 +80,12 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
                 break;
             case "startReader":
+                Activity activity = register.activity();
+                if (activity != null) {
+                    readerBuilder.setActivity(activity).start();
+                } else {
+                    readerBuilder.setContext(applicationContext).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
+                }
                 Map<String, Object> arguments = call.arguments();
                 String header = (String) arguments.get("header");
                 String path = (String) arguments.get("path");
