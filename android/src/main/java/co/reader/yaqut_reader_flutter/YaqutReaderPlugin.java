@@ -16,7 +16,6 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 
@@ -199,30 +198,10 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         public void onSampleEnded() {
 
         }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(@NonNull Parcel dest, int flags) {
-
-        }
     };
     StatsSessionListener statListener  = new StatsSessionListener() {
         @Override
         public void onReadingSessionEnd(ReadingSession readingSession) {
-
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(@NonNull Parcel dest, int flags) {
 
         }
     };
