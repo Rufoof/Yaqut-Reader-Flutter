@@ -35,17 +35,11 @@ import co.yaqut.reader.api.ReaderStyle;
 import java.util.List;
 import java.util.Map;
 
-import io.flutter.embedding.engine.plugins.activity.ActivityAware;
-import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
-import io.flutter.plugin.common.PluginRegistry;
-import android.content.Intent;
-import android.content.Context;
-
 
 /**
  * YaqutReaderFlutterPlugin
  */
-public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
+public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -54,8 +48,6 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler, Acti
     private Context context;
 
     private ReaderBuilder readerBuilder;
-
-    private Activity activity;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -69,27 +61,6 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler, Acti
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
         channel.setMethodCallHandler(null);
         channel = null;
-    }
-
-    @Override
-    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
-        context = binding.getActivity().getApplicationContext();
-        activity = binding.getActivity();
-    }
-
-    @Override
-    public void onDetachedFromActivityForConfigChanges() {
-        activity = null;
-    }
-
-    @Override
-    public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
-        activity = binding.getActivity();
-    }
-
-    @Override
-    public void onDetachedFromActivity() {
-        activity = null;
     }
 
     @Override
@@ -115,16 +86,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler, Acti
                 String token = (String) arguments.get("access_token");
                 Map<String, Object> book = (Map<String, Object>) arguments.get("book");
                 Map<String, Object> style = (Map<String, Object>) arguments.get("style");
-
-                if (activity != null) {
-                    readerBuilder = new ReaderBuilder(activity, (int) call.argument("bookId"));
-                    startReader(header, path, token, book, style);
-                } else {
-                    Intent intent = new Intent(context, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                    startReader(header, path, token, book, style);
-                }
+                startReader(header, path, token, book, style);
                 break;
             case "checkIfLocal":
                 Map<String, Object> checkArgs = call.arguments();
