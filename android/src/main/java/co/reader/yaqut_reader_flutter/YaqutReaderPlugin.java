@@ -35,11 +35,15 @@ import co.yaqut.reader.api.ReaderStyle;
 import java.util.List;
 import java.util.Map;
 
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
+import io.flutter.plugin.common.PluginRegistry;
+
 
 /**
  * YaqutReaderFlutterPlugin
  */
-public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
+public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -66,7 +70,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     @Override
-    public void onAttachedToActivity(@NonNull PluginRegistry.ActivityPluginBinding binding) {
+    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         activity = binding.getActivity();
     }
 
@@ -76,7 +80,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     @Override
-    public void onReattachedToActivityForConfigChanges(@NonNull PluginRegistry.ActivityPluginBinding binding) {
+    public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
         activity = binding.getActivity();
     }
 
