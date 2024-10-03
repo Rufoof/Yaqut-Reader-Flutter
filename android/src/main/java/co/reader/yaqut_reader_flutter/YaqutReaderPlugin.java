@@ -38,6 +38,8 @@ import java.util.Map;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.PluginRegistry;
+import android.content.Intent;
+import android.content.Context;
 
 
 /**
@@ -71,6 +73,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler, Acti
 
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
+        context = binding.getActivity().getApplicationContext();
         activity = binding.getActivity();
     }
 
@@ -117,7 +120,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler, Acti
                     readerBuilder = new ReaderBuilder(activity, (int) call.argument("bookId"));
                     startReader(header, path, token, book, style);
                 } else {
-                    Intent intent = new Intent(context, YourTargetActivity.class);
+                    Intent intent = new Intent(context, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                     startReader(header, path, token, book, style);
