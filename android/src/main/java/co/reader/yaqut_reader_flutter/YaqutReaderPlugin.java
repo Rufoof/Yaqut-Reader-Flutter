@@ -1,38 +1,21 @@
-package co.reader.yaqut_reader_flutter;
-
-import static java.security.AccessController.getContext;
-
 import androidx.annotation.NonNull;
+import android.content.Context;
+import android.util.Log;
+import java.util.Map;
+import java.util.List;
 
-import co.yaqut.reader.api.ReaderListener;
-import co.yaqut.reader.api.ReadingSession;
-import co.yaqut.reader.api.StatsSessionListener;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
-import io.flutter.plugin.common.MethodChannel.Result;
-
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
-import android.view.View;
-
-import androidx.annotation.NonNull;
-
-import io.flutter.embedding.engine.plugins.FlutterPlugin;
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.PluginRegistry;
 import co.yaqut.reader.api.ReaderBuilder;
 import co.yaqut.reader.api.SaveBookManager;
 import co.yaqut.reader.api.BookStorage;
 import co.yaqut.reader.api.NotesAndMarks;
+import co.yaqut.reader.api.ReaderListener;
 import co.yaqut.reader.api.ReaderStyle;
-
-import java.util.List;
-import java.util.Map;
+import co.yaqut.reader.api.StatsSessionListener;
+import co.yaqut.reader.api.ReadingSession;
 
 
 /**
