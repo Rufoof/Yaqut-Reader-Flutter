@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import co.yaqut.reader.api.StatsSessionListener;
 import co.yaqut.reader.api.ReadingSession;
 
+import androidx.annotation.NonNull;
+
 public class StatsSessionListenerImpl implements StatsSessionListener, Parcelable {
 
     // Constructor

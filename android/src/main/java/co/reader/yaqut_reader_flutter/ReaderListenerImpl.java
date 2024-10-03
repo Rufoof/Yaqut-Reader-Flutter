@@ -9,6 +9,8 @@ import co.yaqut.reader.api.NotesAndMarks;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     // Constructor
