@@ -35,6 +35,9 @@ import co.yaqut.reader.api.ReaderStyle;
 import java.util.List;
 import java.util.Map;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 
 /**
  * YaqutReaderFlutterPlugin
@@ -148,81 +151,6 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     private boolean saveBook(int bookId, String bodyPath, String header, String accessToken) {
         return SaveBookManager.save(context, bookId, bodyPath, header, accessToken);
     }
-    ReaderListener readerListener = new ReaderListener() {
-        @Override
-        public void onStyleChanged(ReaderStyle readerStyle) {
-
-        }
-
-        @Override
-        public void onPositionChanged(int i) {
-
-        }
-
-        @Override
-        public void onSyncNotesAndMarks(List<NotesAndMarks> list) {
-
-        }
-
-        @Override
-        public void onUpdateLastOpened(long l) {
-
-        }
-
-        @Override
-        public void onShareBook() {
-
-        }
-
-        @Override
-        public void onBookDetailsCLicked() {
-
-        }
-
-        @Override
-        public void onSaveBookClicked(int i) {
-
-        }
-
-        @Override
-        public void onDownloadBook() {
-
-        }
-
-        @Override
-        public void onReaderClosed(int i) {
-
-        }
-
-        @Override
-        public void onSampleEnded() {
-
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(@NonNull Parcel dest, int flags) {
-
-        }
-    };
-    StatsSessionListener statListener  = new StatsSessionListener() {
-        @Override
-        public void onReadingSessionEnd(ReadingSession readingSession) {
-
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(@NonNull Parcel dest, int flags) {
-
-        }
-    };
+    private ReaderListenerImpl readerListener = new ReaderListenerImpl();
+    private StatsSessionListenerImpl statListener = new StatsSessionListenerImpl();
 }
