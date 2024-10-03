@@ -38,6 +38,9 @@ import java.util.Map;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import co.reader.yaqut_reader_flutter.ReaderListenerImpl;
+import co.reader.yaqut_reader_flutter.StatsSessionListenerImpl;
+
 
 /**
  * YaqutReaderFlutterPlugin

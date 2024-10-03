@@ -1,5 +1,10 @@
+package co.reader.yaqut_reader_flutter;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import co.yaqut.reader.api.StatsSessionListener;
+import co.yaqut.reader.api.ReadingSession;
 
 public class StatsSessionListenerImpl implements StatsSessionListener, Parcelable {
 

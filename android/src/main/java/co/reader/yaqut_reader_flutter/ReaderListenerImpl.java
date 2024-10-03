@@ -1,5 +1,13 @@
+package co.reader.yaqut_reader_flutter;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import co.yaqut.reader.api.ReaderListener;
+import co.yaqut.reader.api.ReaderStyle;
+import co.yaqut.reader.api.NotesAndMarks;
+
+import java.util.List;
 
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
