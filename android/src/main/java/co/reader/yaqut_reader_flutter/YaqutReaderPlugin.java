@@ -1,21 +1,39 @@
-import androidx.annotation.NonNull;
-import android.content.Context;
-import android.util.Log;
-import java.util.Map;
-import java.util.List;
+package co.reader.yaqut_reader_flutter;
 
+import static java.security.AccessController.getContext;
+
+import androidx.annotation.NonNull;
+
+import co.yaqut.reader.api.ReaderListener;
+import co.yaqut.reader.api.ReadingSession;
+import co.yaqut.reader.api.StatsSessionListener;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Parcel;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.PluginRegistry;
 import co.yaqut.reader.api.ReaderBuilder;
 import co.yaqut.reader.api.SaveBookManager;
 import co.yaqut.reader.api.BookStorage;
 import co.yaqut.reader.api.NotesAndMarks;
-import co.yaqut.reader.api.ReaderListener;
 import co.yaqut.reader.api.ReaderStyle;
-import co.yaqut.reader.api.StatsSessionListener;
-import co.yaqut.reader.api.ReadingSession;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -62,7 +80,6 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
                 break;
             case "startReader":
-            Log.d("YaqutReaderPlugin", "startReader invoked");
                 Map<String, Object> arguments = call.arguments();
                 String header = (String) arguments.get("header");
                 String path = (String) arguments.get("path");
@@ -181,10 +198,30 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         public void onSampleEnded() {
 
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(@NonNull Parcel dest, int flags) {
+
+        }
     };
     StatsSessionListener statListener  = new StatsSessionListener() {
         @Override
         public void onReadingSessionEnd(ReadingSession readingSession) {
+
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(@NonNull Parcel dest, int flags) {
 
         }
     };
