@@ -39,15 +39,8 @@ android {
         minSdk = 24
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['src/main/jniLibs']
-        }
-    }
-
     dependencies {
-        implementation files('libs/classes.jar')
-        implementation files('libs/YaqutHtmlConverter-v0.5.jar')
+        implementation 'co.yaqut.reader:reader'
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.mockito:mockito-core:5.0.0")
         implementation 'androidx.appcompat:appcompat:1.6.1'
