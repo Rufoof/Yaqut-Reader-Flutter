@@ -49,6 +49,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
     private ReaderBuilder readerBuilder;
 
+    private Activity activity;
+
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         context = flutterPluginBinding.getApplicationContext();
@@ -61,6 +63,26 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
         channel.setMethodCallHandler(null);
         channel = null;
+    }
+
+    @Override
+    public void onAttachedToActivity(@NonNull PluginRegistry.ActivityPluginBinding binding) {
+        activity = binding.getActivity();
+    }
+
+    @Override
+    public void onDetachedFromActivityForConfigChanges() {
+        activity = null;
+    }
+
+    @Override
+    public void onReattachedToActivityForConfigChanges(@NonNull PluginRegistry.ActivityPluginBinding binding) {
+        activity = binding.getActivity();
+    }
+
+    @Override
+    public void onDetachedFromActivity() {
+        activity = null;
     }
 
     @Override
@@ -80,19 +102,22 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
                 break;
             case "startReader":
-                Activity activity = register.activity();
-                if (activity != null) {
-                    readerBuilder.setActivity(activity).start();
-                } else {
-                    readerBuilder.setContext(applicationContext).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).start();
-                }
                 Map<String, Object> arguments = call.arguments();
                 String header = (String) arguments.get("header");
                 String path = (String) arguments.get("path");
                 String token = (String) arguments.get("access_token");
                 Map<String, Object> book = (Map<String, Object>) arguments.get("book");
                 Map<String, Object> style = (Map<String, Object>) arguments.get("style");
-                startReader(header, path, token, book, style);
+
+                if (activity != null) {
+                    readerBuilder = new ReaderBuilder(activity, (int) call.argument("bookId"));
+                    startReader(header, path, token, book, style);
+                } else {
+                    Intent intent = new Intent(context, YourTargetActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                    startReader(header, path, token, book, style);
+                }
                 break;
             case "checkIfLocal":
                 Map<String, Object> checkArgs = call.arguments();
