@@ -1,0 +1,427 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/reader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:saveEnabled="false"
+        android:nestedScrollingEnabled="true" />
+
+    <LinearLayout
+        android:id="@+id/download_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/progress"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/fixed_white"
+            android:textSize="12sp"
+            tools:text="5%" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/download"
+            android:textColor="@color/fixed_white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/book_download_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <co.yaqut.reader.widgets.ReaderProgressBar
+        android:id="@+id/fragment_reader_yaqutProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <ImageView
+        android:id="@+id/tool_bar_cover_bg"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="24dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/undo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:background="@drawable/ic_undo_brand_left"
+        android:gravity="center"
+        android:padding="16dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="22dp"
+        android:text="صفحة 335"
+        android:visibility="gone"
+        android:textColor="@color/fixed_white"
+        android:textSize="12dp" />
+
+    <FrameLayout
+        android:id="@+id/syn_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="214dp"
+        android:background="@drawable/ic_undo_brand"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="214dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:id="@+id/speed_clicked"
+                android:layout_width="48dp"
+                android:layout_height="250dp"
+                android:background="@drawable/rounded_reader_menu"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+                <!--            android:layout_marginRight="96dp"-->
+
+                <TextView
+                    android:id="@+id/speedup_2x"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="2X"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/speedup_1_5x"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="1.5X"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/speedup_1_25x"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="1.25X"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/speedup_1x"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="1X"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/speedup_75x"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="0.75X"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+
+            <include
+                layout="@layout/audio_volume_controller_reader"
+                android:layout_width="48dp"
+                android:layout_height="260dp"
+                android:visibility="gone" />
+            <!--        android:layout_marginRight="56dp"-->
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/brightness_opacity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="invisible" />
+
+
+    <include
+        layout="@layout/pages_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+    <include
+        layout="@layout/style_control"
+        android:visibility="gone"
+        tools:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/more_menu"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/more_menu_bg_large"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/action_book_details"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_read"
+                app:tint="@color/fixed_light_grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/regular"
+                android:text="@string/book_details"
+                android:textColor="@color/fixed_light_grey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_save"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/action_save_icon"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_save"
+                app:tint="@color/fixed_light_grey" />
+
+            <TextView
+                android:id="@+id/action_save_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/regular"
+                android:text="@string/save_on_shelf"
+                android:textColor="@color/fixed_light_grey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_notes_and_marks"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ab_notes"
+                app:tint="@color/fixed_light_grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/regular"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/notes_and_marks"
+                android:textColor="@color/fixed_light_grey" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_download_book"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_down"
+                app:tint="@color/fixed_light_grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/download_book"
+                android:fontFamily="@font/regular"
+                android:textColor="@color/fixed_light_grey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_ambient_sound"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ab_sounds"
+                app:tint="@color/fixed_light_grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/regular"
+                android:text="@string/ambient_sounds"
+                android:textColor="@color/fixed_light_grey" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_settings"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/left_menu_settings"
+                app:tint="@color/fixed_light_grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/settings"
+                android:fontFamily="@font/regular"
+                android:textColor="@color/fixed_light_grey" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_share"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_share_white_24dp"
+                app:tint="@color/fixed_light_grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/share"
+                android:fontFamily="@font/regular"
+                android:textColor="@color/fixed_light_grey" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/seekBar_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corners_reader_dialog"
+        android:gravity="center"
+        android:padding="10dip"
+        android:text="@string/page"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+
+    <ProgressBar
+        android:id="@+id/loading_progress"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
+
+
+</FrameLayout>

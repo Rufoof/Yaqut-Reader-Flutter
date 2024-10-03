@@ -39,8 +39,15 @@ android {
         minSdk = 24
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+
     dependencies {
-        compileOnly fileTree(dir: 'libs', include: ['*.aar'])
+        implementation files('libs/classes.jar')
+        implementation files('libs/YaqutHtmlConverter-v0.5.jar')
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.mockito:mockito-core:5.0.0")
         implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -62,16 +69,6 @@ android {
                outputs.upToDateWhen {false}
                showStandardStreams = true
             }
-        }
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        flatDir {
-            dirs 'libs'
         }
     }
 }

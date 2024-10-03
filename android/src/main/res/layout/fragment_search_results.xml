@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_marginTop="?attr/actionBarSize">
+
+    <android.widget.SearchView
+        android:layout_marginTop="24dp"
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        app:iconifiedByDefault="false"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:layoutDirection="rtl"
+        android:queryHint="@string/book_search"
+        android:background="@drawable/rounded_corners_gray"
+        app:defaultQueryHint="@string/book_search"
+        app:queryHint="@string/book_search" />
+
+    <ProgressBar
+        android:id="@+id/searchProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="10dp"
+        android:layout_alignParentTop="true"
+        android:indeterminateDrawable="@drawable/rr_progress_indeterminate_horizontal"
+        android:progressDrawable="@drawable/custom_progressbar" />
+
+    <TextView
+        android:id="@+id/empty_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="right|center_vertical"
+        android:text="@string/no_search_results"
+        android:textColor="@color/med_grey"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/searchProgress"
+        android:layout_marginTop="8dp"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp" />
+
+
+</LinearLayout>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="background">#F8F8F8</color>
+    <color name="black_">#121212</color>
+    <color name="brand">#D70036</color>
+    <color name="clicked_brand">#C0161D</color>
+    <color name="clicked_white">#F8F8F8</color>
+    <color name="dark_grey">#404040</color>
+    <color name="disabled_brand">#35D70036</color>
+    <color name="fixed_accent_brown">#F2E8D4</color>
+    <color name="fixed_accent_green">#C7E8CE</color>
+    <color name="fixed_accent_light_brand">#303030</color>
+    <color name="fixed_always_dark_gray">#404040</color>
+    <color name="fixed_black_">#121212</color>
+    <color name="fixed_brand">#D70036</color>
+    <color name="fixed_dark_grey">#404040</color>
+    <color name="fixed_light_brand">#FF979A</color>
+    <color name="fixed_light_grey">#E0E0E0</color>
+    <color name="fixed_med_grey">#808080</color>
+    <color name="fixed_transparent_cover_bg_dark">#70000000</color>
+    <color name="fixed_white">#FFF</color>
+    <color name="light_brand">#FF979A</color>
+    <color name="light_grey">#E0E0E0</color>
+    <color name="med_grey">#808080</color>
+    <color name="page_indicator">#C0202020</color>
+    <color name="toolbar">#C0202020</color>
+    <color name="transeparent_bg_player">#77FFFFFF</color>
+    <color name="transeparent_profile">#77000000</color>
+    <color name="transparent_black">#66666666</color>
+    <color name="transparent_cover_bg">#80FFFFFF</color>
+    <color name="transparent_separator">#55FFFFFF</color>
+    <color name="white">#FFF</color>
+    <dimen name="book_cover_height">165dp</dimen>
+    <dimen name="book_cover_width">120dp</dimen>
+    <dimen name="cover_corner_radius">8dp</dimen>
+    <dimen name="devices_list_scrolling_height">205dp</dimen>
+    <dimen name="devices_list_width">300dp</dimen>
+    <dimen name="item_padding_10">10dp</dimen>
+    <dimen name="item_padding_20">20dp</dimen>
+    <dimen name="item_padding_5">5dp</dimen>
+    <dimen name="main_books_cover_radius">10dp</dimen>
+    <dimen name="main_books_cover_radius_4">4dp</dimen>
+    <dimen name="mixer_image_size">64dp</dimen>
+    <dimen name="popup_width">220dp</dimen>
+    <string name="_00_00">00:00</string>
+    <string name="add">إضافة</string>
+    <string name="add_note">أضف ملاحظة</string>
+    <string name="ambient_desc">حمّل باقة أصوات الطبيعة التي صممت خصيصاً لمساعدتك على التركيز أو
+        الاسترخاء أثناء القراءة
+    </string>
+    <string name="ambient_size">ملاحظة: حجم الملف 16.6 Mb</string>
+    <string name="ambient_sounds">أصوات الطبيعة</string>
+    <string name="ambient_sounds_swith"> تشغيل أصوات الطبيعة</string>
+    <string name="and">و</string>
+    <string name="animation_0">تلقائي</string>
+    <string name="animation_1">بطاقة</string>
+    <string name="animation_10">قلب من الجانب</string>
+    <string name="animation_2">إخفاء</string>
+    <string name="animation_3">ثلاثي الأبعاد</string>
+    <string name="animation_4">شرائح</string>
+    <string name="animation_5">دائري</string>
+    <string name="animation_6">مكعب</string>
+    <string name="animation_7">قلب</string>
+    <string name="animation_8">لف من أسفل</string>
+    <string name="animation_9">لف من أعلى</string>
+    <string name="animation_style">نمط تقليب الصفحات</string>
+    <string name="app_name">reader</string>
+    <string name="book_details">تفاصيل الكتاب</string>
+    <string name="book_search">بحث في الكتاب</string>
+    <string name="bookmark">مؤشر</string>
+    <string name="bookmarks">المؤشرات</string>
+    <string name="brightness">السطوع</string>
+    <string name="brown">بني</string>
+    <string name="can_not_do_search_toast">لا يمكن إجراء عملية البحث ... نص البحث طويل</string>
+    <string name="cancel">إلغاء</string>
+    <string name="cannot_open_document">Cannot open document</string>
+    <string name="cannot_open_document_Reason">Cannot open document: %1$s</string>
+    <string name="chapter">فصل</string>
+    <string name="close">إغلاق</string>
+    <string name="confirm">تأكيد</string>
+    <string name="dark">داكن</string>
+    <string name="delete_note_or_mark">هل تريد حذف العلامة أو الملاحظة؟</string>
+    <string name="dictionary_search">بحث في القاموس</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="download">تحميل</string>
+    <string name="download_book">تحميل</string>
+    <string name="eight_min">8 دقائق</string>
+    <string name="eight_minutes">08:00</string>
+    <string name="eight_seconds_timer">00:08</string>
+    <string name="end_of_chapter">نهاية الفصل</string>
+    <string name="enter_password">إدخال كلمة السر</string>
+    <string name="error">حدث خطأ … الرجاء المحاولة لاحقا</string>
+    <string name="error_loading_image">حدث خط أثناء تحميل الصورة</string>
+    <string name="fifteen_mins">15 دقيقة</string>
+    <string name="fifteen_minutes">15:00</string>
+    <string name="fifteen_sec">15 ثانية</string>
+    <string name="file_management">إدارة مساحة التخزين</string>
+    <string name="file_management_desc">حذف ملفات الكتب من وحدة تخزين الجهاز</string>
+    <string name="focus">تركيز</string>
+    <string name="font_size">حجم الخط</string>
+    <string name="font_type">نوع الخط</string>
+    <string name="for_end_of_chapter">لنهاية الفصل</string>
+    <string name="from">من</string>
+    <string name="green">أخضر</string>
+    <string name="highlight">علامة</string>
+    <string name="highlights">العلامات</string>
+    <string name="hour">ساعة</string>
+    <string name="hours">ساعات</string>
+    <string name="internet_search">بحث على الانترنت</string>
+    <string name="justification">المحاذاة</string>
+    <string name="keep_awake_info">منع إقفال الشاشة أثناء القراءة</string>
+    <string name="keep_awake_title">الوضع النشط</string>
+    <string name="less_than_one_minute">أقل من دقيقة</string>
+    <string name="light">فاتح</string>
+    <string name="line_spacing">تباعد الأسطر</string>
+    <string name="minute">دقيقة</string>
+    <string name="minutes">دقائق</string>
+    <string name="more">المزيد</string>
+    <string name="ninety_sec">90 ثانية</string>
+    <string name="no_further_occurrences_found">No further occurrences found</string>
+    <string name="no_marks_and_notes">لا يوجد ملاحظات أو علامات\n\nلإضافة العلامات و الملاحظات اضغط
+        طويلا على النص
+    </string>
+    <string name="no_search_results">لا يوجد نتائج للبحث</string>
+    <string name="not_supported">Not supported</string>
+    <string name="note">ملاحظة</string>
+    <string name="notes">الملاحظات</string>
+    <string name="notes_and_marks">الملاحظات و العلامات</string>
+    <string name="ok">موافق</string>
+    <string name="okay">Okay</string>
+    <string name="one_page">صفحة واحدة</string>
+    <string name="page">صفحة</string>
+    <string name="page_number">رقم الصفحة</string>
+    <string name="page_number_info">التحديد بإظهار رقم الصقحة أو بالنسبة المئوية</string>
+    <string name="pages">صفحات</string>
+    <string name="pause">توقف</string>
+    <string name="play">تشغيل</string>
+    <string name="please_wait2">الرجاء الانتظار</string>
+    <string name="position">المكان</string>
+    <string name="progress_bar_info">إظهار شريط التصفح أعلى الكتاب</string>
+    <string name="progress_bar_key">شريط التصفح</string>
+    <string name="reader_animation_info">نوع الحركة عند قلب الصفحة</string>
+    <string name="relax">استرخاء</string>
+    <string name="remaining">تبقّى</string>
+    <string name="save">حفظ</string>
+    <string name="save_on_shelf">حفظ على الرف</string>
+    <string name="saved">على الرّف</string>
+    <string name="saved_on_shelf">موجود على الرّف</string>
+    <string name="scroll_direction">اتجاه التقليب</string>
+    <string name="search">بحث</string>
+    <string name="searching_">Searching…</string>
+    <string name="settings">الإعدادات</string>
+    <string name="share">شارك الكتاب</string>
+    <string name="short_query">نص البحث قصير</string>
+    <string name="sixty_mins">60 دقيقة</string>
+    <string name="sixty_minutes">60:00</string>
+    <string name="sixty_sec">60 ثانية</string>
+    <string name="skip_time">وقت التخطي</string>
+    <string name="skip_time_info">وقت التخطي في الكتب الصوتية</string>
+    <string name="sleep_timert">مؤقّت النّوم</string>
+    <string name="speed1">1X</string>
+    <string name="speed1_25">1.25X</string>
+    <string name="speed1_5">1.5X</string>
+    <string name="speed2x">2X</string>
+    <string name="stop">إيقاف</string>
+    <string name="sync_dialog_message_1">هناك موقع مسجل مسبقاً لهذا الكتاب بتاريخ:</string>
+    <string name="sync_dialog_message_2">هل تريد الانتقال إليه ؟</string>
+    <string name="sync_dialog_title">آخر موقع مسجل</string>
+    <string name="table_of_content">الفهرس</string>
+    <string name="table_of_contents">الفهرس</string>
+    <string name="ten_sec">10 ثواني</string>
+    <string name="text_not_found">Text not found</string>
+    <string name="theme">النمط</string>
+    <string name="thirty_mins">30 دقيقة</string>
+    <string name="thirty_minutes">30:00</string>
+    <string name="thirty_sec">30 ثانية</string>
+    <string name="timer_finished">نهاية المؤقّت</string>
+    <string name="toast_note_deleted_successfully">تم حذف العلامة بنجاح</string>
+    <string name="two_hours">ساعتان</string>
+    <string name="two_minutes">دقيقتان</string>
+    <string name="two_pages">صفحتان</string>
+    <string name="unable_to_load_book">حصل خطأ … الرجاء إعادة تحميل الكتاب</string>
+    <string name="view_page_number">عرض رقم الصفحة</string>
+    <string name="view_percentage">عرض النسبة</string>
+    <string name="volume_info">استخدام مفاتيح الصوت للتصفح</string>
+    <string name="volume_title">مفاتيح الصوت</string>
+    <string name="wikipedia_search">بحث على ويكيبيديا</string>
+    <style name="ActionButtonOverflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/white</item>
+    </style>
+    <style name="AlertDialogCustom" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:background">@color/light_grey</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textColorPrimary">@color/med_grey</item>
+        <item name="android:colorAccent">@color/brand</item>
+    </style>
+    <style name="DarkTheme" parent="Theme.AppCompat.DayNight">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="colorAccent">@color/brand</item>
+    </style>
+    <style name="LightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:forceDarkAllowed" ns1:targetApi="q">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="colorAccent">@color/brand</item>
+    </style>
+    <style name="NoDividerNumberPicker">
+        <item name="android:colorControlNormal">@android:color/transparent</item>
+        <item name="android:colorControlActivated">@android:color/transparent</item>
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHorizontal">@android:color/transparent</item>
+        <item name="android:dividerVertical">@android:color/transparent</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColorPrimary">@color/dark_grey</item>
+        <item name="android:textColorSecondary">@color/light_grey</item>
+        <item name="android:fontFamily">@font/regular</item>
+
+    </style>
+    <style name="OverlayActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
+    </style>
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/light</item>
+    </style>
+    <declare-styleable name="PageFlipItemView">
+        <attr format="string" name="text"/>
+        <attr format="reference" name="image"/>
+    </declare-styleable>
+</resources>
