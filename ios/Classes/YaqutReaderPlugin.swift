@@ -83,13 +83,11 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let font = style["font"] as? Int ?? 0
         let readerStyle = ReaderStyle(readerColor: readerColor, readerTextSize: textSize, isJustified: isJustified, lineSpacing: lineSpacing, font: font)
         self.readerBuilder?.setReaderStyle(readerStyle: readerStyle)
-        let currentPath = path ?? ""
-        let currentHeader = header ?? ""
-        if currentPath != "" && currentHeader != "" {
+        if (path ?? "") != "" && (header ?? "") != "" {
             self.readerBuilder?.build()
             return
         }
-        let saveBookManager = SaveBookManager(bookId: bookId, bodyPath: currentPath, header: currentHeader, token: accessToken)
+        let saveBookManager = SaveBookManager(bookId: bookId, bodyPath: path == "" ? nil : path, header: header == "" ? nil : header, token: accessToken == "" ? nil : accessToken)
         let saveBook = saveBookManager.save()
         if saveBook {
             self.readerBuilder?.build()
