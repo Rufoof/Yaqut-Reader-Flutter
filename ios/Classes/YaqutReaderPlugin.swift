@@ -219,20 +219,4 @@ extension YaqutReaderPlugin: ReaderDelegate {
     }
 }
 
-extension YaqutReaderPlugin: StatsSessionDelegate {
-    public func onReadingSessionEnd(session: YaqutReader.RRReadingSession) {
-        let data:[String: Any] = [
-            "bookId": session.bookId,
-            "bookFileId": session.bookFileId,
-            "pagesRead": session.pagesRead,
-            "startOffset": session.startOffset,
-            "endOffset": session.endOffset,
-            "coveredOffset": session.coveredOffset,
-            "coveredLength": session.coveredLength,
-            "startTime": session.startTime,
-            "endTime": session.endTime,
-            "MD5": session.MD5,
-            "UUID": session.UUID]
-        channel?.invokeMethod("onReadingSessionEnd", arguments: data)
-    }
-}
+extension YaqutReaderPlugin: StatsSessionDelegate {}
