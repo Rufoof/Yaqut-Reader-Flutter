@@ -82,7 +82,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let font = style["font"] as? Int ?? 0
         let readerStyle = ReaderStyle(readerColor: readerColor, readerTextSize: textSize, isJustified: isJustified, lineSpacing: lineSpacing, font: font)
         self.readerBuilder?.setReaderStyle(readerStyle: readerStyle)
-        if path != "" && header != "" {
+        if (path ?? "") != "" && (header ?? "") != "" {
             self.readerBuilder?.build()
             return
         }
