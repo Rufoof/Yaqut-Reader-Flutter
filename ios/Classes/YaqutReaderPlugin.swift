@@ -87,7 +87,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
             self.readerBuilder?.build()
             return
         }
-        let saveBookManager = SaveBookManager(bookId: bookId, bodyPath: path == "" ? nil : path, header: header == "" ? nil : header, token: accessToken == "" ? nil : accessToken)
+        let saveBookManager = SaveBookManager(bookId: bookId, bodyPath: path ?? "", header: header == "" ? nil : header, token: accessToken == "" ? nil : accessToken)
         let saveBook = saveBookManager.save()
         if saveBook {
             self.readerBuilder?.build()
