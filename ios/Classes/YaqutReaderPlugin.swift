@@ -201,6 +201,10 @@ extension YaqutReaderPlugin: ReaderDelegate {
     public func onSampleEnded() {
         channel?.invokeMethod("onSampleEnded", arguments: [:])
     }
+    
+    public func onReadingSessionEnd(session: YaqutReader.RRReadingSession) {
+        channel?.invokeMethod("onReadingSessionEnd", arguments: [:])
+    }
 }
 
 extension YaqutReaderPlugin: StatsSessionDelegate {
