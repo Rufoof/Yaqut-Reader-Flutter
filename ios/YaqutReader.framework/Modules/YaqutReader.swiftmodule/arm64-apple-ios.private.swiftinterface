@@ -2764,6 +2764,9 @@ extension YaqutReader.ReaderBuilder : YaqutReader.RRReaderViewDelegate {
   public func onShareBook()
   public func onDownloadBook()
 }
+extension YaqutReader.ReaderBuilder : YaqutReader.StatsSessionDelegate {
+  public func onReadingSessionEnd(session: YaqutReader.RRReadingSession)
+}
 extension YaqutReader.ReaderBuilder : YaqutReader.RRAudioPlayerDelegate {
 }
 extension YaqutReader.ReaderBuilder : YaqutReader.RRPDFViewDelegate {
