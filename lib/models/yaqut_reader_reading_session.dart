@@ -10,8 +10,8 @@ class YaqutReaderReadingSession {
   List<int> coveredLength;
   double startTime;
   double endTime;
-  String md5;
-  String uuid;
+  String? md5;
+  String? uuid;
 
   YaqutReaderReadingSession({
     required this.bookId,
@@ -54,8 +54,8 @@ class YaqutReaderReadingSession {
       coveredLength: json[constCoveredLength] as List<int>,
       startTime: json[constStartTime] as double,
       endTime: json[constEndTime] as double,
-      md5: json[constMd5] as String,
-      uuid: json[constUuid] as String,
+      md5: json[constMd5] as String? ?? json["MD5"] as String? ?? "",
+      uuid: json[constUuid] as String? ?? json["UUID"] as String? ?? "",
     );
   }
 }

@@ -160,8 +160,13 @@ class YaqutReaderPlugin {
       case 'onSampleEnded':
         onSampleEndedCallback();
       case 'onReadingSessionEnd':
+        final Map<Object?, Object?> rawData =
+            call.arguments as Map<Object?, Object?>;
+        final Map<String, dynamic> data = rawData.map(
+          (key, value) => MapEntry(key as String, value),
+        );
         YaqutReaderReadingSession session =
-            YaqutReaderReadingSession.fromJson(call.arguments);
+            YaqutReaderReadingSession.fromJson(data);
         onSyncReadingSessionCallback(session);
       default:
     }
