@@ -213,8 +213,8 @@ extension YaqutReaderPlugin: ReaderDelegate {
             "coveredLength": session.getCoveredLength(),
             "startTime": session.getStartTime(),
             "endTime": session.getEndTime(),
-            "MD5": session.getMd5(),
-            "UUID": session.getUuid()
+            "md5": session.getMd5(),
+            "uuid": session.getUuid()
             ]
         channel?.invokeMethod("onReadingSessionEnd", arguments: data)
     }
