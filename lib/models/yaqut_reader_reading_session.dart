@@ -58,8 +58,8 @@ class YaqutReaderReadingSession {
       coveredLength: (json[constCoveredLength] as List<dynamic>)
           .map((e) => e as int)
           .toList(),
-      startTime: json[constStartTime] as double,
-      endTime: json[constEndTime] as double,
+      startTime: (json[constStartTime] as num).toDouble(),
+      endTime: (json[constEndTime] as num).toDouble(),
       md5: json[constMd5] as String,
       uuid: json[constUuid] as String,
     );
