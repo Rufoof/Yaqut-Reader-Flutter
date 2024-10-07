@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:yaqut_reader_plugin/constants/constants.dart';
 
 class YaqutReaderReadingSession {
@@ -34,8 +36,8 @@ class YaqutReaderReadingSession {
       constPagesRead: pagesRead,
       constStartOffset: startOffset,
       constEndOffset: endOffset,
-      constCoveredOffset: coveredOffset,
-      constCoveredLength: coveredLength,
+      constCoveredOffset: jsonEncode(coveredOffset),
+      constCoveredLength: jsonEncode(coveredLength),
       constStartTime: startTime,
       constEndTime: endTime,
       constMd5: md5,
