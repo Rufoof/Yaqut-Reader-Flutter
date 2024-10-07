@@ -50,8 +50,12 @@ class YaqutReaderReadingSession {
       pagesRead: json[constPagesRead] as int,
       startOffset: json[constStartOffset] as int,
       endOffset: json[constEndOffset] as int,
-      coveredOffset: json[constCoveredOffset] as List<int>,
-      coveredLength: json[constCoveredLength] as List<int>,
+      coveredOffset: (json[constCoveredOffset] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+      coveredLength: (json[constCoveredLength] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
       startTime: json[constStartTime] as double,
       endTime: json[constEndTime] as double,
       md5: json[constMd5] as String,

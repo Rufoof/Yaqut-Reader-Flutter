@@ -204,15 +204,15 @@ extension YaqutReaderPlugin: ReaderDelegate {
     
     public func onReadingSessionEnd(session: YaqutReader.RRReadingSession) {
         let data:[String: Any] = [
-            "bookId": session.getBookId(),
-            "bookFileId": session.getBookFileId(),
-            "pagesRead": session.getPagesRead(),
-            "startOffset": session.getStartOffset(),
-            "endOffset": session.getEndOffset(),
-            "coveredOffset": session.getCoveredOffset(),
-            "coveredLength": session.getCoveredLength(),
-            "startTime": session.getStartTime(),
-            "endTime": session.getEndTime(),
+            "book_id": session.getBookId(),
+            "book_file_id": session.getBookFileId(),
+            "pages_read": session.getPagesRead(),
+            "start_offset": session.getStartOffset(),
+            "end_offset": session.getEndOffset(),
+            "covered_offset": session.getCoveredOffset(),
+            "covered_length": session.getCoveredLength(),
+            "start_time": session.getStartTime(),
+            "end_time": session.getEndTime(),
             "md5": session.getMd5(),
             "uuid": session.getUuid()
             ]
