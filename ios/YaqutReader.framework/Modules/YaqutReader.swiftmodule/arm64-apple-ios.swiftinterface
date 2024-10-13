@@ -1302,6 +1302,10 @@ extension YaqutReader.CS.BigInt : Swift.ExpressibleByIntegerLiteral {
   public init(integerLiteral value: Swift.Int64)
   public typealias IntegerLiteralType = Swift.Int64
 }
+public class KeyModel {
+  public init(bookId: Swift.Int, bookKey: Swift.String)
+  @objc deinit
+}
 public class RRBookInfo {
   final public let length: Swift.Int
   final public let formatVersion: Swift.Int
@@ -1837,6 +1841,10 @@ extension YaqutReader.RSA : Swift.CustomStringConvertible {
   final public var description: Swift.String {
     get
   }
+}
+public struct FileSizeInfo {
+  public let id: Swift.String
+  public let size: Swift.UInt64
 }
 extension Swift.FixedWidthInteger {
   @inlinable internal func bytes(totalBytes: Swift.Int = MemoryLayout<Self>.size) -> Swift.Array<Swift.UInt8> {
@@ -3701,7 +3709,9 @@ public protocol FinalizingDecryptModeWorker : YaqutReader.CipherModeWorker {
 }
 public class SaveBookManager {
   public init(bookId: Swift.Int, bodyPath: Swift.String, header: Swift.String?, token: Swift.String?)
+  public init()
   public func save() -> Swift.Bool
+  public func moveOfflineFileToBookFiles(bookId: Swift.Int) -> Swift.Bool
   @objc deinit
 }
 public protocol _UInt8Type {
@@ -4064,8 +4074,8 @@ public class BookStorage {
   public func getLocalBooks() -> [Swift.Int]
   public func isBookLocal(bookId: Swift.Int) -> Swift.Bool
   public func deleteBook(bookId: Swift.Int)
-  public func checkDeviceFreeSpace() -> [Swift.Int]
-  public func checkDeviceFreeSpace()
+  public func checkDeviceFreeSpace() -> [YaqutReader.FileSizeInfo]
+  public func insertOldKeys(keys: [YaqutReader.KeyModel])
   @objc deinit
 }
 extension Swift.Array {
