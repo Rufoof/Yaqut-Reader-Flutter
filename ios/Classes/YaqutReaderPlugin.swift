@@ -43,16 +43,6 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
                 }
                 result("AppDelegate Falied response")
             }
-        case "moveOfflineFile":
-            if let arguments = call.arguments as? [String: Any] {
-                if let bookId = arguments["book_id"] as? Int {
-                    let saveBookManager = SaveBookManager()
-                    let success = saveBookManager.moveOfflineFileToBookFiles(bookId: bookId)
-                    result(success)
-                    return
-                }
-                result("AppDelegate Falied response")
-            }
         default:
             result(FlutterMethodNotImplemented)
         }

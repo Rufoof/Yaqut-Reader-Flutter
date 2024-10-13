@@ -187,19 +187,5 @@ class YaqutReaderPlugin {
     return isLocal!;
   }
 
-  Future<bool> moveOfflineFile(int bookId) async {
-    bool? success = false;
-    try {
-      success = await methodChannel.invokeMethod<bool>('moveOfflineFile', {
-        'book_id': bookId,
-      });
-    } on PlatformException catch (e) {
-      if (kDebugMode) {
-        debugPrint("Failed to call native method: '${e.message}'.");
-      }
-    }
-    return success!;
-  }
-
   getPlatformVersion() {}
 }

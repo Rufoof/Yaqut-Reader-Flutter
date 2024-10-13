@@ -3709,9 +3709,7 @@ public protocol FinalizingDecryptModeWorker : YaqutReader.CipherModeWorker {
 }
 public class SaveBookManager {
   public init(bookId: Swift.Int, bodyPath: Swift.String, header: Swift.String?, token: Swift.String?)
-  public init()
   public func save() -> Swift.Bool
-  public func moveOfflineFileToBookFiles(bookId: Swift.Int) -> Swift.Bool
   @objc deinit
 }
 public protocol _UInt8Type {
