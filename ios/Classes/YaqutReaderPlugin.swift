@@ -201,7 +201,9 @@ extension YaqutReaderPlugin: ReaderDelegate {
     public func onSampleEnded() {
         channel?.invokeMethod("onSampleEnded", arguments: [:])
     }
-    
+}
+
+extension YaqutReaderPlugin: StatsSessionDelegate {
     public func onReadingSessionEnd(session: YaqutReader.RRReadingSession) {
         let data:[String: Any] = [
             "book_id": session.getBookId(),
@@ -219,5 +221,3 @@ extension YaqutReaderPlugin: ReaderDelegate {
         channel?.invokeMethod("onReadingSessionEnd", arguments: data)
     }
 }
-
-extension YaqutReaderPlugin: StatsSessionDelegate {}
