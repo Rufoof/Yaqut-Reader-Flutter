@@ -85,6 +85,9 @@ class YaqutReaderPlugin {
   }
 
   void onSyncReadingSessionCallback(YaqutReaderReadingSession session) {
+    if (kDebugMode) {
+      print("4. onSyncReadingSessionCallback called");
+    }
     onSyncReadingSessionStreamController.add(session);
   }
 
