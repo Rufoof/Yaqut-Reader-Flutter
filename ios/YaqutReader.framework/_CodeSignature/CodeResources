@@ -22,7 +22,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		E+//tZHAoKauJRlNl0nq20u8ucY=
+		i+A8HNOc+YCSFo9AOKnNmH2s9qc=
 		</data>
 		<key>Base.lproj/RRReaderView.nib</key>
 		<data>
@@ -90,11 +90,11 @@
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		b6Vabx66kgHwu5yMLj3X23clITY=
+		lO7MHiWuIJz/vciY5ZE90jyIKT8=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		lgex0sZkaFRxST2XNQdh/ujMePQ=
+		hJOdwRYk79LYnTzFagkHHbEg04o=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
@@ -361,7 +361,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5HUGxXrYrfqKMkZkaEKbVL7nyNb/rvrS01g6rzUqMBw=
+			atUs+9nxD0WxwovPiwIbJOV5TG5VcY2CtzeDAPoZ7aw=
 			</data>
 		</dict>
 		<key>Base.lproj/RRReaderView.nib</key>
@@ -473,14 +473,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eVbxutFUzVIWHiEM3up1WNL60a7kax18FdIPSoL8zQY=
+			t3KZKQHvQJbyF+eSVqi02wfJLzh6yi5Lc7PIue+Oxwg=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Qc1sJvp3EV/K1gzYz6sMT3x3eyYLLK/jjvmg2lfudK8=
+			XRfKRaEFjymfA0YZgGCjgGABJhWdQrZaZL5EBn8FZsE=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
