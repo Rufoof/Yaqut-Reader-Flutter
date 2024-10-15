@@ -71,7 +71,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let notesAndMarksData = bookData["notesAndMarks"] as? [[String: Any]] ?? []
         var notesAndMarks = [NotesAndMarks]()
         for item in notesAndMarksData {
-            let newItem: [String: Any] = ["bookId": bookId, "markId": item["markId"] as? Int ?? 0, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
+            let newItem: [String: Any] = ["bookId": bookId, "markId": item["id"] as? Int ?? 0, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
             let noteAndMark = NotesAndMarks(data: newItem)
             notesAndMarks.append(noteAndMark)
         }
@@ -190,7 +190,7 @@ extension YaqutReaderPlugin: ReaderDelegate {
             ]
             items.append(item)
         }
-        
+
         channel?.invokeMethod("onSyncNotes", arguments: items)
     }
 
