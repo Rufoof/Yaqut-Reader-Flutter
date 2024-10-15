@@ -190,6 +190,7 @@ extension YaqutReaderPlugin: ReaderDelegate {
             ]
             items.append(item)
         }
+        
         channel?.invokeMethod("onSyncNotes", arguments: items)
     }
 
