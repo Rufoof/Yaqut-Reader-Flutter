@@ -71,7 +71,8 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let notesAndMarksData = bookData["notesAndMarks"] as? [[String: Any]] ?? []
         var notesAndMarks = [NotesAndMarks]()
         for item in notesAndMarksData {
-            let noteAndMark = NotesAndMarks(dbData: item)
+            let newItem: [String: Any] = ["bookId": bookId, "fromOffset": item["location"], "toOffset": item["length"], "markColor": item["color"], "displayText": item["note"], "type": item["type"], "deleted": item["deleted"], "local": 1]
+            let noteAndMark = NotesAndMarks(dbData: newItem)
             notesAndMarks.append(noteAndMark)
         }
         self.readerBuilder?.setMarks(allMarks: notesAndMarks)
