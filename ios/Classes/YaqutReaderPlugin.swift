@@ -73,7 +73,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         print("notesAndMarksData count: \(notesAndMarksData.count)")
         for item in notesAndMarksData {
             print("item: \(item)")
-            let newItem: [String: Any] = ["bookId": bookId, "fromOffset": item["location"] as? Int, "toOffset": item["length"] as? Int, "markColor": item["color"] as? Int, "displayText": item["note"], "type": item["type"] as? Int, "deleted": item["deleted"] as? Int, "local": 1]
+            let newItem: [String: Any] = ["bookId": bookId, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
             print("newItem: \(newItem)")
             let noteAndMark = NotesAndMarks(dbData: newItem)
             print("noteAndMark fromOffset: \(noteAndMark.fromOffset) toOffset: \(noteAndMark.toOffset) displayText: \(noteAndMark.displayText)")
