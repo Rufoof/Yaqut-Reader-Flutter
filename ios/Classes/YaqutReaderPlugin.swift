@@ -70,9 +70,13 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         self.readerBuilder?.setSaveState(saveState: .NOT_SAVED)
         let notesAndMarksData = bookData["notesAndMarks"] as? [[String: Any]] ?? []
         var notesAndMarks = [NotesAndMarks]()
+        print("notesAndMarksData count: \(notesAndMarksData.count)")
         for item in notesAndMarksData {
+            print("item: \(item)")
             let newItem: [String: Any] = ["bookId": bookId, "fromOffset": item["location"], "toOffset": item["length"], "markColor": item["color"], "displayText": item["note"], "type": item["type"], "deleted": item["deleted"], "local": 1]
+            print("newItem: \(newItem)")
             let noteAndMark = NotesAndMarks(dbData: newItem)
+            print("noteAndMark fromOffset: \(noteAndMark.fromOffset) toOffset: \(noteAndMark.toOffset) displayText: \(noteAndMark.displayText)")
             notesAndMarks.append(noteAndMark)
         }
         self.readerBuilder?.setMarks(allMarks: notesAndMarks)
