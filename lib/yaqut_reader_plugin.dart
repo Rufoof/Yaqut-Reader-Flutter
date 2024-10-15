@@ -147,12 +147,6 @@ class YaqutReaderPlugin {
       case 'onDownloadBook':
         onDownloadBookCallback();
       case 'onSyncNotes':
-        // List<YaqutReaderNote> notes = [];
-        // final List<dynamic> marks = call.arguments;
-        // for (var mark in marks) {
-        //   var note = YaqutReaderNote.fromJson(mark);
-        //   notes.add(note);
-        // }
         List<dynamic> notes = call.arguments;
         onSyncNotesCallback(notes);
       case 'onReaderClosed':

@@ -11,6 +11,7 @@ class YaqutReaderBook {
   final double? retailPrice;
   final double? rating;
   double? previewPercentage;
+  List<Map<String, dynamic>>? notesAndMarks;
 
   YaqutReaderBook({
     required this.bookId,
@@ -25,6 +26,7 @@ class YaqutReaderBook {
     this.retailPrice,
     this.rating,
     this.previewPercentage,
+    this.notesAndMarks,
   });
 
   factory YaqutReaderBook.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,9 @@ class YaqutReaderBook {
       retailPrice: json['retailPrice'] as double?,
       rating: json['rating'] as double?,
       previewPercentage: json['previewPercentage'] as double?,
+      notesAndMarks: (json['notesAndMarks'] as List<dynamic>?)
+          ?.map((item) => Map<String, dynamic>.from(item as Map))
+          .toList(),
     );
   }
 
@@ -58,6 +63,9 @@ class YaqutReaderBook {
       'retailPrice': retailPrice,
       'rating': rating,
       'previewPercentage': previewPercentage,
+      'notesAndMarks': notesAndMarks
+          ?.map((item) => Map<String, dynamic>.from(item))
+          .toList(),
     };
   }
 }
