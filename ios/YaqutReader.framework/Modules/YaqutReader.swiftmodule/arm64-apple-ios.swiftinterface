@@ -1621,6 +1621,7 @@ extension YaqutReader.LonginusExtension where Base == Foundation.Data {
 }
 public class NotesAndMarks {
   public var bookId: Swift.Int
+  public var markId: Swift.Int
   public var fromOffset: Swift.Int
   public var toOffset: Swift.Int
   public var markColor: Swift.Int?
@@ -1628,7 +1629,7 @@ public class NotesAndMarks {
   public var type: Swift.Int
   public var deleted: Swift.Int?
   public var local: Swift.Int?
-  public init(bookId: Swift.Int, fromOffset: Swift.Int, toOffset: Swift.Int, markColor: Swift.Int?, displayText: Swift.String?, type: Swift.Int, deleted: Swift.Int?, local: Swift.Int?)
+  public init(bookId: Swift.Int, markId: Swift.Int, fromOffset: Swift.Int, toOffset: Swift.Int, markColor: Swift.Int?, displayText: Swift.String?, type: Swift.Int, deleted: Swift.Int?, local: Swift.Int?)
   public init(data: [Swift.String : Any])
   public init(dbData: [Swift.String : Any])
   @objc deinit

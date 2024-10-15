@@ -70,13 +70,9 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         self.readerBuilder?.setSaveState(saveState: .NOT_SAVED)
         let notesAndMarksData = bookData["notesAndMarks"] as? [[String: Any]] ?? []
         var notesAndMarks = [NotesAndMarks]()
-        print("notesAndMarksData count: \(notesAndMarksData.count)")
         for item in notesAndMarksData {
-            print("item: \(item)")
-            let newItem: [String: Any] = ["bookId": bookId, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
-            print("newItem: \(newItem)")
+            let newItem: [String: Any] = ["bookId": bookId, "markId": item["markId"] as? Int ?? 0, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
             let noteAndMark = NotesAndMarks(data: newItem)
-            print("noteAndMark fromOffset: \(noteAndMark.fromOffset) toOffset: \(noteAndMark.toOffset) displayText: \(noteAndMark.displayText)")
             notesAndMarks.append(noteAndMark)
         }
         self.readerBuilder?.setMarks(allMarks: notesAndMarks)
@@ -186,7 +182,8 @@ extension YaqutReaderPlugin: ReaderDelegate {
         var items = [[String: Any]]()
         for mark in list {
             let item: [String: Any] = [
-                "book_id": self.bookId ?? 0, "from_offset": mark.fromOffset,
+                "book_id": self.bookId ?? 0, "mark_id": mark.markId ?? 0,
+                "from_offset": mark.fromOffset,
                 "to_offset": mark.toOffset, "mark_color": mark.markColor ?? 0,
                 "display_text": mark.displayText ?? "", "type": mark.type,
                 "deleted": mark.deleted ?? 0, "local": mark.local ?? 1

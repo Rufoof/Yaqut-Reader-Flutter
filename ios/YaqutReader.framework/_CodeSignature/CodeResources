@@ -90,15 +90,15 @@
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		ooWOahP23H8TvhlQYqOkW4agqJA=
+		dhjMFPOfJOqXYqVgEnBHZZnc6o0=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		wr03bbVN4lkBRtWXjaET5Db4G2k=
+		WfHjirdH/5m/QooKhMxt246jmXA=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		SVxzXjAQ2IZvD7r2+pg20E7bmpE=
+		ODyfxhgRngSxzb2JeBUxTcXBCJ8=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -106,11 +106,11 @@
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		SVxzXjAQ2IZvD7r2+pg20E7bmpE=
+		ODyfxhgRngSxzb2JeBUxTcXBCJ8=
 		</data>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		Qp2FQRg76oxFNzUOwya7qhimnMo=
+		rreiNTOMOr39jwu6BC/30IsrbPw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -473,21 +473,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yk/WvQbAP/uJDpFaE/rxVgiz9wbCJyL95ZQMyaMMjk4=
+			ebeQSKFC0TyLEm2rjQWG4eqYuNIly6GW7aeTh1iNxlI=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			T5AliS1Va312X2yLvxRdviGzkBwJoSuvD8/t754ebUE=
+			6Qd6lQhRlPnVaNi5qT1Koy6Ig2hU0U2HYZnJX5teUwM=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ag6SpY7o58mc1AuXZ6berkbPtu+87Ja9NV4neh8uBYk=
+			gBQ8Tf7yHk89tnRMUKT/Y0eO6c+niMJ1anDzwh0uYTA=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -501,14 +501,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ag6SpY7o58mc1AuXZ6berkbPtu+87Ja9NV4neh8uBYk=
+			gBQ8Tf7yHk89tnRMUKT/Y0eO6c+niMJ1anDzwh0uYTA=
 			</data>
 		</dict>
 		<key>Modules/YaqutReader.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fVMMn2XxM1+MHlWZVgee+kTOQM4p2IqrR+gEGRyVb44=
+			PsYXCntboWYSSSEWu/32G2tlVyceoe3XTgWKrgPyVSE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
