@@ -76,6 +76,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
             notesAndMarks.append(noteAndMark)
         }
         self.readerBuilder?.setMarks(allMarks: notesAndMarks)
+        
         let readerColor = style["readerColor"] as? Int ?? 0
         let textSize = style["textSize"] as? Int ?? 22
         let isJustified = style["isJustified"] as? Bool ?? true
