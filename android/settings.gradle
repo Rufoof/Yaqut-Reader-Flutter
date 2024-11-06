@@ -1,3 +1,4 @@
 rootProject.name = 'yaqut_reader_flutter'
 include ':flutter'
 include ':reader'
+project(':reader').projectDir = new File('../Reader')
