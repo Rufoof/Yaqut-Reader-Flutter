@@ -1,5 +1,5 @@
 package android
 //rootProject.name = 'yaqut_reader_flutter'
 //include ':flutter'
-include ':yaqut_reader_flutter',':reader'
-project(':reader').projectDir = new File('../../Reader')
+include ':yaqut_reader_flutter',':Reader'
+project(':Reader').projectDir = new File('../Reader')
