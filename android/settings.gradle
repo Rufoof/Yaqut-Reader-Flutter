@@ -1,4 +1,5 @@
-rootProject.name = 'yaqut_reader_flutter'
-include ':flutter'
+package android
+//rootProject.name = 'yaqut_reader_flutter'
+//include ':flutter'
 include ':yaqut_reader_flutter',':reader'
 project(':reader').projectDir = new File('../../Reader')
