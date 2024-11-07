@@ -37,7 +37,13 @@ import co.reader.yaqut_reader_flutter.ReaderListenerImpl;
 import co.reader.yaqut_reader_flutter.StatsSessionListenerImpl;
 
 import android.app.Application;
-
+import android.app.Activity;
+import android.content.Context;
+import androidx.annotation.NonNull;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
+import io.flutter.plugin.common.MethodChannel;
 
 /**
  * YaqutReaderFlutterPlugin
