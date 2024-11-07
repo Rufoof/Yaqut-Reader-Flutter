@@ -8,7 +8,6 @@ import co.yaqut.reader.api.ReaderListener;
 import co.yaqut.reader.api.ReadingSession;
 import co.yaqut.reader.api.StatsSessionListener;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
-import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
@@ -20,11 +19,7 @@ import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-
-import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.PluginRegistry;
 import co.yaqut.reader.api.ReaderBuilder;
 import co.yaqut.reader.api.SaveBookManager;
@@ -36,7 +31,6 @@ import co.yaqut.reader.api.ReaderManager;
 import java.util.List;
 import java.util.Map;
 
-import android.os.Parcel;
 import android.os.Parcelable;
 
 import co.reader.yaqut_reader_flutter.ReaderListenerImpl;
@@ -54,21 +48,48 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel channel;
-    private Context context;
+    private Context applicationContext;
+    private Activity activity;
 
     private ReaderBuilder readerBuilder;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-        context = flutterPluginBinding.getApplicationContext();
-        if (context instanceof Application) {
-            ReaderManager.initialize((Application) context);
-        } else {
-            throw new IllegalStateException("Unable to obtain Application instance from context");
-        }
+        applicationContext = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
         setAppearance();
+    }
+
+    @Override
+    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
+        activity = binding.getActivity();
+    }
+
+    // Method to start the reader, ensuring the Activity context is used
+    private void startReader() {
+        if (activity != null) {
+            ReaderBuilder builder = new ReaderBuilder();
+            builder.initMiniPlayer(activity); // Pass the Activity context here
+            builder.build();
+        } else {
+            throw new IllegalStateException("Activity context is required to start the reader.");
+        }
+    }
+
+    @Override
+    public void onDetachedFromActivityForConfigChanges() {
+        activity = null;
+    }
+
+    @Override
+    public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
+        activity = binding.getActivity();
+    }
+
+    @Override
+    public void onDetachedFromActivity() {
+        activity = null;
     }
 
     @Override
@@ -85,7 +106,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
             Map<String, Object> checkArgs = call.arguments();
             int bookId = (int) checkArgs.get("book_id");
             int bookFileId = (int) checkArgs.get("book_file_id");
-            boolean isLocal = BookStorage.isBookLocal(context, bookId);
+            boolean isLocal = BookStorage.isBookLocal(applicationContext, bookId);
             result.success(isLocal);
             return;
         }
@@ -106,7 +127,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
                 Map<String, Object> checkArgs = call.arguments();
                 int bookId = (int) checkArgs.get("book_id");
                 int bookFileId = (int) checkArgs.get("book_file_id");
-                boolean isLocal = BookStorage.isBookLocal(context,bookId);
+                boolean isLocal = BookStorage.isBookLocal(applicationContext,bookId);
 
                 result.success(isLocal);
                 break;
@@ -132,7 +153,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
 
         ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1 : 0, lineSpacing, font);
 
-        readerBuilder = new ReaderBuilder(context, bookId);
+        readerBuilder = new ReaderBuilder(applicationContext, bookId);
         readerBuilder.setReaderStyle(readerStyle)
                 .setTitle(title)
                 .setCover("")
@@ -160,7 +181,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private boolean saveBook(int bookId, String bodyPath, String header, String accessToken) {
-        return SaveBookManager.save(context, bookId, bodyPath, header, accessToken);
+        return SaveBookManager.save(applicationContext, bookId, bodyPath, header, accessToken);
     }
     private ReaderListenerImpl readerListener = new ReaderListenerImpl();
     private StatsSessionListenerImpl statListener = new StatsSessionListenerImpl();
