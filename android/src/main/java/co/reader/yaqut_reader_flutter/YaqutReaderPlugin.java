@@ -1,4 +1,4 @@
-package android.src.main.java.co.reader.yaqut_reader_flutter;
+package co.reader.yaqut_reader_flutter;
 
 import android.app.Activity;
 import android.app.Application;
