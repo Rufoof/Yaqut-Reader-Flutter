@@ -19,6 +19,7 @@ import co.yaqut.reader.api.BookStorage;
 import co.yaqut.reader.api.ReaderBuilder;
 import co.yaqut.reader.api.ReaderStyle;
 import co.yaqut.reader.api.SaveBookManager;
+import co.yaqut.reader.api.ReaderManager;
 
 public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
     private MethodChannel channel;
