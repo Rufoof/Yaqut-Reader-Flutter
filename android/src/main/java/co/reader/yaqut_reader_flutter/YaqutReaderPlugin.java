@@ -92,54 +92,60 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         int position = (int) bookData.getOrDefault("position", 0);
         String cover = (String) bookData.get("coverThumbUrl");
         List<Map<String, Object>> notesAndMarksData = (List<Map<String, Object>>) bookData.getOrDefault("notesAndMarks", new ArrayList<>());
-        List<NotesAndMarks> notesAndMarks = new ArrayList<>();
+        List<NotesAndMarks> notesAndMarks = getNotesAndMarks(notesAndMarksData);
+        // Handle Reader Style
+        int readerColor = (int) styleData.getOrDefault("readerColor", 0);
+        int textSize = (int) styleData.getOrDefault("textSize", 22);
+        boolean isJustified = (Boolean) styleData.getOrDefault("isJustified", true);
+        int lineSpacing = (int) styleData.getOrDefault("lineSpacing", 1);
+        int font = (int) styleData.getOrDefault("font", 0);
 
-        for (Map<String, Object> item : notesAndMarksData) {
-            Map<String, Object> newItem = new HashMap<>();
-            int markId= (int) item.getOrDefault("id", 0);
-            int fromOffset= (int) item.getOrDefault("location", 0);
-            int toOffset= (int) item.getOrDefault("length", 0);
-            int markColor= (int) item.getOrDefault("color", 0);
-            String displayText= (String) item.getOrDefault("note", "");
-            int type= (int) item.getOrDefault("type", 0);
-            int deleted= (int) item.getOrDefault("deleted", 0);
-            int local= 1;
+        ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1 : 0, lineSpacing, font);
 
-            NotesAndMarks noteAndMark = new NotesAndMarks(fromOffset, toOffset,type, displayText,markColor, deleted);
-            notesAndMarks.add(noteAndMark);
+        readerBuilder = new ReaderBuilder(activity, bookId); // Use Activity context here
+        readerBuilder.setReaderStyle(readerStyle)
+                .setTitle(title)
+                .setCover(cover)
+                .setPosition(position)
+                .setPercentageView((float) previewPercentage)
+                .setReaderListener(new ReaderListenerImpl(channel, bookId))
+                .setNotesAndMarks(notesAndMarks)
+                .setReadingStatsListener(new StatsSessionListenerImpl(channel));
+        readerBuilder.setFileId(bookFileId);
+        readerBuilder.setNotesAndMarks(notesAndMarks);
+        readerBuilder.setSaveState(ReaderBuilder.SAVE_STATE_NOT_SAVED).setDownloadEnabled(false);
 
-            // Handle Reader Style
-            int readerColor = (int) styleData.getOrDefault("readerColor", 0);
-            int textSize = (int) styleData.getOrDefault("textSize", 22);
-            boolean isJustified = (Boolean) styleData.getOrDefault("isJustified", true);
-            int lineSpacing = (int) styleData.getOrDefault("lineSpacing", 1);
-            int font = (int) styleData.getOrDefault("font", 0);
-
-            ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1: 0, lineSpacing, font);
-
-            readerBuilder = new ReaderBuilder(activity, bookId); // Use Activity context here
-            readerBuilder.setReaderStyle(readerStyle)
-                    .setTitle(title)
-                    .setCover(cover)
-                    .setPosition(position)
-                    .setPercentageView((float) previewPercentage)
-                    .setReaderListener(new ReaderListenerImpl(channel, bookId))
-                    .setNotesAndMarks(notesAndMarks)
-                    .setReadingStatsListener(new StatsSessionListenerImpl(channel));
-            readerBuilder.setFileId(bookFileId);
-            readerBuilder.setNotesAndMarks(notesAndMarks);
-            readerBuilder.setSaveState(ReaderBuilder.SAVE_STATE_NOT_SAVED).setDownloadEnabled(false);
-
-            if (path.isEmpty()) {
+        if (path.isEmpty()) {
+            readerBuilder.build();
+        } else {
+            boolean saved = saveBook(bookId, path, header, token);
+            if (saved) {
                 readerBuilder.build();
-            } else {
-                boolean saved = saveBook(bookId, path, header, token);
-                if (saved) {
-                    readerBuilder.build();
-                }
             }
         }
     }
+
+    private static @NonNull List<NotesAndMarks> getNotesAndMarks(List<Map<String, Object>> notesAndMarksData) {
+        if (notesAndMarksData == null)
+            return null;
+        List<NotesAndMarks> notesAndMarks = new ArrayList<>();
+        for (Map<String, Object> item : notesAndMarksData) {
+            Map<String, Object> newItem = new HashMap<>();
+            int markId = (int) item.getOrDefault("id", 0);
+            int fromOffset = (int) item.getOrDefault("location", 0);
+            int toOffset = (int) item.getOrDefault("length", 0);
+            int markColor = (int) item.getOrDefault("color", 0);
+            String displayText = (String) item.getOrDefault("note", "");
+            int type = (int) item.getOrDefault("type", 0);
+            int deleted = (int) item.getOrDefault("deleted", 0);
+            int local = 1;
+
+            NotesAndMarks noteAndMark = new NotesAndMarks(fromOffset, toOffset, type, displayText, markColor, deleted);
+            notesAndMarks.add(noteAndMark);
+        }
+        return notesAndMarks;
+    }
+
     private void setAppearance() {
         // Handle UI customization here
     }
