@@ -30,13 +30,11 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     private Context applicationContext;
     private Activity activity;
     private ReaderBuilder readerBuilder;
-    private ReaderListenerImpl readerListener = new ReaderListenerImpl();
-    private StatsSessionListenerImpl statListener = new StatsSessionListenerImpl();
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         applicationContext = flutterPluginBinding.getApplicationContext();
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
+        channel = new MethodChannefl(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
         setAppearance();
 
@@ -108,7 +106,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
             newItem.put("deleted", item.getOrDefault("deleted", 0));
             newItem.put("local", 1);
 
-            NotesAndMarks noteAndMark = new NotesAndMarks(newItem);
+            NotesAndMarks noteAndMark = new NotesAndMarks(newItem.get("fromOffset"), newItem.get("toOffset"), newItem.get("type"), newItem.get("displayText"), newItem.get("markColor"), newItem.get("deleted"));
             notesAndMarks.add(noteAndMark);
 
             // Handle Reader Style
@@ -118,7 +116,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
             int lineSpacing = (int) styleData.getOrDefault("lineSpacing", 1);
             int font = (int) styleData.getOrDefault("font", 0);
 
-            ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1 : 0, lineSpacing, font);
+            ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified, lineSpacing, font);
 
             readerBuilder = new ReaderBuilder(activity, bookId); // Use Activity context here
             readerBuilder.setReaderStyle(readerStyle)
@@ -149,52 +147,6 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
 
     private boolean saveBook(int bookId, String bodyPath, String header, String accessToken) {
         return SaveBookManager.save(applicationContext, bookId, bodyPath, header, accessToken);
-    }
-
-    /**
-     * Listener methods, fired from Reader library
-     */
-    protected void onConfigurationChanged(ReaderConfiguration config) {
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("line_space", config.getReaderStyle().getLineSpacing());
-        data.put("layout", config.getReaderStyle().isJustified());
-        data.put("orientation", config.getScrollOrientation());
-        data.put("font_size", config.getReaderStyle().getTextSize());
-        data.put("font", config.getReaderStyle().getFont());
-        data.put("reader_color", config.getReaderStyle().getReaderColor());
-        data.put("book_id", mBookId);
-        invokeMethodOnFlutter("onConfigurationChanged", data);
-    }
-
-    protected void onPositionChanged(int position) {
-        HashMap<String, Object> data = new HashMap<>();
-        data.put("position", position);
-        data.put("book_id", mBookId);
-        invokeMethodOnFlutter("onPositionChanged", data);
-    }
-
-    protected void onSyncNotesAndMarks(List<NotesAndMarks> notes) {
-        List<HashMap<String, Object>> data = new ArrayList<>();
-        for (NotesAndMarks note : notes) {
-            HashMap<String, Object> item = new HashMap<>();
-            item.put("book_id", mBookId);
-            item.put("from_offset", note.getFromOffset());
-            item.put("to_offset", note.getToOffset());
-            item.put("mark_color", note.getColor());
-            item.put("display_text", note.getDisplayText());
-            item.put("type", note.getType());
-            item.put("deleted", note.isDeleted() ? 1 : 0);
-            item.put("local", 0);
-            data.add(item);
-        }
-        invokeMethodOnFlutter("onSyncNotes", data);
-    }
-
-    private void invokeMethodOnFlutter(String method, Object arguments) {
-        Log.i(TAG, "invokeMethodOnFlutter: " + method);
-        if (channel != null) {
-            channel.invokeMethod(method, arguments);
-        }
     }
 
     @Override
