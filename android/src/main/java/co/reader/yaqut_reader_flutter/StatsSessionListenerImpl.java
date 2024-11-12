@@ -48,7 +48,7 @@ public class StatsSessionListenerImpl implements StatsSessionListener, Parcelabl
 
     // Implement the StatsSessionListener methods here
     @Override
-    public void onReadingSessionEnd(ReadingSession readingSession) {
+    public void onReadingSessionEnd(ReadingSession session) {
         Map<String, Object> data = new HashMap<>();
         data.put("book_id", session.getBookId());
         data.put("book_file_id", session.getBookFileId());

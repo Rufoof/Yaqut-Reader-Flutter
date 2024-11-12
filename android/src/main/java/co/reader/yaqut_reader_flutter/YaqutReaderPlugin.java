@@ -34,7 +34,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         applicationContext = flutterPluginBinding.getApplicationContext();
-        channel = new MethodChannefl(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
         setAppearance();
 
@@ -96,17 +96,16 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
 
         for (Map<String, Object> item : notesAndMarksData) {
             Map<String, Object> newItem = new HashMap<>();
-            newItem.put("bookId", bookId);
-            newItem.put("markId", item.getOrDefault("id", 0));
-            newItem.put("fromOffset", item.getOrDefault("location", 0));
-            newItem.put("toOffset", item.getOrDefault("length", 0));
-            newItem.put("markColor", item.getOrDefault("color", 0));
-            newItem.put("displayText", item.getOrDefault("note", ""));
-            newItem.put("type", item.getOrDefault("type", 0));
-            newItem.put("deleted", item.getOrDefault("deleted", 0));
-            newItem.put("local", 1);
+            int markId= (int) item.getOrDefault("id", 0);
+            int fromOffset= (int) item.getOrDefault("location", 0);
+            int toOffset= (int) item.getOrDefault("length", 0);
+            int markColor= (int) item.getOrDefault("color", 0);
+            int displayText= (int) item.getOrDefault("note", "");
+            int type= (int) item.getOrDefault("type", 0);
+            int deleted= (int) item.getOrDefault("deleted", 0);
+            int local= 1;
 
-            NotesAndMarks noteAndMark = new NotesAndMarks(newItem.get("fromOffset"), newItem.get("toOffset"), newItem.get("type"), newItem.get("displayText"), newItem.get("markColor"), newItem.get("deleted"));
+            NotesAndMarks noteAndMark = new NotesAndMarks(fromOffset, toOffset,type, displayText,markColor, deleted);
             notesAndMarks.add(noteAndMark);
 
             // Handle Reader Style
@@ -116,7 +115,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
             int lineSpacing = (int) styleData.getOrDefault("lineSpacing", 1);
             int font = (int) styleData.getOrDefault("font", 0);
 
-            ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified, lineSpacing, font);
+            ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1: 0, lineSpacing, font);
 
             readerBuilder = new ReaderBuilder(activity, bookId); // Use Activity context here
             readerBuilder.setReaderStyle(readerStyle)

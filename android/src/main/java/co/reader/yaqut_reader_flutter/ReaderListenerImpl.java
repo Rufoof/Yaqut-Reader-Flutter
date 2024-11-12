@@ -55,11 +55,11 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     // Implement the ReaderListener methods here
     @Override
     public void onStyleChanged(ReaderStyle style) {
-        int lineSpace = style.getLineSpacing().getValue();
+        int lineSpace = style.getLineSpacing();
         int readerColor = style.getReaderColor();
         int fontIndex = style.getFont();
         int fontSize = style.getTextSize();
-        int layout = style.isJustified() ? 1 : 2;
+        int layout = style.isJustified();
         int bookId = this.bookId;
 
         Map<String, Integer> data = new HashMap<>();
@@ -92,14 +92,12 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         for (NotesAndMarks mark : list) {
             Map<String, Object> item = new HashMap<>();
             item.put("book_id", bookId);
-            item.put("mark_id", (mark.getMarkId() != null) ? mark.getMarkId() : 0);
             item.put("from_offset", mark.getFromOffset());
             item.put("to_offset", mark.getToOffset());
-            item.put("mark_color", (mark.getMarkColor() != null) ? mark.getMarkColor() : 0);
+            item.put("mark_color", (mark.getColor() != null) ? mark.getColor() : 0);
             item.put("display_text", (mark.getDisplayText() != null) ? mark.getDisplayText() : "");
             item.put("type", mark.getType());
-            item.put("deleted", (mark.getDeleted() != null) ? mark.getDeleted() : 0);
-            item.put("local", (mark.getLocal() != null) ? mark.getLocal() : 1);
+            item.put("deleted", mark.isDeleted() ? 1 : 0);
 
             items.add(item);
         }
