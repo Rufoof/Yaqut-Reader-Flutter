@@ -94,7 +94,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
             item.put("book_id", bookId);
             item.put("from_offset", mark.getFromOffset());
             item.put("to_offset", mark.getToOffset());
-            item.put("mark_color", (mark.getColor() != null) ? mark.getColor() : 0);
+            item.put("mark_color",  mark.getColor() );
             item.put("display_text", (mark.getDisplayText() != null) ? mark.getDisplayText() : "");
             item.put("type", mark.getType());
             item.put("deleted", mark.isDeleted() ? 1 : 0);

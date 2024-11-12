@@ -100,7 +100,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
             int fromOffset= (int) item.getOrDefault("location", 0);
             int toOffset= (int) item.getOrDefault("length", 0);
             int markColor= (int) item.getOrDefault("color", 0);
-            int displayText= (int) item.getOrDefault("note", "");
+            String displayText= (String) item.getOrDefault("note", "");
             int type= (int) item.getOrDefault("type", 0);
             int deleted= (int) item.getOrDefault("deleted", 0);
             int local= 1;
