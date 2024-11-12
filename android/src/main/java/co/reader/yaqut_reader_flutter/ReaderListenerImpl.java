@@ -15,7 +15,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
-    private final MethodChannel channel;
+    private  MethodChannel channel;
     private  int bookId;
 
     // Constructor
@@ -37,7 +37,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     }
 
     protected ReaderListenerImpl(Parcel in) {
-        // Read any data from the parcel here
+
     }
 
     public static final Creator<ReaderListenerImpl> CREATOR = new Creator<ReaderListenerImpl>() {
