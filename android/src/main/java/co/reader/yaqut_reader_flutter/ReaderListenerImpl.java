@@ -16,16 +16,16 @@ import co.yaqut.reader.api.ReaderStyle;
 import co.yaqut.reader.api.NotesAndMarks;
 import co.yaqut.reader.api.ReaderListener;
 
-public class ReaderListenerImpl implements ReaderListener, Parcelable {
-    private MethodChannel methodChannel;
-
-    private final int bookId;
+public class ReaderListenerImpl implements ReaderListener, Parcelable, ReaderListenerCallback {
     private static final String TAG = "ReaderListenerImpl";
+    private MethodChannel methodChannel;
+    private final int bookId;
+    private ReaderListenerCallback callback;
 
     // Constructor
-    public ReaderListenerImpl(MethodChannel channel, int bookId) {
-        this.methodChannel = channel;
+    public ReaderListenerImpl(ReaderListenerCallback callback, int bookId) {
         this.bookId = bookId;
+        this.callback = callback;
         Log.i(TAG, "ReaderListenerImpl: initialized");
     }
 
@@ -71,18 +71,15 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onStyleChanged(ReaderStyle style) {
-        MethodChannel channel = getMethodChannel();
-        if (channel != null) {
-            Map<String, Integer> data = new HashMap<>();
-            data.put("line_space", style.getLineSpacing());
-            data.put("reader_color", style.getReaderColor());
-            data.put("font", style.getFont());
-            data.put("font_size", style.getTextSize());
-            data.put("layout", style.isJustified());
-            data.put("book_id", bookId);
-            channel.invokeMethod("onStyleChanged", data);
-            Log.i(TAG, "onStyleChanged: channel invoked");
-        }else Log.i(TAG, "onStyleChanged: channel = null");
+//            Map<String, Integer> data = new HashMap<>();
+//            data.put("line_space", style.getLineSpacing());
+//            data.put("reader_color", style.getReaderColor());
+//            data.put("font", style.getFont());
+//            data.put("font_size", style.getTextSize());
+//            data.put("layout", style.isJustified());
+//            data.put("book_id", bookId);
+            if (callback != null)
+                callback.onStyleChanged(bookId, style);
     }
 
     @Override
@@ -115,6 +112,21 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
             }
             channel.invokeMethod("onSyncNotes", items);
         }
+    }
+
+    @Override
+    public void onStyleChanged(int bookId, ReaderStyle style) {
+        Log.i(TAG, "onStyleChanged called: ");
+    }
+
+    @Override
+    public void onPositionChanged(int bookId, int position) {
+
+    }
+
+    @Override
+    public void onSyncNotesAndMarks(int bookId, List<NotesAndMarks> notes) {
+
     }
 
     @Override
