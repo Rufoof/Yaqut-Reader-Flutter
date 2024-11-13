@@ -28,12 +28,13 @@ import co.yaqut.reader.api.ReaderManager;
 import co.yaqut.reader.api.NotesAndMarks;
 import co.yaqut.reader.api.ReaderListener;
 
-public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, ReaderListener {
+public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, ReaderListener, Parcelable {
     private  MethodChannel channel;
     private Context applicationContext;
     private Activity activity;
     private ReaderBuilder readerBuilder;
     private static final String TAG = "YaqutReaderPlugin";
+    private int bookId;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -95,7 +96,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
             Log.e("YaqutReaderPlugin", "Cannot start reader: Activity or Channel is null");
             return;
         }
-        int bookId = (int) bookData.get("bookId");
+        bookId = (int) bookData.get("bookId");
         String title = (String) bookData.get("title");
         int bookFileId = (int) bookData.get("bookFileId");
         double previewPercentage = (Double) bookData.getOrDefault("samplePreviewPercentage", 0.15);
@@ -180,30 +181,36 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     public void onDetachedFromActivity() {
         activity = null;
     }
+    public YaqutReaderPlugin() {
+        // Default constructor
+    }
+
+    // Parcelable constructor, if any properties were to be added
+    private YaqutReaderPlugin(Parcel in) {
+        // Read any properties if needed in future
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // Write any properties if needed in future
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-
-    }
-
-
-    public static final Parcelable.Creator<YaqutReaderPlugin> CREATOR = new Parcelable.Creator<>() {
+    public static final Creator<YaqutReaderPlugin> CREATOR = new Creator<YaqutReaderPlugin>() {
+        @Override
         public YaqutReaderPlugin createFromParcel(Parcel in) {
             return new YaqutReaderPlugin(in);
         }
 
+        @Override
         public YaqutReaderPlugin[] newArray(int size) {
             return new YaqutReaderPlugin[size];
         }
     };
-
-    private YaqutReaderPlugin(Parcel in) {
-        // Read your data from the parcel
-    }
     @Override
     public void onStyleChanged(ReaderStyle style) {
         Map<String, Integer> data = new HashMap<>();
