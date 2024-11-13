@@ -2,6 +2,8 @@ package co.reader.yaqut_reader_flutter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
 import io.flutter.plugin.common.MethodChannel;
 import co.yaqut.reader.api.ReaderListener;
 import co.yaqut.reader.api.ReaderStyle;
@@ -15,12 +17,14 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
+    private static final String TAG = "ReaderListenerImpl";
     private  MethodChannel channel;
     private  int bookId;
 
     // Constructor
     public ReaderListenerImpl(MethodChannel channel, int bookId) {
         // Initialize any fields here if needed
+        Log.i(TAG, "ReaderListenerImpl: initialized");
         this.channel = channel;
         this.bookId = bookId;
     }
@@ -60,7 +64,6 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         int fontIndex = style.getFont();
         int fontSize = style.getTextSize();
         int layout = style.isJustified();
-        int bookId = this.bookId;
 
         Map<String, Integer> data = new HashMap<>();
         data.put("line_space", lineSpace);
@@ -71,8 +74,10 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         data.put("book_id", bookId);
 
         if (channel != null) {
+            Log.i(TAG, "onStyleChanged: invokeMethod");
             channel.invokeMethod("onStyleChanged", data);
-        }
+        }else
+            Log.i(TAG, "onStyleChanged: channel is null");
     }
 
     @Override
@@ -82,6 +87,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         data.put("book_id", bookId );
 
         if (channel != null) {
+            Log.i(TAG, "onPositionChanged: invokeMethod");
             channel.invokeMethod("onPositionChanged", data);
         }
     }
@@ -103,6 +109,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         }
 
         if (channel != null) {
+            Log.i(TAG, "onSyncNotes: invokeMethod");
             channel.invokeMethod("onSyncNotes", items);
         }
 
@@ -116,13 +123,16 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     @Override
     public void onShareBook() {
         if (channel != null) {
+            Log.i(TAG, "onShareBook: invokeMethod");
             channel.invokeMethod("onShareBook", new HashMap<String, Object>());
         }
+
     }
 
     @Override
     public void onBookDetailsCLicked() {
         if (channel != null) {
+            Log.i(TAG, "onBookDetailsCLicked: invokeMethod");
             channel.invokeMethod("onBookDetailsCLicked", new HashMap<String, Object>());
         }
 
@@ -135,6 +145,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         data.put("book_id", bookId);
 
         if (channel != null) {
+            Log.i(TAG, "onSaveBookClicked: invokeMethod");
             channel.invokeMethod("onSaveBookClicked", data);
 
         }
@@ -143,6 +154,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     @Override
     public void onDownloadBook() {
         if (channel != null) {
+            Log.i(TAG, "onDownloadBook: invokeMethod");
             channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
         }
     }
@@ -154,6 +166,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         data.put("book_id", bookId );
 
         if (channel != null) {
+            Log.i(TAG, "onReaderClosed: invokeMethod");
             channel.invokeMethod("onReaderClosed", data);
         }
     }
@@ -161,6 +174,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     @Override
     public void onSampleEnded() {
         if (channel != null) {
+            Log.i(TAG, "onSampleEnded: invokeMethod");
             channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
         }
     }
