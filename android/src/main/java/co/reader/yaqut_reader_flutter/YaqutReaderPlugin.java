@@ -30,9 +30,11 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     private Context applicationContext;
     private Activity activity;
     private ReaderBuilder readerBuilder;
+    private static final String TAG = "YaqutReaderPlugin";
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        Log.i(TAG, "onAttachedToEngine: ");
         applicationContext = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
@@ -48,13 +50,14 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        Log.i(TAG, "onDetachedFromEngine: ");
         channel.setMethodCallHandler(null);
         channel = null;
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
-        Log.d("YaqutReaderPlugin", "Method called: " + call.method);
+        Log.i("YaqutReaderPlugin", "Method called: " + call.method);
 
         switch (call.method) {
             case "getPlatformVersion":
@@ -70,7 +73,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                     Map<String, Object> style = (Map<String, Object>) arguments.get("style");
                     startReader(header, path, token, book, style);
                 } else {
-                    result.error("NO_ACTIVITY", "Activity context is not available", null);
+                    Log.e(TAG, "onMethodCall: NO_ACTIVITY Activity context is not available");
                 }
                 break;
             case "checkIfLocal":
@@ -85,6 +88,10 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     }
 
     private void startReader(String header, String path, String token, Map<String, Object> bookData, Map<String, Object> styleData) {
+        if (activity == null || channel == null) {
+            Log.e("YaqutReaderPlugin", "Cannot start reader: Activity or Channel is null");
+            return;
+        }
         int bookId = (int) bookData.get("bookId");
         String title = (String) bookData.get("title");
         int bookFileId = (int) bookData.get("bookFileId");
