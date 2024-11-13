@@ -3,6 +3,8 @@ package co.reader.yaqut_reader_flutter;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -40,7 +42,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         applicationContext = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
-        setAppearance();
+
 
         if (applicationContext instanceof Application) {
             // Initialize ReaderManager with Application context
@@ -59,11 +61,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
-        Log.i("YaqutReaderPlugin", "Method called: " + call.method);
-        if (channel == null && applicationContext != null) {
-            channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
-            Log.i(TAG, "onMethodCall: channel initialized");
-        }
+        Log.d("YaqutReaderPlugin", "Method called: " + call.method);
+
         switch (call.method) {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
@@ -164,7 +163,24 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         return SaveBookManager.save(applicationContext, bookId, bodyPath, header, accessToken);
     }
     // Inner class implementing ReaderListener
-    private class ReaderListenerImpl implements ReaderListener {
+    private class ReaderListenerImpl implements ReaderListener, Parcelable {
+
+        protected ReaderListenerImpl(Parcel in) {
+
+        }
+
+        public  final Creator<ReaderListenerImpl> CREATOR = new Creator<ReaderListenerImpl>() {
+            @Override
+            public ReaderListenerImpl createFromParcel(Parcel in) {
+                return new ReaderListenerImpl(in);
+            }
+
+            @Override
+            public ReaderListenerImpl[] newArray(int size) {
+                return new ReaderListenerImpl[size];
+            }
+        };
+
         private int bookId;
 
         ReaderListenerImpl(int bookId) {
@@ -291,6 +307,16 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                 Log.i(TAG, "onSampleEnded: invokeMethod");
                 channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
             }
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(@NonNull Parcel dest, int flags) {
+
         }
     }
     @Override
