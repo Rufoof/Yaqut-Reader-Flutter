@@ -24,7 +24,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     // Constructor
     public ReaderListenerImpl(MethodChannel channel, int bookId) {
         // Initialize any fields here if needed
-        Log.i(TAG, "ReaderListenerImpl: initialized");
+        Log.i(TAG, "ReaderListenerImpl: initialized channel = "+  channel);
         this.channel = channel;
         this.bookId = bookId;
     }

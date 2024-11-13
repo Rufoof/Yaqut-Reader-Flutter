@@ -26,7 +26,7 @@ import co.yaqut.reader.api.ReaderManager;
 import co.yaqut.reader.api.NotesAndMarks;
 
 public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
-    private MethodChannel channel;
+    private static MethodChannel channel;
     private Context applicationContext;
     private Activity activity;
     private ReaderBuilder readerBuilder;
