@@ -58,7 +58,9 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
         Log.i("YaqutReaderPlugin", "Method called: " + call.method);
-
+        if (channel == null && applicationContext != null) {
+            channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
+        }
         switch (call.method) {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
