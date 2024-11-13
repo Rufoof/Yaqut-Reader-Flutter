@@ -26,6 +26,7 @@ import co.yaqut.reader.api.ReaderStyle;
 import co.yaqut.reader.api.SaveBookManager;
 import co.yaqut.reader.api.ReaderManager;
 import co.yaqut.reader.api.NotesAndMarks;
+import co.yaqut.reader.api.ReaderListener;
 
 public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, ReaderListener {
     private  MethodChannel channel;
