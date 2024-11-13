@@ -27,7 +27,7 @@ import co.yaqut.reader.api.SaveBookManager;
 import co.yaqut.reader.api.ReaderManager;
 import co.yaqut.reader.api.NotesAndMarks;
 
-public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, ReaderListenerCallback {
+public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, ReaderListener {
     private  MethodChannel channel;
     private Context applicationContext;
     private Activity activity;
@@ -110,15 +110,13 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         int font = (int) styleData.getOrDefault("font", 0);
 
         ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1 : 0, lineSpacing, font);
-        ReaderListenerImpl listener = new ReaderListenerImpl(this, bookId); // Create the listener
-        listener.setMethodChannel(channel);
         readerBuilder = new ReaderBuilder(activity, bookId); // Use Activity context here
         readerBuilder.setReaderStyle(readerStyle)
                 .setTitle(title)
                 .setCover(cover)
                 .setPosition(position)
                 .setPercentageView((float) previewPercentage)
-                .setReaderListener(listener)
+                .setReaderListener(this)
                 .setNotesAndMarks(notesAndMarks)
                 .setReadingStatsListener(new StatsSessionListenerImpl(channel));
         readerBuilder.setFileId(bookFileId);
@@ -181,54 +179,128 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     public void onDetachedFromActivity() {
         activity = null;
     }
-
     @Override
-    public void onStyleChanged(int bookId, ReaderStyle style) {
-        Log.i(TAG, "onStyleChanged: ");
+    public int describeContents() {
+        return 0;
     }
 
     @Override
-    public void onPositionChanged(int bookId, int position) {
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
 
     }
 
-    @Override
-    public void onSyncNotesAndMarks(int bookId, List<NotesAndMarks> notes) {
 
+    public static final Parcelable.Creator<YaqutReaderPlugin> CREATOR = new Parcelable.Creator<>() {
+        public YaqutReaderPlugin createFromParcel(Parcel in) {
+            return new YaqutReaderPlugin(in);
+        }
+
+        public YaqutReaderPlugin[] newArray(int size) {
+            return new YaqutReaderPlugin[size];
+        }
+    };
+
+    private YaqutReaderPlugin(Parcel in) {
+        // Read your data from the parcel
+    }
+    @Override
+    public void onStyleChanged(ReaderStyle style) {
+        Map<String, Integer> data = new HashMap<>();
+        data.put("line_space", style.getLineSpacing());
+        data.put("reader_color", style.getReaderColor());
+        data.put("font", style.getFont());
+        data.put("font_size", style.getTextSize());
+        data.put("layout", style.isJustified());
+        data.put("book_id", bookId);
+        channel.invokeMethod("onStyleChanged", data);
     }
 
     @Override
-    public void onUpdateLastOpened(long i) {
+    public void onPositionChanged(int position) {
+        if (channel != null) {
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", position);
+            data.put("book_id", bookId);
+            Log.i(TAG, "onPositionChanged: channel invoked");
+            channel.invokeMethod("onPositionChanged", data);
+        }else Log.i(TAG, "onPositionChanged: channel is null");
+    }
 
+    @Override
+    public void onSyncNotesAndMarks(List<NotesAndMarks> list) {
+        if (channel != null) {
+            List<Map<String, Object>> items = new ArrayList<>();
+            for (NotesAndMarks mark : list) {
+                Map<String, Object> item = new HashMap<>();
+                item.put("book_id", bookId);
+                item.put("from_offset", mark.getFromOffset());
+                item.put("to_offset", mark.getToOffset());
+                item.put("mark_color", mark.getColor());
+                item.put("display_text", mark.getDisplayText() != null ? mark.getDisplayText() : "");
+                item.put("type", mark.getType());
+                item.put("deleted", mark.isDeleted() ? 1 : 0);
+                items.add(item);
+            }
+            channel.invokeMethod("onSyncNotes", items);
+        }
+    }
+
+
+
+    @Override
+    public void onUpdateLastOpened(long timestamp) {
+        if (channel != null) {
+            channel.invokeMethod("onUpdateLastOpened", timestamp);
+        }
     }
 
     @Override
     public void onShareBook() {
-
+        if (channel != null) {
+            channel.invokeMethod("onShareBook", new HashMap<String, Object>());
+        }
     }
 
     @Override
     public void onBookDetailsCLicked() {
-
+        if (channel != null) {
+            channel.invokeMethod("onBookDetailsClicked", new HashMap<String, Object>());
+        }
     }
 
     @Override
-    public void onSaveBookClicked(int i) {
-
+    public void onSaveBookClicked(int position) {
+        if (channel != null) {
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", position);
+            data.put("book_id", bookId);
+            channel.invokeMethod("onSaveBookClicked", data);
+        }
     }
 
     @Override
     public void onDownloadBook() {
-
+        if (channel != null) {
+            channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
+        }
     }
 
     @Override
-    public void onReaderClosed(int i) {
-
+    public void onReaderClosed(int position) {
+        if (channel != null) {
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", position);
+            data.put("book_id", bookId);
+            channel.invokeMethod("onReaderClosed", data);
+        }
     }
 
     @Override
     public void onSampleEnded() {
-
+        if (channel != null) {
+            channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
+        }
     }
+
+
 }

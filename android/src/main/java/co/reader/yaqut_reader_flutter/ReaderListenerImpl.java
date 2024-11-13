@@ -71,15 +71,15 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onStyleChanged(ReaderStyle style) {
-//            Map<String, Integer> data = new HashMap<>();
-//            data.put("line_space", style.getLineSpacing());
-//            data.put("reader_color", style.getReaderColor());
-//            data.put("font", style.getFont());
-//            data.put("font_size", style.getTextSize());
-//            data.put("layout", style.isJustified());
-//            data.put("book_id", bookId);
-            if (callback != null)
-                callback.onStyleChanged(bookId, style);
+            Map<String, Integer> data = new HashMap<>();
+            data.put("line_space", style.getLineSpacing());
+            data.put("reader_color", style.getReaderColor());
+            data.put("font", style.getFont());
+            data.put("font_size", style.getTextSize());
+            data.put("layout", style.isJustified());
+            data.put("book_id", bookId);
+//            if (callback != null)
+//                callback.onStyleChanged(bookId, style);
     }
 
     @Override
