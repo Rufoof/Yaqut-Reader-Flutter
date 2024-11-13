@@ -24,9 +24,11 @@ import co.yaqut.reader.api.ReaderStyle;
 import co.yaqut.reader.api.SaveBookManager;
 import co.yaqut.reader.api.ReaderManager;
 import co.yaqut.reader.api.NotesAndMarks;
+import co.yaqut.reader.api.ReaderListener;
+
 
 public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
-    private static MethodChannel channel;
+    private  MethodChannel channel;
     private Context applicationContext;
     private Activity activity;
     private ReaderBuilder readerBuilder;
@@ -118,7 +120,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                 .setCover(cover)
                 .setPosition(position)
                 .setPercentageView((float) previewPercentage)
-                .setReaderListener(new ReaderListenerImpl(channel, bookId))
+                .setReaderListener(new ReaderListenerImpl(bookId))
                 .setNotesAndMarks(notesAndMarks)
                 .setReadingStatsListener(new StatsSessionListenerImpl(channel));
         readerBuilder.setFileId(bookFileId);
@@ -156,14 +158,141 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         return notesAndMarks;
     }
 
-    private void setAppearance() {
-        // Handle UI customization here
-    }
+
 
     private boolean saveBook(int bookId, String bodyPath, String header, String accessToken) {
         return SaveBookManager.save(applicationContext, bookId, bodyPath, header, accessToken);
     }
+    // Inner class implementing ReaderListener
+    private class ReaderListenerImpl implements ReaderListener {
+        private int bookId;
 
+        ReaderListenerImpl(int bookId) {
+            this.bookId = bookId;
+        }
+
+        @Override
+        public void onStyleChanged(ReaderStyle style) {
+            int lineSpace = style.getLineSpacing();
+            int readerColor = style.getReaderColor();
+            int fontIndex = style.getFont();
+            int fontSize = style.getTextSize();
+            int layout = style.isJustified();
+
+            Map<String, Integer> data = new HashMap<>();
+            data.put("line_space", lineSpace);
+            data.put("reader_color", readerColor);
+            data.put("font", fontIndex);
+            data.put("font_size", fontSize);
+            data.put("layout", layout);
+            data.put("book_id", bookId);
+
+            if (channel != null) {
+                Log.i(TAG, "onStyleChanged: invokeMethod");
+                channel.invokeMethod("onStyleChanged", data);
+            }else
+                Log.i(TAG, "onStyleChanged: channel is null");
+        }
+
+        @Override
+        public void onPositionChanged(int i) {
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", i);
+            data.put("book_id", bookId );
+
+            if (channel != null) {
+                Log.i(TAG, "onPositionChanged: invokeMethod");
+                channel.invokeMethod("onPositionChanged", data);
+            }
+        }
+
+        @Override
+        public void onSyncNotesAndMarks(List<NotesAndMarks> list) {
+            List<Map<String, Object>> items = new ArrayList<>();
+            for (NotesAndMarks mark : list) {
+                Map<String, Object> item = new HashMap<>();
+                item.put("book_id", bookId);
+                item.put("from_offset", mark.getFromOffset());
+                item.put("to_offset", mark.getToOffset());
+                item.put("mark_color",  mark.getColor() );
+                item.put("display_text", (mark.getDisplayText() != null) ? mark.getDisplayText() : "");
+                item.put("type", mark.getType());
+                item.put("deleted", mark.isDeleted() ? 1 : 0);
+
+                items.add(item);
+            }
+
+            if (channel != null) {
+                Log.i(TAG, "onSyncNotes: invokeMethod");
+                channel.invokeMethod("onSyncNotes", items);
+            }
+
+        }
+
+        @Override
+        public void onUpdateLastOpened(long l) {
+            // Handle updating last opened
+        }
+
+        @Override
+        public void onShareBook() {
+            if (channel != null) {
+                Log.i(TAG, "onShareBook: invokeMethod");
+                channel.invokeMethod("onShareBook", new HashMap<String, Object>());
+            }
+
+        }
+
+        @Override
+        public void onBookDetailsCLicked() {
+            if (channel != null) {
+                Log.i(TAG, "onBookDetailsCLicked: invokeMethod");
+                channel.invokeMethod("onBookDetailsCLicked", new HashMap<String, Object>());
+            }
+
+        }
+
+        @Override
+        public void onSaveBookClicked(int i) {
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", i);
+            data.put("book_id", bookId);
+
+            if (channel != null) {
+                Log.i(TAG, "onSaveBookClicked: invokeMethod");
+                channel.invokeMethod("onSaveBookClicked", data);
+
+            }
+        }
+
+        @Override
+        public void onDownloadBook() {
+            if (channel != null) {
+                Log.i(TAG, "onDownloadBook: invokeMethod");
+                channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
+            }
+        }
+
+        @Override
+        public void onReaderClosed(int i) {
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", i);
+            data.put("book_id", bookId );
+
+            if (channel != null) {
+                Log.i(TAG, "onReaderClosed: invokeMethod");
+                channel.invokeMethod("onReaderClosed", data);
+            }
+        }
+
+        @Override
+        public void onSampleEnded() {
+            if (channel != null) {
+                Log.i(TAG, "onSampleEnded: invokeMethod");
+                channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
+            }
+        }
+    }
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         activity = binding.getActivity();
