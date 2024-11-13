@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StatsSessionListenerImpl implements StatsSessionListener, Parcelable {
+    private static final String TAG = "StatsSessionListenerImp";
     private MethodChannel channel;
 
     // Constructor

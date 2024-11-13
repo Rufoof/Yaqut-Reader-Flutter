@@ -2,6 +2,7 @@ package co.reader.yaqut_reader_flutter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,17 +20,20 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     private MethodChannel methodChannel;
 
     private final int bookId;
+    private static final String TAG = "ReaderListenerImpl";
 
     // Constructor
     public ReaderListenerImpl(MethodChannel channel, int bookId) {
         this.methodChannel = channel;
         this.bookId = bookId;
+        Log.i(TAG, "ReaderListenerImpl: initialized");
     }
 
     // Parcelable implementation
     protected ReaderListenerImpl(Parcel in) {
         this.bookId = in.readInt();
         this.methodChannel = null;
+        Log.i(TAG, "ReaderListenerImpl: parcel");
         // If there is any other object to save, you can read them here
     }
 
@@ -77,7 +81,8 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
             data.put("layout", style.isJustified());
             data.put("book_id", bookId);
             channel.invokeMethod("onStyleChanged", data);
-        }
+            Log.i(TAG, "onStyleChanged: channel invoked");
+        }else Log.i(TAG, "onStyleChanged: channel = null");
     }
 
     @Override
@@ -87,8 +92,9 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
             Map<String, Integer> data = new HashMap<>();
             data.put("position", position);
             data.put("book_id", bookId);
+            Log.i(TAG, "onPositionChanged: channel invoked");
             channel.invokeMethod("onPositionChanged", data);
-        }
+        }else Log.i(TAG, "onPositionChanged: channel is null");
     }
 
     @Override
