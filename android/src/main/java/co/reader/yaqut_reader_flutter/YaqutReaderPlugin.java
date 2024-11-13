@@ -163,13 +163,13 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         return SaveBookManager.save(applicationContext, bookId, bodyPath, header, accessToken);
     }
     // Inner class implementing ReaderListener
-    private class ReaderListenerImpl implements ReaderListener, Parcelable {
+    private static class ReaderListenerImpl implements ReaderListener, Parcelable {
 
         protected ReaderListenerImpl(Parcel in) {
 
         }
 
-        public  final Creator<ReaderListenerImpl> CREATOR = new Creator<ReaderListenerImpl>() {
+        public static final Creator<ReaderListenerImpl> CREATOR = new Creator<ReaderListenerImpl>() {
             @Override
             public ReaderListenerImpl createFromParcel(Parcel in) {
                 return new ReaderListenerImpl(in);
