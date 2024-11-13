@@ -110,7 +110,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         int font = (int) styleData.getOrDefault("font", 0);
 
         ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1 : 0, lineSpacing, font);
-        ReaderListenerImpl listener = new ReaderListenerImpl(channel, bookId); // Create the listener
+        ReaderListenerImpl listener = new ReaderListenerImpl(this, bookId); // Create the listener
         listener.setMethodChannel(channel);
         readerBuilder = new ReaderBuilder(activity, bookId); // Use Activity context here
         readerBuilder.setReaderStyle(readerStyle)
