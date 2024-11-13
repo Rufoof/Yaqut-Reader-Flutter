@@ -16,16 +16,18 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 
+import java.lang.ref.WeakReference;
+
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
     private static final String TAG = "ReaderListenerImpl";
-    private  MethodChannel channel;
+    private WeakReference<MethodChannel> channelReference;
     private  int bookId;
 
     // Constructor
     public ReaderListenerImpl(MethodChannel channel, int bookId) {
         // Initialize any fields here if needed
         Log.i(TAG, "ReaderListenerImpl: initialized channel = "+  channel);
-        this.channel = channel;
+        this.channelReference = new WeakReference<>(channel);
         this.bookId = bookId;
     }
 
@@ -73,6 +75,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         data.put("layout", layout);
         data.put("book_id", bookId);
 
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onStyleChanged: invokeMethod");
             channel.invokeMethod("onStyleChanged", data);
@@ -86,6 +89,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         data.put("position", i);
         data.put("book_id", bookId );
 
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onPositionChanged: invokeMethod");
             channel.invokeMethod("onPositionChanged", data);
@@ -107,7 +111,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
             items.add(item);
         }
-
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onSyncNotes: invokeMethod");
             channel.invokeMethod("onSyncNotes", items);
@@ -122,6 +126,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onShareBook() {
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onShareBook: invokeMethod");
             channel.invokeMethod("onShareBook", new HashMap<String, Object>());
@@ -131,6 +136,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onBookDetailsCLicked() {
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onBookDetailsCLicked: invokeMethod");
             channel.invokeMethod("onBookDetailsCLicked", new HashMap<String, Object>());
@@ -140,10 +146,11 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSaveBookClicked(int i) {
+
         Map<String, Integer> data = new HashMap<>();
         data.put("position", i);
         data.put("book_id", bookId);
-
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onSaveBookClicked: invokeMethod");
             channel.invokeMethod("onSaveBookClicked", data);
@@ -153,6 +160,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onDownloadBook() {
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onDownloadBook: invokeMethod");
             channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
@@ -164,7 +172,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         Map<String, Integer> data = new HashMap<>();
         data.put("position", i);
         data.put("book_id", bookId );
-
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onReaderClosed: invokeMethod");
             channel.invokeMethod("onReaderClosed", data);
@@ -173,6 +181,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSampleEnded() {
+        MethodChannel channel = channelReference.get();
         if (channel != null) {
             Log.i(TAG, "onSampleEnded: invokeMethod");
             channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
