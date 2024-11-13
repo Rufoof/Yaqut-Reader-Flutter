@@ -28,7 +28,7 @@ import co.yaqut.reader.api.ReaderManager;
 import co.yaqut.reader.api.NotesAndMarks;
 import co.yaqut.reader.api.ReaderListener;
 
-public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, ReaderListener, Parcelable {
+public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
     private  MethodChannel channel;
     private Context applicationContext;
     private Activity activity;
@@ -42,6 +42,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         applicationContext = flutterPluginBinding.getApplicationContext();
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
         channel.setMethodCallHandler(this);
+        ChannelManager.getInstance().setChannel(channel);
 
 
         if (applicationContext instanceof Application) {
@@ -57,6 +58,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         Log.i(TAG, "onDetachedFromEngine: ");
         channel.setMethodCallHandler(null);
         channel = null;
+        ChannelManager.getInstance().setChannel(channel);
     }
 
     @Override
@@ -118,7 +120,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                 .setCover(cover)
                 .setPosition(position)
                 .setPercentageView((float) previewPercentage)
-                .setReaderListener(this)
+                .setReaderListener(new ReaderListenerImpl(bookId))
                 .setNotesAndMarks(notesAndMarks)
                 .setReadingStatsListener(new StatsSessionListenerImpl(channel));
         readerBuilder.setFileId(bookFileId);
@@ -181,134 +183,5 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     public void onDetachedFromActivity() {
         activity = null;
     }
-    public YaqutReaderPlugin() {
-        // Default constructor
-    }
-
-    // Parcelable constructor, if any properties were to be added
-    private YaqutReaderPlugin(Parcel in) {
-        // Read any properties if needed in future
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        // Write any properties if needed in future
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<YaqutReaderPlugin> CREATOR = new Creator<YaqutReaderPlugin>() {
-        @Override
-        public YaqutReaderPlugin createFromParcel(Parcel in) {
-            return new YaqutReaderPlugin(in);
-        }
-
-        @Override
-        public YaqutReaderPlugin[] newArray(int size) {
-            return new YaqutReaderPlugin[size];
-        }
-    };
-    @Override
-    public void onStyleChanged(ReaderStyle style) {
-        Map<String, Integer> data = new HashMap<>();
-        data.put("line_space", style.getLineSpacing());
-        data.put("reader_color", style.getReaderColor());
-        data.put("font", style.getFont());
-        data.put("font_size", style.getTextSize());
-        data.put("layout", style.isJustified());
-        data.put("book_id", bookId);
-        channel.invokeMethod("onStyleChanged", data);
-    }
-
-    @Override
-    public void onPositionChanged(int position) {
-        if (channel != null) {
-            Map<String, Integer> data = new HashMap<>();
-            data.put("position", position);
-            data.put("book_id", bookId);
-            Log.i(TAG, "onPositionChanged: channel invoked");
-            channel.invokeMethod("onPositionChanged", data);
-        }else Log.i(TAG, "onPositionChanged: channel is null");
-    }
-
-    @Override
-    public void onSyncNotesAndMarks(List<NotesAndMarks> list) {
-        if (channel != null) {
-            List<Map<String, Object>> items = new ArrayList<>();
-            for (NotesAndMarks mark : list) {
-                Map<String, Object> item = new HashMap<>();
-                item.put("book_id", bookId);
-                item.put("from_offset", mark.getFromOffset());
-                item.put("to_offset", mark.getToOffset());
-                item.put("mark_color", mark.getColor());
-                item.put("display_text", mark.getDisplayText() != null ? mark.getDisplayText() : "");
-                item.put("type", mark.getType());
-                item.put("deleted", mark.isDeleted() ? 1 : 0);
-                items.add(item);
-            }
-            channel.invokeMethod("onSyncNotes", items);
-        }
-    }
-
-
-
-    @Override
-    public void onUpdateLastOpened(long timestamp) {
-        if (channel != null) {
-            channel.invokeMethod("onUpdateLastOpened", timestamp);
-        }
-    }
-
-    @Override
-    public void onShareBook() {
-        if (channel != null) {
-            channel.invokeMethod("onShareBook", new HashMap<String, Object>());
-        }
-    }
-
-    @Override
-    public void onBookDetailsCLicked() {
-        if (channel != null) {
-            channel.invokeMethod("onBookDetailsClicked", new HashMap<String, Object>());
-        }
-    }
-
-    @Override
-    public void onSaveBookClicked(int position) {
-        if (channel != null) {
-            Map<String, Integer> data = new HashMap<>();
-            data.put("position", position);
-            data.put("book_id", bookId);
-            channel.invokeMethod("onSaveBookClicked", data);
-        }
-    }
-
-    @Override
-    public void onDownloadBook() {
-        if (channel != null) {
-            channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
-        }
-    }
-
-    @Override
-    public void onReaderClosed(int position) {
-        if (channel != null) {
-            Map<String, Integer> data = new HashMap<>();
-            data.put("position", position);
-            data.put("book_id", bookId);
-            channel.invokeMethod("onReaderClosed", data);
-        }
-    }
-
-    @Override
-    public void onSampleEnded() {
-        if (channel != null) {
-            channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
-        }
-    }
-
 
 }

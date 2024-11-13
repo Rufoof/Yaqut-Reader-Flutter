@@ -18,21 +18,17 @@ import co.yaqut.reader.api.ReaderListener;
 
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
     private static final String TAG = "ReaderListenerImpl";
-    private MethodChannel methodChannel;
     private final int bookId;
-    private ReaderListenerCallback callback;
 
     // Constructor
-    public ReaderListenerImpl(ReaderListenerCallback callback, int bookId) {
+    public ReaderListenerImpl( int bookId) {
         this.bookId = bookId;
-        this.callback = callback;
         Log.i(TAG, "ReaderListenerImpl: initialized");
     }
 
     // Parcelable implementation
     protected ReaderListenerImpl(Parcel in) {
         this.bookId = in.readInt();
-        this.methodChannel = null;
         Log.i(TAG, "ReaderListenerImpl: parcel");
         // If there is any other object to save, you can read them here
     }
@@ -43,15 +39,6 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         // If you added other fields, write them here
     }
 
-    // Setter for the MethodChannel (to be called after Parcelable object is created)
-    public void setMethodChannel(MethodChannel channel) {
-        this.methodChannel = channel;
-    }
-
-    // Get the MethodChannel reference
-    private MethodChannel getMethodChannel() {
-        return methodChannel;
-    }
     public static final Creator<ReaderListenerImpl> CREATOR = new Creator<ReaderListenerImpl>() {
         @Override
         public ReaderListenerImpl createFromParcel(Parcel in) {
@@ -71,6 +58,8 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onStyleChanged(ReaderStyle style) {
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
+        if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("line_space", style.getLineSpacing());
             data.put("reader_color", style.getReaderColor());
@@ -78,13 +67,16 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
             data.put("font_size", style.getTextSize());
             data.put("layout", style.isJustified());
             data.put("book_id", bookId);
-//            if (callback != null)
-//                callback.onStyleChanged(bookId, style);
+            channel.invokeMethod("onStyleChanged", data);
+        } else {
+            Log.i(TAG, "onStyleChanged: channel is null");
+        }
+
     }
 
     @Override
     public void onPositionChanged(int position) {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("position", position);
@@ -96,7 +88,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSyncNotesAndMarks(List<NotesAndMarks> list) {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             List<Map<String, Object>> items = new ArrayList<>();
             for (NotesAndMarks mark : list) {
@@ -118,7 +110,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onUpdateLastOpened(long timestamp) {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             channel.invokeMethod("onUpdateLastOpened", timestamp);
         }
@@ -126,7 +118,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onShareBook() {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             channel.invokeMethod("onShareBook", new HashMap<String, Object>());
         }
@@ -134,7 +126,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onBookDetailsCLicked() {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             channel.invokeMethod("onBookDetailsClicked", new HashMap<String, Object>());
         }
@@ -142,7 +134,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSaveBookClicked(int position) {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("position", position);
@@ -153,7 +145,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onDownloadBook() {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
         }
@@ -161,7 +153,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onReaderClosed(int position) {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("position", position);
@@ -172,7 +164,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSampleEnded() {
-        MethodChannel channel = getMethodChannel();
+        MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
             channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
         }
