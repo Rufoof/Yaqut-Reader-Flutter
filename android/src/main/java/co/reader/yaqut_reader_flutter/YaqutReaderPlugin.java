@@ -27,7 +27,7 @@ import co.yaqut.reader.api.SaveBookManager;
 import co.yaqut.reader.api.ReaderManager;
 import co.yaqut.reader.api.NotesAndMarks;
 
-public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
+public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware, ReaderListenerCallback {
     private  MethodChannel channel;
     private Context applicationContext;
     private Activity activity;
@@ -180,5 +180,55 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
     @Override
     public void onDetachedFromActivity() {
         activity = null;
+    }
+
+    @Override
+    public void onStyleChanged(int bookId, ReaderStyle style) {
+        Log.i(TAG, "onStyleChanged: ");
+    }
+
+    @Override
+    public void onPositionChanged(int bookId, int position) {
+
+    }
+
+    @Override
+    public void onSyncNotesAndMarks(int bookId, List<NotesAndMarks> notes) {
+
+    }
+
+    @Override
+    public void onUpdateLastOpened(long i) {
+
+    }
+
+    @Override
+    public void onShareBook() {
+
+    }
+
+    @Override
+    public void onBookDetailsCLicked() {
+
+    }
+
+    @Override
+    public void onSaveBookClicked(int i) {
+
+    }
+
+    @Override
+    public void onDownloadBook() {
+
+    }
+
+    @Override
+    public void onReaderClosed(int i) {
+
+    }
+
+    @Override
+    public void onSampleEnded() {
+
     }
 }

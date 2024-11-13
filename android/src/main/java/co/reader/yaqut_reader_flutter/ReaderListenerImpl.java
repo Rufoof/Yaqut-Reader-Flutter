@@ -16,7 +16,7 @@ import co.yaqut.reader.api.ReaderStyle;
 import co.yaqut.reader.api.NotesAndMarks;
 import co.yaqut.reader.api.ReaderListener;
 
-public class ReaderListenerImpl implements ReaderListener, Parcelable, ReaderListenerCallback {
+public class ReaderListenerImpl implements ReaderListener, Parcelable {
     private static final String TAG = "ReaderListenerImpl";
     private MethodChannel methodChannel;
     private final int bookId;
@@ -114,20 +114,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable, ReaderLis
         }
     }
 
-    @Override
-    public void onStyleChanged(int bookId, ReaderStyle style) {
-        Log.i(TAG, "onStyleChanged called: ");
-    }
 
-    @Override
-    public void onPositionChanged(int bookId, int position) {
-
-    }
-
-    @Override
-    public void onSyncNotesAndMarks(int bookId, List<NotesAndMarks> notes) {
-
-    }
 
     @Override
     public void onUpdateLastOpened(long timestamp) {
