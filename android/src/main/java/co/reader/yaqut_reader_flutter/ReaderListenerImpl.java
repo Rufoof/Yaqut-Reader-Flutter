@@ -2,48 +2,44 @@ package co.reader.yaqut_reader_flutter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
-import io.flutter.plugin.common.MethodChannel;
-import co.yaqut.reader.api.ReaderListener;
-import co.yaqut.reader.api.ReaderStyle;
-import co.yaqut.reader.api.NotesAndMarks;
-
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
 
-import androidx.annotation.NonNull;
-
-import java.lang.ref.WeakReference;
+import co.yaqut.reader.api.ReaderStyle;
+import co.yaqut.reader.api.NotesAndMarks;
+import co.yaqut.reader.api.ReaderListener;
 
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
-    private static final String TAG = "ReaderListenerImpl";
-    private WeakReference<MethodChannel> channelReference;
-    private  int bookId;
+    private final WeakReference<MethodChannel> weakChannel;
+    private final int bookId;
 
     // Constructor
     public ReaderListenerImpl(MethodChannel channel, int bookId) {
-        // Initialize any fields here if needed
-        Log.i(TAG, "ReaderListenerImpl: initialized channel = "+  channel);
-        this.channelReference = new WeakReference<>(channel);
+        this.weakChannel = new WeakReference<>(channel);
         this.bookId = bookId;
     }
 
+    // Getter for the channel
+    private MethodChannel getChannel() {
+        return weakChannel.get(); // Return channel if still available
+    }
+
     // Parcelable implementation
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        // Write any necessary data to the parcel here
-    }
-
     protected ReaderListenerImpl(Parcel in) {
+        this.bookId = in.readInt();
+        // If there is any other object to save, you can read them here
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(bookId);
+        // If you added other fields, write them here
     }
 
     public static final Creator<ReaderListenerImpl> CREATOR = new Creator<ReaderListenerImpl>() {
@@ -58,132 +54,115 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         }
     };
 
-    // Implement the ReaderListener methods here
     @Override
-    public void onStyleChanged(ReaderStyle style) {
-        int lineSpace = style.getLineSpacing();
-        int readerColor = style.getReaderColor();
-        int fontIndex = style.getFont();
-        int fontSize = style.getTextSize();
-        int layout = style.isJustified();
-
-        Map<String, Integer> data = new HashMap<>();
-        data.put("line_space", lineSpace);
-        data.put("reader_color", readerColor);
-        data.put("font", fontIndex);
-        data.put("font_size", fontSize);
-        data.put("layout", layout);
-        data.put("book_id", bookId);
-
-        MethodChannel channel = channelReference.get();
-        if (channel != null) {
-            Log.i(TAG, "onStyleChanged: invokeMethod");
-            channel.invokeMethod("onStyleChanged", data);
-        }else
-            Log.i(TAG, "onStyleChanged: channel is null");
+    public int describeContents() {
+        return 0; // No special contents
     }
 
     @Override
-    public void onPositionChanged(int i) {
-        Map<String, Integer> data = new HashMap<>();
-        data.put("position", i);
-        data.put("book_id", bookId );
-
-        MethodChannel channel = channelReference.get();
+    public void onStyleChanged(ReaderStyle style) {
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onPositionChanged: invokeMethod");
+            Map<String, Integer> data = new HashMap<>();
+            data.put("line_space", style.getLineSpacing());
+            data.put("reader_color", style.getReaderColor());
+            data.put("font", style.getFont());
+            data.put("font_size", style.getTextSize());
+            data.put("layout", style.isJustified());
+            data.put("book_id", bookId);
+            channel.invokeMethod("onStyleChanged", data);
+        }
+    }
+
+    @Override
+    public void onPositionChanged(int position) {
+        MethodChannel channel = getChannel();
+        if (channel != null) {
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", position);
+            data.put("book_id", bookId);
             channel.invokeMethod("onPositionChanged", data);
         }
     }
 
     @Override
     public void onSyncNotesAndMarks(List<NotesAndMarks> list) {
-        List<Map<String, Object>> items = new ArrayList<>();
-        for (NotesAndMarks mark : list) {
-            Map<String, Object> item = new HashMap<>();
-            item.put("book_id", bookId);
-            item.put("from_offset", mark.getFromOffset());
-            item.put("to_offset", mark.getToOffset());
-            item.put("mark_color",  mark.getColor() );
-            item.put("display_text", (mark.getDisplayText() != null) ? mark.getDisplayText() : "");
-            item.put("type", mark.getType());
-            item.put("deleted", mark.isDeleted() ? 1 : 0);
-
-            items.add(item);
-        }
-        MethodChannel channel = channelReference.get();
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onSyncNotes: invokeMethod");
+            List<Map<String, Object>> items = new ArrayList<>();
+            for (NotesAndMarks mark : list) {
+                Map<String, Object> item = new HashMap<>();
+                item.put("book_id", bookId);
+                item.put("from_offset", mark.getFromOffset());
+                item.put("to_offset", mark.getToOffset());
+                item.put("mark_color", mark.getColor());
+                item.put("display_text", mark.getDisplayText() != null ? mark.getDisplayText() : "");
+                item.put("type", mark.getType());
+                item.put("deleted", mark.isDeleted() ? 1 : 0);
+                items.add(item);
+            }
             channel.invokeMethod("onSyncNotes", items);
         }
-
     }
 
     @Override
-    public void onUpdateLastOpened(long l) {
-        // Handle updating last opened
+    public void onUpdateLastOpened(long timestamp) {
+        MethodChannel channel = getChannel();
+        if (channel != null) {
+            channel.invokeMethod("onUpdateLastOpened", timestamp);
+        }
     }
 
     @Override
     public void onShareBook() {
-        MethodChannel channel = channelReference.get();
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onShareBook: invokeMethod");
             channel.invokeMethod("onShareBook", new HashMap<String, Object>());
         }
-
     }
 
     @Override
-    public void onBookDetailsCLicked() {
-        MethodChannel channel = channelReference.get();
+    public void onBookDetailsClicked() {
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onBookDetailsCLicked: invokeMethod");
-            channel.invokeMethod("onBookDetailsCLicked", new HashMap<String, Object>());
+            channel.invokeMethod("onBookDetailsClicked", new HashMap<String, Object>());
         }
-
     }
 
     @Override
-    public void onSaveBookClicked(int i) {
-
-        Map<String, Integer> data = new HashMap<>();
-        data.put("position", i);
-        data.put("book_id", bookId);
-        MethodChannel channel = channelReference.get();
+    public void onSaveBookClicked(int position) {
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onSaveBookClicked: invokeMethod");
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", position);
+            data.put("book_id", bookId);
             channel.invokeMethod("onSaveBookClicked", data);
-
         }
     }
 
     @Override
     public void onDownloadBook() {
-        MethodChannel channel = channelReference.get();
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onDownloadBook: invokeMethod");
             channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
         }
     }
 
     @Override
-    public void onReaderClosed(int i) {
-        Map<String, Integer> data = new HashMap<>();
-        data.put("position", i);
-        data.put("book_id", bookId );
-        MethodChannel channel = channelReference.get();
+    public void onReaderClosed(int position) {
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onReaderClosed: invokeMethod");
+            Map<String, Integer> data = new HashMap<>();
+            data.put("position", position);
+            data.put("book_id", bookId);
             channel.invokeMethod("onReaderClosed", data);
         }
     }
 
     @Override
     public void onSampleEnded() {
-        MethodChannel channel = channelReference.get();
+        MethodChannel channel = getChannel();
         if (channel != null) {
-            Log.i(TAG, "onSampleEnded: invokeMethod");
             channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
         }
     }
