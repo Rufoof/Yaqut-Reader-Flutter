@@ -122,7 +122,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     }
 
     @Override
-    public void onBookDetailsClicked() {
+    public void onBookDetailsCLicked() {
         MethodChannel channel = getChannel();
         if (channel != null) {
             channel.invokeMethod("onBookDetailsClicked", new HashMap<String, Object>());
