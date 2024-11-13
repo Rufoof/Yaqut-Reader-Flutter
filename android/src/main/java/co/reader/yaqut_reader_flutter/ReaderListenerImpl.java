@@ -16,23 +16,20 @@ import co.yaqut.reader.api.NotesAndMarks;
 import co.yaqut.reader.api.ReaderListener;
 
 public class ReaderListenerImpl implements ReaderListener, Parcelable {
-    private final WeakReference<MethodChannel> weakChannel;
+    private MethodChannel methodChannel;
+
     private final int bookId;
 
     // Constructor
     public ReaderListenerImpl(MethodChannel channel, int bookId) {
-        this.weakChannel = new WeakReference<>(channel);
+        this.methodChannel = channel;
         this.bookId = bookId;
-    }
-
-    // Getter for the channel
-    private MethodChannel getChannel() {
-        return weakChannel.get(); // Return channel if still available
     }
 
     // Parcelable implementation
     protected ReaderListenerImpl(Parcel in) {
         this.bookId = in.readInt();
+        this.methodChannel = null;
         // If there is any other object to save, you can read them here
     }
 
@@ -42,6 +39,15 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
         // If you added other fields, write them here
     }
 
+    // Setter for the MethodChannel (to be called after Parcelable object is created)
+    public void setMethodChannel(MethodChannel channel) {
+        this.methodChannel = channel;
+    }
+
+    // Get the MethodChannel reference
+    private MethodChannel getMethodChannel() {
+        return methodChannel;
+    }
     public static final Creator<ReaderListenerImpl> CREATOR = new Creator<ReaderListenerImpl>() {
         @Override
         public ReaderListenerImpl createFromParcel(Parcel in) {
@@ -61,7 +67,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onStyleChanged(ReaderStyle style) {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("line_space", style.getLineSpacing());
@@ -76,7 +82,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onPositionChanged(int position) {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("position", position);
@@ -87,7 +93,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSyncNotesAndMarks(List<NotesAndMarks> list) {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             List<Map<String, Object>> items = new ArrayList<>();
             for (NotesAndMarks mark : list) {
@@ -107,7 +113,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onUpdateLastOpened(long timestamp) {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             channel.invokeMethod("onUpdateLastOpened", timestamp);
         }
@@ -115,7 +121,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onShareBook() {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             channel.invokeMethod("onShareBook", new HashMap<String, Object>());
         }
@@ -123,7 +129,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onBookDetailsCLicked() {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             channel.invokeMethod("onBookDetailsClicked", new HashMap<String, Object>());
         }
@@ -131,7 +137,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSaveBookClicked(int position) {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("position", position);
@@ -142,7 +148,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onDownloadBook() {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             channel.invokeMethod("onDownloadBook", new HashMap<String, Object>());
         }
@@ -150,7 +156,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onReaderClosed(int position) {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             Map<String, Integer> data = new HashMap<>();
             data.put("position", position);
@@ -161,7 +167,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
 
     @Override
     public void onSampleEnded() {
-        MethodChannel channel = getChannel();
+        MethodChannel channel = getMethodChannel();
         if (channel != null) {
             channel.invokeMethod("onSampleEnded", new HashMap<String, Object>());
         }
