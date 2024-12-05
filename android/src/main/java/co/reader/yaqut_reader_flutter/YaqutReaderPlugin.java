@@ -1,113 +1,91 @@
 package co.reader.yaqut_reader_flutter;
 
-import static java.security.AccessController.getContext;
-
-import androidx.annotation.NonNull;
-
-import co.yaqut.reader.api.ReaderListener;
-import co.yaqut.reader.api.ReadingSession;
-import co.yaqut.reader.api.StatsSessionListener;
-import io.flutter.embedding.engine.plugins.FlutterPlugin;
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
-import io.flutter.plugin.common.MethodChannel.Result;
-
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import io.flutter.embedding.engine.plugins.FlutterPlugin;
-import io.flutter.plugin.common.MethodCall;
-import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.PluginRegistry;
-import co.yaqut.reader.api.ReaderBuilder;
-import co.yaqut.reader.api.SaveBookManager;
-import co.yaqut.reader.api.BookStorage;
-import co.yaqut.reader.api.NotesAndMarks;
-import co.yaqut.reader.api.ReaderStyle;
-import co.yaqut.reader.api.ReaderManager;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
 
-import co.reader.yaqut_reader_flutter.ReaderListenerImpl;
-import co.reader.yaqut_reader_flutter.StatsSessionListenerImpl;
+import co.yaqut.reader.api.BookStorage;
+import co.yaqut.reader.api.ReaderBuilder;
+import co.yaqut.reader.api.ReaderStyle;
+import co.yaqut.reader.api.SaveBookManager;
+import co.yaqut.reader.api.ReaderManager;
+import co.yaqut.reader.api.NotesAndMarks;
+import co.yaqut.reader.api.ReaderListener;
 
-import android.app.Application;
-
-
-/**
- * YaqutReaderFlutterPlugin
- */
-public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
-    /// The MethodChannel that will the communication between Flutter and native Android
-    ///
-    /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-    /// when the Flutter Engine is detached from the Activity
-    private MethodChannel channel;
-    private Context context;
-
+public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
+    private  MethodChannel channel;
+    private Context applicationContext;
+    private Activity activity;
     private ReaderBuilder readerBuilder;
+    private static final String TAG = "YaqutReaderPlugin";
+    private int bookId;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-        context = flutterPluginBinding.getApplicationContext();
-        if (context instanceof Application) {
-            ReaderManager.initialize((Application) context);
+        Log.i(TAG, "onAttachedToEngine: ");
+        applicationContext = flutterPluginBinding.getApplicationContext();
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
+        channel.setMethodCallHandler(this);
+        ChannelManager.getInstance().setChannel(channel);
+
+
+        if (applicationContext instanceof Application) {
+            // Initialize ReaderManager with Application context
+            ReaderManager.initialize((Application) applicationContext);
         } else {
             throw new IllegalStateException("Unable to obtain Application instance from context");
         }
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "yaqut_reader_plugin");
-        channel.setMethodCallHandler(this);
-        setAppearance();
     }
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        Log.i(TAG, "onDetachedFromEngine: ");
         channel.setMethodCallHandler(null);
         channel = null;
+        ChannelManager.getInstance().setChannel(channel);
     }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
         Log.d("YaqutReaderPlugin", "Method called: " + call.method);
-        if (call.method.equals("checkIfLocal")) {
-            Log.d("YaqutReaderPlugin", "checkIfLocal invoked");
-            Map<String, Object> checkArgs = call.arguments();
-            int bookId = (int) checkArgs.get("book_id");
-            int bookFileId = (int) checkArgs.get("book_file_id");
-            boolean isLocal = BookStorage.isBookLocal(context, bookId);
-            result.success(isLocal);
-            return;
-        }
+
         switch (call.method) {
             case "getPlatformVersion":
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
                 break;
             case "startReader":
-                Map<String, Object> arguments = call.arguments();
-                String header = (String) arguments.get("header");
-                String path = (String) arguments.get("path");
-                String token = (String) arguments.get("access_token");
-                Map<String, Object> book = (Map<String, Object>) arguments.get("book");
-                Map<String, Object> style = (Map<String, Object>) arguments.get("style");
-                startReader(header, path, token, book, style);
+                if (activity != null) {
+                    Map<String, Object> arguments = call.arguments();
+                    String header = (String) arguments.get("header");
+                    String path = (String) arguments.get("path");
+                    String token = (String) arguments.get("access_token");
+                    Map<String, Object> book = (Map<String, Object>) arguments.get("book");
+                    Map<String, Object> style = (Map<String, Object>) arguments.get("style");
+                    startReader(header, path, token, book, style);
+                } else {
+                    Log.e(TAG, "onMethodCall: NO_ACTIVITY Activity context is not available");
+                }
                 break;
             case "checkIfLocal":
                 Map<String, Object> checkArgs = call.arguments();
                 int bookId = (int) checkArgs.get("book_id");
-                int bookFileId = (int) checkArgs.get("book_file_id");
-                boolean isLocal = BookStorage.isBookLocal(context,bookId);
-
+                boolean isLocal = BookStorage.isBookLocal(applicationContext, bookId);
                 result.success(isLocal);
                 break;
             default:
@@ -115,14 +93,19 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
-    private void startReader(String header, String path, String token,Map<String, Object> bookData, Map<String, Object> styleData) {
-        int bookId = (int) bookData.get("bookId"); 
-
+    private void startReader(String header, String path, String token, Map<String, Object> bookData, Map<String, Object> styleData) {
+        if (activity == null || channel == null) {
+            Log.e("YaqutReaderPlugin", "Cannot start reader: Activity or Channel is null");
+            return;
+        }
+        bookId = (int) bookData.get("bookId");
         String title = (String) bookData.get("title");
-        int bookFileId = (int) bookData.get("bookFileId"); 
+        int bookFileId = (int) bookData.get("bookFileId");
         double previewPercentage = (Double) bookData.getOrDefault("samplePreviewPercentage", 0.15);
         int position = (int) bookData.getOrDefault("position", 0);
-
+        String cover = (String) bookData.get("coverThumbUrl");
+        List<Map<String, Object>> notesAndMarksData = (List<Map<String, Object>>) bookData.getOrDefault("notesAndMarks", new ArrayList<>());
+        List<NotesAndMarks> notesAndMarks = getNotesAndMarks(notesAndMarksData);
         // Handle Reader Style
         int readerColor = (int) styleData.getOrDefault("readerColor", 0);
         int textSize = (int) styleData.getOrDefault("textSize", 22);
@@ -131,17 +114,17 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         int font = (int) styleData.getOrDefault("font", 0);
 
         ReaderStyle readerStyle = new ReaderStyle(textSize, readerColor, isJustified ? 1 : 0, lineSpacing, font);
-
-        readerBuilder = new ReaderBuilder(context, bookId);
+        readerBuilder = new ReaderBuilder(activity, bookId); // Use Activity context here
         readerBuilder.setReaderStyle(readerStyle)
                 .setTitle(title)
-                .setCover("")
+                .setCover(cover)
                 .setPosition(position)
                 .setPercentageView((float) previewPercentage)
-                .setReaderListener(readerListener)
-                .setReadingStatsListener(statListener);
+                .setReaderListener(new ReaderListenerImpl(bookId))
+                .setNotesAndMarks(notesAndMarks)
+                .setReadingStatsListener(new StatsSessionListenerImpl(channel));
         readerBuilder.setFileId(bookFileId);
-        readerBuilder.setNotesAndMarks(null);
+        readerBuilder.setNotesAndMarks(notesAndMarks);
         readerBuilder.setSaveState(ReaderBuilder.SAVE_STATE_NOT_SAVED).setDownloadEnabled(false);
 
         if (path.isEmpty()) {
@@ -154,14 +137,51 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
-    private void setAppearance() {
-        // Handle UI customization here for Android equivalent
-        // Colors and appearances can be customized via views and themes
+    private static @NonNull List<NotesAndMarks> getNotesAndMarks(List<Map<String, Object>> notesAndMarksData) {
+        if (notesAndMarksData == null)
+            return null;
+        List<NotesAndMarks> notesAndMarks = new ArrayList<>();
+        for (Map<String, Object> item : notesAndMarksData) {
+            Map<String, Object> newItem = new HashMap<>();
+            int markId = (int) item.getOrDefault("id", 0);
+            int fromOffset = (int) item.getOrDefault("location", 0);
+            int toOffset = (int) item.getOrDefault("length", 0);
+            int markColor = (int) item.getOrDefault("color", 0);
+            String displayText = (String) item.getOrDefault("note", "");
+            int type = (int) item.getOrDefault("type", 0);
+            int deleted = (int) item.getOrDefault("deleted", 0);
+            int local = 1;
+
+            NotesAndMarks noteAndMark = new NotesAndMarks(fromOffset, toOffset, type, displayText, markColor, deleted);
+            notesAndMarks.add(noteAndMark);
+        }
+        return notesAndMarks;
     }
 
+
+
     private boolean saveBook(int bookId, String bodyPath, String header, String accessToken) {
-        return SaveBookManager.save(context, bookId, bodyPath, header, accessToken);
+        return SaveBookManager.save(applicationContext, bookId, bodyPath, header, accessToken);
     }
-    private ReaderListenerImpl readerListener = new ReaderListenerImpl();
-    private StatsSessionListenerImpl statListener = new StatsSessionListenerImpl();
+
+    @Override
+    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
+        activity = binding.getActivity();
+    }
+
+    @Override
+    public void onDetachedFromActivityForConfigChanges() {
+        activity = null;
+    }
+
+    @Override
+    public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
+        activity = binding.getActivity();
+    }
+
+    @Override
+    public void onDetachedFromActivity() {
+        activity = null;
+    }
+
 }
