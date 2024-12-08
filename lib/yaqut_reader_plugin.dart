@@ -30,6 +30,8 @@ class YaqutReaderPlugin {
   final StreamController<YaqutReaderReadingSession>
       onSyncReadingSessionStreamController =
       StreamController<YaqutReaderReadingSession>.broadcast();
+  final StreamController<String> onOrientationChangedStreamController =
+      StreamController<String>.broadcast();
 
   Stream<YaqutReaderStyle> get onStyleChanged =>
       onStyleChangedStreamController.stream;
@@ -45,6 +47,8 @@ class YaqutReaderPlugin {
   Stream<String> get onSampleEnded => onSampleEndedStreamController.stream;
   Stream<YaqutReaderReadingSession> get onSyncReadingSession =>
       onSyncReadingSessionStreamController.stream;
+  Stream<String> get onOrientationChanged =>
+      onOrientationChangedStreamController.stream;
 
   void onStyleChangedCallback(YaqutReaderStyle style) {
     onStyleChangedStreamController.add(style);
@@ -83,10 +87,12 @@ class YaqutReaderPlugin {
   }
 
   void onSyncReadingSessionCallback(YaqutReaderReadingSession session) {
-    if (kDebugMode) {
-      print("4. onSyncReadingSessionCallback called");
-    }
+    if (kDebugMode) {}
     onSyncReadingSessionStreamController.add(session);
+  }
+
+  void onOrientationChangedCallback() {
+    onOrientationChangedStreamController.add('onOrientationChanged');
   }
 
   Future<void> startReader(
@@ -164,6 +170,8 @@ class YaqutReaderPlugin {
         YaqutReaderReadingSession session =
             YaqutReaderReadingSession.fromJson(data);
         onSyncReadingSessionCallback(session);
+      case 'onOrientationChanged':
+        onOrientationChangedCallback();
       default:
     }
   }

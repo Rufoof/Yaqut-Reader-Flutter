@@ -585,6 +585,7 @@ public protocol RRReaderViewDelegate {
   func onSyncReadingSession(session: YaqutReader.RRReadingSession)
   func onReaderClosed(position: Swift.Int)
   func onEndOfSample()
+  func onOrientationChanged()
 }
 extension YaqutReader.CS.BigUInt {
   public static func >>= <Other>(lhs: inout YaqutReader.CS.BigUInt, rhs: Other) where Other : Swift.BinaryInteger
@@ -2772,6 +2773,7 @@ public class ReaderBuilder {
   @objc deinit
 }
 extension YaqutReader.ReaderBuilder : YaqutReader.RRReaderViewDelegate {
+  public func onOrientationChanged()
   public func onSyncReadingSession(session: YaqutReader.RRReadingSession)
   public func onStyleChanged(style: YaqutReader.ReaderStyle)
   public func onBookDetailsCLicked()
@@ -4320,6 +4322,7 @@ public protocol ReaderDelegate {
   func onSyncNotesAndMarks(list: [YaqutReader.NotesAndMarks])
   func onReaderClosed(position: Swift.Int)
   func onSampleEnded()
+  func onOrientationChanged()
 }
 extension YaqutReader.CS.BigUInt {
   public mutating func multiply(byWord y: YaqutReader.CS.BigUInt.Word)

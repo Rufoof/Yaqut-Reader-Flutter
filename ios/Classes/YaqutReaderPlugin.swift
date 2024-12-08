@@ -205,6 +205,10 @@ extension YaqutReaderPlugin: ReaderDelegate {
     public func onSampleEnded() {
         channel?.invokeMethod("onSampleEnded", arguments: [:])
     }
+
+    public func onOrientationChanged() {
+        channel?.invokeMethod("onOrientationChanged", arguments: [:])
+    }
 }
 
 extension YaqutReaderPlugin: StatsSessionDelegate {
