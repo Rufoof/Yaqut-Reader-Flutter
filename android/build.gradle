@@ -42,7 +42,6 @@ android {
     }
 
     dependencies {
-        implementation project(':publishing')
         implementation 'co.yaqut.reader:reader:1.0.0'
 
         testImplementation("junit:junit:4.13.2")
