@@ -1,0 +1,25 @@
+plugins {
+    id 'maven-publish'
+}
+
+group = 'co.yaqut.reader' // Set the group ID for your library
+version = '1.0.0' // Set the version for your library
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = 'co.yaqut.reader' // Replace with your desired group ID
+            artifactId = 'reader'         // Replace with your desired artifact ID
+            version = '1.0.0'            // Replace with your desired version
+
+            // Specify the location of the existing .aar file
+            artifact(file('app-release.aar')) {
+                extension 'aar'
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal() // This publishes to the local Maven repository (~/.m2/repository)
+    }
+}
