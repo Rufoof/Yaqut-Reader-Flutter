@@ -12,16 +12,19 @@ yaqut_reader_plugin:
       ref: 1.1.0
 ```
 ## Installation
-Make sure to install muPdf into your local maven to be able to build this:
-```bash
-./gradlew -p muPdf publish
-```
-
+Android
 ## install reader locally:
 ```bash
 ./gradlew -p publishing publish
 ```
-
+```build.gradle
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal() // Ensures the project can access the locally published AAR
+    }
+```
 ### Usage
 
 You need to create 'Book' object and call 'startReader' from 'UserBooks'
