@@ -43,7 +43,6 @@ android {
 
     dependencies {
         implementation 'co.yaqut.reader:reader:1.0.0'
-
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.mockito:mockito-core:5.0.0")
         implementation 'androidx.appcompat:appcompat:1.6.1'
