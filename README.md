@@ -11,12 +11,13 @@ yaqut_reader_plugin:
       url: https://github.com/Rufoof/Yaqut-Reader-Flutter.git
       ref: 1.1.0
 ```
-## Installation
-Android
-## install reader locally:
+## Android
+
+install reader locally:
 ```bash
 ./gradlew -p publishing publish
 ```
+access the local maven
 ```build.gradle
 allprojects {
     repositories {
