@@ -1,0 +1,76 @@
+
+group = "co.reader.yaqut_reader_flutter"
+version = "1.0"
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.3.0")
+        classpath 'com.google.gms:google-services:4.3.10'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+apply plugin: "com.android.library"
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace = "co.reader.yaqut_reader_flutter"
+    }
+
+    compileSdk = 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdk = 24
+    }
+
+    dependencies {
+        implementation 'co.yaqut.reader:reader:1.0.0'
+        testImplementation("junit:junit:4.13.2")
+        testImplementation("org.mockito:mockito-core:5.0.0")
+        implementation 'androidx.appcompat:appcompat:1.6.1'
+        implementation 'com.google.android.material:material:1.12.0'
+        implementation 'com.github.skydoves:expandablelayout:1.0.7'
+        implementation 'com.squareup.picasso:picasso:2.71828'
+        implementation 'jp.wasabeef:picasso-transformations:2.4.0'
+        implementation 'org.greenrobot:eventbus:3.3.1'
+        implementation 'com.google.android.exoplayer:exoplayer:2.19.1'
+        implementation "androidx.media3:media3-exoplayer:1.4.1"
+        implementation "androidx.media3:media3-ui:1.4.1"
+        implementation "androidx.media3:media3-common:1.4.1"
+        implementation "androidx.media3:media3-session:1.4.1"
+        implementation 'androidx.media3:media3-exoplayer-hls:1.4.1'
+        implementation 'com.google.code.gson:gson:2.8.6'
+        def multidex_version = "2.0.1"
+        implementation "androidx.multidex:multidex:$multidex_version"
+
+
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+}

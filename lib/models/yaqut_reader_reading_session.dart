@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:yaqut_reader_plugin/constants/constants.dart';
 
 class YaqutReaderReadingSession {
@@ -34,8 +36,8 @@ class YaqutReaderReadingSession {
       constPagesRead: pagesRead,
       constStartOffset: startOffset,
       constEndOffset: endOffset,
-      constCoveredOffset: coveredOffset,
-      constCoveredLength: coveredLength,
+      constCoveredOffset: jsonEncode(coveredOffset),
+      constCoveredLength: jsonEncode(coveredLength),
       constStartTime: startTime,
       constEndTime: endTime,
       constMd5: md5,
@@ -50,10 +52,14 @@ class YaqutReaderReadingSession {
       pagesRead: json[constPagesRead] as int,
       startOffset: json[constStartOffset] as int,
       endOffset: json[constEndOffset] as int,
-      coveredOffset: json[constCoveredOffset] as List<int>,
-      coveredLength: json[constCoveredLength] as List<int>,
-      startTime: json[constStartTime] as double,
-      endTime: json[constEndTime] as double,
+      coveredOffset: (json[constCoveredOffset] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+      coveredLength: (json[constCoveredLength] as List<dynamic>)
+          .map((e) => e as int)
+          .toList(),
+      startTime: (json[constStartTime] as num).toDouble(),
+      endTime: (json[constEndTime] as num).toDouble(),
       md5: json[constMd5] as String,
       uuid: json[constUuid] as String,
     );

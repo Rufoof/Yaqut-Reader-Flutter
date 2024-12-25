@@ -25,6 +25,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
                 let header = arguments["header"] as? String
                 let path = arguments["path"] as? String
                 let token = arguments["access_token"] as? String
+                print("startReader invoked iOS")
                 self.startReader(header: header, path: path, accessToken: token, bookData: book, style: style)
             }
         case "checkIfLocal":
@@ -49,13 +50,9 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
     
     private func startReader(header: String?, path: String?, accessToken: String?, bookData: [String: Any], style: [String: Any]) {
         let bookId = bookData["bookId"] as? Int ?? 0
+        let bookFileId = bookData["bookFileId"] as? Int ?? 0
         let title = bookData["title"] as? String ?? ""
-        var bookFileId: Int = 0
-        var previewPercentage: Double = 0.15
-        if let currentFile = bookData["currentFile"] as? [String: Any] {
-            bookFileId = currentFile["bookFileId"] as? Int ?? 0
-            previewPercentage = bookData["samplePreviewPercentage"] as? Double ?? 0.15
-        }
+        let previewPercentage = bookData["samplePreviewPercentage"] as? Double ?? 0.15
         let position = bookData["position"] as? Int ?? 0
         self.bookId = bookId
         self.readerBuilder = ReaderBuilder(bookId: bookId, language: Language.arabic)
@@ -74,10 +71,12 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let notesAndMarksData = bookData["notesAndMarks"] as? [[String: Any]] ?? []
         var notesAndMarks = [NotesAndMarks]()
         for item in notesAndMarksData {
-            let noteAndMark = NotesAndMarks(dbData: item)
+            let newItem: [String: Any] = ["bookId": bookId, "markId": item["id"] as? Int ?? 0, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
+            let noteAndMark = NotesAndMarks(data: newItem)
             notesAndMarks.append(noteAndMark)
         }
         self.readerBuilder?.setMarks(allMarks: notesAndMarks)
+        
         let readerColor = style["readerColor"] as? Int ?? 0
         let textSize = style["textSize"] as? Int ?? 22
         let isJustified = style["isJustified"] as? Bool ?? true
@@ -86,12 +85,11 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let font = style["font"] as? Int ?? 0
         let readerStyle = ReaderStyle(readerColor: readerColor, readerTextSize: textSize, isJustified: isJustified, lineSpacing: lineSpacing, font: font)
         self.readerBuilder?.setReaderStyle(readerStyle: readerStyle)
-        guard let path = path else {
+        if (path ?? "") == "" {
             self.readerBuilder?.build()
             return
         }
-        
-        let saveBookManager = SaveBookManager(bookId: bookId, bodyPath: path, header: header, token: accessToken)
+        let saveBookManager = SaveBookManager(bookId: bookId, bodyPath: path ?? "", header: header == "" ? nil : header, token: accessToken == "" ? nil : accessToken)
         let saveBook = saveBookManager.save()
         if saveBook {
             self.readerBuilder?.build()
@@ -185,13 +183,15 @@ extension YaqutReaderPlugin: ReaderDelegate {
         var items = [[String: Any]]()
         for mark in list {
             let item: [String: Any] = [
-                "book_id": self.bookId ?? 0, "from_offset": mark.fromOffset,
+                "book_id": self.bookId ?? 0, "mark_id": mark.markId ?? 0,
+                "from_offset": mark.fromOffset,
                 "to_offset": mark.toOffset, "mark_color": mark.markColor ?? 0,
                 "display_text": mark.displayText ?? "", "type": mark.type,
                 "deleted": mark.deleted ?? 0, "local": mark.local ?? 1
             ]
             items.append(item)
         }
+
         channel?.invokeMethod("onSyncNotes", arguments: items)
     }
 
@@ -205,10 +205,27 @@ extension YaqutReaderPlugin: ReaderDelegate {
     public func onSampleEnded() {
         channel?.invokeMethod("onSampleEnded", arguments: [:])
     }
+
+    public func onOrientationChanged() {
+        channel?.invokeMethod("onOrientationChanged", arguments: [:])
+    }
 }
 
 extension YaqutReaderPlugin: StatsSessionDelegate {
     public func onReadingSessionEnd(session: YaqutReader.RRReadingSession) {
-        channel?.invokeMethod("onReadingSessionEnd", arguments: [:])
+        let data:[String: Any] = [
+            "book_id": session.getBookId(),
+            "book_file_id": session.getBookFileId(),
+            "pages_read": session.getPagesRead(),
+            "start_offset": session.getStartOffset(),
+            "end_offset": session.getEndOffset(),
+            "covered_offset": session.getCoveredOffset(),
+            "covered_length": session.getCoveredLength(),
+            "start_time": session.getStartTime(),
+            "end_time": session.getEndTime(),
+            "md5": session.getMd5(),
+            "uuid": session.getUuid()
+            ]
+        channel?.invokeMethod("onReadingSessionEnd", arguments: data)
     }
 }

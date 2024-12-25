@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:yaqut_reader_plugin/constants/constants.dart';
 import 'package:yaqut_reader_plugin/models/yaqut_reader_book.dart';
-import 'package:yaqut_reader_plugin/models/yaqut_reader_note.dart';
 import 'package:yaqut_reader_plugin/models/yaqut_reader_reading_session.dart';
 import 'package:yaqut_reader_plugin/models/yaqut_reader_style.dart';
 
@@ -14,8 +13,8 @@ class YaqutReaderPlugin {
       StreamController<YaqutReaderStyle>.broadcast();
   final StreamController<int> onPositionChangedStreamController =
       StreamController<int>.broadcast();
-  final StreamController<List<YaqutReaderNote>> onSyncNotesStreamController =
-      StreamController<List<YaqutReaderNote>>.broadcast();
+  final StreamController<List<dynamic>> onSyncNotesStreamController =
+      StreamController<List<dynamic>>.broadcast();
   final StreamController<String> onBookDetailsCLickedStreamController =
       StreamController<String>.broadcast();
   final StreamController<String> onSaveBookClickedStreamController =
@@ -31,12 +30,13 @@ class YaqutReaderPlugin {
   final StreamController<YaqutReaderReadingSession>
       onSyncReadingSessionStreamController =
       StreamController<YaqutReaderReadingSession>.broadcast();
+  final StreamController<String> onOrientationChangedStreamController =
+      StreamController<String>.broadcast();
 
   Stream<YaqutReaderStyle> get onStyleChanged =>
       onStyleChangedStreamController.stream;
   Stream<int> get onPositionChanged => onPositionChangedStreamController.stream;
-  Stream<List<YaqutReaderNote>> get onSyncNotes =>
-      onSyncNotesStreamController.stream;
+  Stream<List<dynamic>> get onSyncNotes => onSyncNotesStreamController.stream;
   Stream<String> get onBookDetailsCLicked =>
       onBookDetailsCLickedStreamController.stream;
   Stream<String> get onSaveBookClicked =>
@@ -47,6 +47,8 @@ class YaqutReaderPlugin {
   Stream<String> get onSampleEnded => onSampleEndedStreamController.stream;
   Stream<YaqutReaderReadingSession> get onSyncReadingSession =>
       onSyncReadingSessionStreamController.stream;
+  Stream<String> get onOrientationChanged =>
+      onOrientationChangedStreamController.stream;
 
   void onStyleChangedCallback(YaqutReaderStyle style) {
     onStyleChangedStreamController.add(style);
@@ -56,7 +58,7 @@ class YaqutReaderPlugin {
     onPositionChangedStreamController.add(position);
   }
 
-  void onSyncNotesCallback(List<YaqutReaderNote> notes) {
+  void onSyncNotesCallback(List<dynamic> notes) {
     onSyncNotesStreamController.add(notes);
   }
 
@@ -85,7 +87,12 @@ class YaqutReaderPlugin {
   }
 
   void onSyncReadingSessionCallback(YaqutReaderReadingSession session) {
+    if (kDebugMode) {}
     onSyncReadingSessionStreamController.add(session);
+  }
+
+  void onOrientationChangedCallback() {
+    onOrientationChangedStreamController.add('onOrientationChanged');
   }
 
   Future<void> startReader(
@@ -146,12 +153,7 @@ class YaqutReaderPlugin {
       case 'onDownloadBook':
         onDownloadBookCallback();
       case 'onSyncNotes':
-        List<YaqutReaderNote> notes = [];
-        final List<dynamic> marks = call.arguments;
-        for (var mark in marks) {
-          var note = YaqutReaderNote.fromJson(mark);
-          notes.add(note);
-        }
+        List<dynamic> notes = call.arguments;
         onSyncNotesCallback(notes);
       case 'onReaderClosed':
         var data = call.arguments as Map;
@@ -160,9 +162,16 @@ class YaqutReaderPlugin {
       case 'onSampleEnded':
         onSampleEndedCallback();
       case 'onReadingSessionEnd':
+        final Map<Object?, Object?> rawData =
+            call.arguments as Map<Object?, Object?>;
+        final Map<String, dynamic> data = rawData.map(
+          (key, value) => MapEntry(key as String, value),
+        );
         YaqutReaderReadingSession session =
-            YaqutReaderReadingSession.fromJson(call.arguments);
+            YaqutReaderReadingSession.fromJson(data);
         onSyncReadingSessionCallback(session);
+      case 'onOrientationChanged':
+        onOrientationChangedCallback();
       default:
     }
   }

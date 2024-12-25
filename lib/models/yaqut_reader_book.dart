@@ -1,5 +1,6 @@
 class YaqutReaderBook {
   final int bookId;
+  final int bookFileId;
   final String title;
   final String? subtitle;
   final String? description;
@@ -9,9 +10,13 @@ class YaqutReaderBook {
   final double? price;
   final double? retailPrice;
   final double? rating;
+  double? previewPercentage;
+  int position;
+  List<Map<String, dynamic>>? notesAndMarks;
 
   YaqutReaderBook({
     required this.bookId,
+    required this.bookFileId,
     required this.title,
     this.subtitle,
     this.description,
@@ -21,11 +26,15 @@ class YaqutReaderBook {
     this.price,
     this.retailPrice,
     this.rating,
+    this.previewPercentage,
+    this.position = 0,
+    this.notesAndMarks,
   });
 
   factory YaqutReaderBook.fromJson(Map<String, dynamic> json) {
     return YaqutReaderBook(
       bookId: json['bookId'] as int,
+      bookFileId: json['bookFileId'] as int,
       title: json['title'] as String,
       subtitle: json['subtitle'] as String?,
       description: json['description'] as String?,
@@ -35,12 +44,18 @@ class YaqutReaderBook {
       price: json['price'] as double?,
       retailPrice: json['retailPrice'] as double?,
       rating: json['rating'] as double?,
+      previewPercentage: json['previewPercentage'] as double?,
+      position: json['position'] ?? 0,
+      notesAndMarks: (json['notesAndMarks'] as List<dynamic>?)
+          ?.map((item) => Map<String, dynamic>.from(item as Map))
+          .toList(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'bookId': bookId,
+      'bookFileId': bookFileId,
       'title': title,
       'subtitle': subtitle,
       'description': description,
@@ -50,6 +65,11 @@ class YaqutReaderBook {
       'price': price,
       'retailPrice': retailPrice,
       'rating': rating,
+      'previewPercentage': previewPercentage,
+      'position': position,
+      'notesAndMarks': notesAndMarks
+          ?.map((item) => Map<String, dynamic>.from(item))
+          .toList(),
     };
   }
 }
