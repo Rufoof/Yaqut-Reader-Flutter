@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _rufoofPlugin = YaqutReaderPlugin();
+  final _yaqutReaderPlugin = YaqutReaderPlugin();
 
   @override
   void initState() {
@@ -31,10 +31,10 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion = await _rufoofPlugin.getPlatformVersion() ??
+      platformVersion = await _yaqutReaderPlugin.getPlatformVersion() ??
           'Unknown platform version';
 
-      // final result = await _rufoofPlugin.startReader(
+      // final result = await _yaqutReaderPlugin.startReader(
       //     header: '', path: '', accessToken: '', book: null, style: null);
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';

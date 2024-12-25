@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 import XCTest
 
-@testable import rufoof_plugin
+@testable import yaqut_reader_plugin
 
 // This demonstrates a simple unit test of the Swift portion of this plugin's implementation.
 //
@@ -11,7 +11,7 @@ import XCTest
 class RunnerTests: XCTestCase {
 
   func testGetPlatformVersion() {
-    let plugin = RufoofPlugin()
+    let plugin = yaqutReaderPlugin()
 
     let call = FlutterMethodCall(methodName: "getPlatformVersion", arguments: [])
 

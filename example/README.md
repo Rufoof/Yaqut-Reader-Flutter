@@ -1,6 +1,6 @@
 # yaqut_reader_example
 
-Demonstrates how to use the rufoof_plugin plugin.
+Demonstrates how to use the yaqut_reader_plugin plugin.
 
 ## Getting Started
 
