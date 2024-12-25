@@ -6,7 +6,7 @@
 2. Under `dependencies` add the following:
 
 ```dart
-rufoof_plugin:
+yaqut_reader_plugin:
     git:
       url: https://github.com/Rufoof/Yaqut-Reader-Flutter.git
       ref: 1.0.0
