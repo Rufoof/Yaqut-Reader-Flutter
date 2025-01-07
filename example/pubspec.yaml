@@ -21,7 +21,7 @@ dependencies:
 
   yaqut_reader_plugin:
     # When depending on this package from a real application you should use:
-    #   rufoof_plugin: ^x.y.z
+    #   yaqut_reader_plugin: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints
     # The example app is bundled with the plugin so we use a path dependency on
     # the parent directory to use the current plugin's version.
