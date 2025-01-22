@@ -54224,6 +54224,34 @@
           },
           {
             "kind": "Function",
+            "name": "setOrientationEnabled",
+            "printedName": "setOrientationEnabled(enabled:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11YaqutReader12RRReaderViewC21setOrientationEnabled7enabledySb_tF",
+            "mangledName": "$s11YaqutReader12RRReaderViewC21setOrientationEnabled7enabledySb_tF",
+            "moduleName": "YaqutReader",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "errorCloseBook",
             "printedName": "errorCloseBook()",
             "children": [
@@ -72419,6 +72447,32 @@
             "declKind": "Func",
             "usr": "s:11YaqutReader0B7BuilderC20setAudioStartChapter05audiofG0ySi_tF",
             "mangledName": "$s11YaqutReader0B7BuilderC20setAudioStartChapter05audiofG0ySi_tF",
+            "moduleName": "YaqutReader",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "enableOrientation",
+            "printedName": "enableOrientation(enabled:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11YaqutReader0B7BuilderC17enableOrientation7enabledySb_tF",
+            "mangledName": "$s11YaqutReader0B7BuilderC17enableOrientation7enabledySb_tF",
             "moduleName": "YaqutReader",
             "declAttributes": [
               "AccessControl"
@@ -126533,42 +126587,42 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 1622,
+      "offset": 1626,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 1656,
+      "offset": 1660,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 1684,
+      "offset": 1688,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "FloatLiteral",
-      "offset": 1716,
+      "offset": 1720,
       "length": 4,
       "value": "54.0"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "StringLiteral",
-      "offset": 1866,
+      "offset": 1870,
       "length": 12,
       "value": "\"RRPageCell\""
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 26910,
+      "offset": 27151,
       "length": 1,
       "value": "0"
     },
@@ -131202,21 +131256,28 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
       "kind": "BooleanLiteral",
-      "offset": 148330,
+      "offset": 5281,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 148698,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
       "kind": "BooleanLiteral",
-      "offset": 148361,
+      "offset": 148729,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
       "kind": "FloatLiteral",
-      "offset": 151528,
+      "offset": 151896,
       "length": 3,
       "value": "1.0"
     },
@@ -132244,29 +132305,36 @@
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderBuilder.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1308,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 1307,
+      "offset": 1355,
       "length": 6,
       "value": "-10000"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 1356,
+      "offset": 1404,
       "length": 6,
       "value": "-20000"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 1409,
+      "offset": 1457,
       "length": 6,
       "value": "-30000"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 12400,
+      "offset": 12625,
       "length": 1,
       "value": "0"
     },
