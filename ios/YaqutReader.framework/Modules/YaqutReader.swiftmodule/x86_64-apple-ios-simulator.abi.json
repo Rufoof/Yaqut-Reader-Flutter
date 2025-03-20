@@ -17949,6 +17949,33 @@
           },
           {
             "kind": "Function",
+            "name": "onShareQuotes",
+            "printedName": "onShareQuotes(text:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11YaqutReader20RRReaderViewDelegateP13onShareQuotes4textySS_tF",
+            "mangledName": "$s11YaqutReader20RRReaderViewDelegateP13onShareQuotes4textySS_tF",
+            "moduleName": "YaqutReader",
+            "genericSig": "<τ_0_0 where τ_0_0 : YaqutReader.RRReaderViewDelegate>",
+            "sugared_genericSig": "<Self where Self : YaqutReader.RRReaderViewDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "onDownloadBook",
             "printedName": "onDownloadBook()",
             "children": [
@@ -54418,102 +54445,6 @@
           },
           {
             "kind": "Function",
-            "name": "scrollViewWillBeginDragging",
-            "printedName": "scrollViewWillBeginDragging(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIScrollView",
-                "printedName": "UIKit.UIScrollView",
-                "usr": "c:objc(cs)UIScrollView"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@YaqutReader@objc(cs)RRReaderView(im)scrollViewWillBeginDragging:",
-            "mangledName": "$s11YaqutReader12RRReaderViewC06scrollD17WillBeginDraggingyySo08UIScrollD0CF",
-            "moduleName": "YaqutReader",
-            "objc_name": "scrollViewWillBeginDragging:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Preconcurrency",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "scrollViewDidEndDecelerating",
-            "printedName": "scrollViewDidEndDecelerating(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIScrollView",
-                "printedName": "UIKit.UIScrollView",
-                "usr": "c:objc(cs)UIScrollView"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@YaqutReader@objc(cs)RRReaderView(im)scrollViewDidEndDecelerating:",
-            "mangledName": "$s11YaqutReader12RRReaderViewC06scrollD18DidEndDeceleratingyySo08UIScrollD0CF",
-            "moduleName": "YaqutReader",
-            "objc_name": "scrollViewDidEndDecelerating:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Preconcurrency",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "scrollViewDidEndScrollingAnimation",
-            "printedName": "scrollViewDidEndScrollingAnimation(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIScrollView",
-                "printedName": "UIKit.UIScrollView",
-                "usr": "c:objc(cs)UIScrollView"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@YaqutReader@objc(cs)RRReaderView(im)scrollViewDidEndScrollingAnimation:",
-            "mangledName": "$s11YaqutReader12RRReaderViewC06scrollD24DidEndScrollingAnimationyySo08UIScrollD0CF",
-            "moduleName": "YaqutReader",
-            "objc_name": "scrollViewDidEndScrollingAnimation:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Preconcurrency",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
             "name": "onReSync",
             "printedName": "onReSync()",
             "children": [
@@ -54849,6 +54780,140 @@
             "mangledName": "$s11YaqutReader12RRReaderViewC11didSetValueyyF",
             "moduleName": "YaqutReader",
             "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "scrollViewWillBeginDragging",
+            "printedName": "scrollViewWillBeginDragging(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIScrollView",
+                "printedName": "UIKit.UIScrollView",
+                "usr": "c:objc(cs)UIScrollView"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@YaqutReader@objc(cs)RRReaderView(im)scrollViewWillBeginDragging:",
+            "mangledName": "$s11YaqutReader12RRReaderViewC06scrollD17WillBeginDraggingyySo08UIScrollD0CF",
+            "moduleName": "YaqutReader",
+            "objc_name": "scrollViewWillBeginDragging:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "scrollViewDidEndDecelerating",
+            "printedName": "scrollViewDidEndDecelerating(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIScrollView",
+                "printedName": "UIKit.UIScrollView",
+                "usr": "c:objc(cs)UIScrollView"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@YaqutReader@objc(cs)RRReaderView(im)scrollViewDidEndDecelerating:",
+            "mangledName": "$s11YaqutReader12RRReaderViewC06scrollD18DidEndDeceleratingyySo08UIScrollD0CF",
+            "moduleName": "YaqutReader",
+            "objc_name": "scrollViewDidEndDecelerating:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "scrollViewDidEndScrollingAnimation",
+            "printedName": "scrollViewDidEndScrollingAnimation(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIScrollView",
+                "printedName": "UIKit.UIScrollView",
+                "usr": "c:objc(cs)UIScrollView"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@YaqutReader@objc(cs)RRReaderView(im)scrollViewDidEndScrollingAnimation:",
+            "mangledName": "$s11YaqutReader12RRReaderViewC06scrollD24DidEndScrollingAnimationyySo08UIScrollD0CF",
+            "moduleName": "YaqutReader",
+            "objc_name": "scrollViewDidEndScrollingAnimation:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "scrollViewDidEndDragging",
+            "printedName": "scrollViewDidEndDragging(_:willDecelerate:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIScrollView",
+                "printedName": "UIKit.UIScrollView",
+                "usr": "c:objc(cs)UIScrollView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@YaqutReader@objc(cs)RRReaderView(im)scrollViewDidEndDragging:willDecelerate:",
+            "mangledName": "$s11YaqutReader12RRReaderViewC06scrollD14DidEndDragging_14willDecelerateySo08UIScrollD0C_SbtF",
+            "moduleName": "YaqutReader",
+            "objc_name": "scrollViewDidEndDragging:willDecelerate:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
               "Preconcurrency",
               "Custom",
               "AccessControl"
@@ -72721,6 +72786,33 @@
             "declAttributes": [
               "AccessControl"
             ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onShareQuotes",
+            "printedName": "onShareQuotes(text:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11YaqutReader0B7BuilderC13onShareQuotes4textySS_tF",
+            "mangledName": "$s11YaqutReader0B7BuilderC13onShareQuotes4textySS_tF",
+            "moduleName": "YaqutReader",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
             "funcSelfKind": "NonMutating"
           },
           {
@@ -102060,8 +102152,9 @@
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
               },
               {
                 "kind": "TypeNominal",
@@ -102071,8 +102164,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:11YaqutReader11BookStorageC06deleteC06bookIdySi_tF",
-            "mangledName": "$s11YaqutReader11BookStorageC06deleteC06bookIdySi_tF",
+            "usr": "s:11YaqutReader11BookStorageC06deleteC06bookIdSbSi_tF",
+            "mangledName": "$s11YaqutReader11BookStorageC06deleteC06bookIdSbSi_tF",
             "moduleName": "YaqutReader",
             "declAttributes": [
               "AccessControl"
@@ -106261,6 +106354,33 @@
             "declKind": "Func",
             "usr": "s:11YaqutReader0B8DelegateP11onShareBookyyF",
             "mangledName": "$s11YaqutReader0B8DelegateP11onShareBookyyF",
+            "moduleName": "YaqutReader",
+            "genericSig": "<τ_0_0 where τ_0_0 : YaqutReader.ReaderDelegate>",
+            "sugared_genericSig": "<Self where Self : YaqutReader.ReaderDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onShareQuotes",
+            "printedName": "onShareQuotes(text:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11YaqutReader0B8DelegateP13onShareQuotes4textySS_tF",
+            "mangledName": "$s11YaqutReader0B8DelegateP13onShareQuotes4textySS_tF",
             "moduleName": "YaqutReader",
             "genericSig": "<τ_0_0 where τ_0_0 : YaqutReader.ReaderDelegate>",
             "sugared_genericSig": "<Self where Self : YaqutReader.ReaderDelegate>",
@@ -126622,9 +126742,44 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 27151,
+      "offset": 26931,
       "length": 1,
       "value": "0"
+    },
+    {
+      "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
+      "kind": "FloatLiteral",
+      "offset": 29048,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
+      "kind": "StringLiteral",
+      "offset": 35197,
+      "length": 12,
+      "value": "\"rr-ic-note\""
+    },
+    {
+      "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35285,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35297,
+      "length": 2,
+      "value": "20"
+    },
+    {
+      "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35377,
+      "length": 2,
+      "value": "40"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Libs\/AnimatedCollectionViewLayout\/Animators\/PageAttributesAnimator.swift",
@@ -131256,28 +131411,28 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
       "kind": "BooleanLiteral",
-      "offset": 5281,
+      "offset": 5295,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
       "kind": "BooleanLiteral",
-      "offset": 148698,
+      "offset": 150668,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
       "kind": "BooleanLiteral",
-      "offset": 148729,
+      "offset": 150699,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRReaderView.swift",
       "kind": "FloatLiteral",
-      "offset": 151896,
+      "offset": 153866,
       "length": 3,
       "value": "1.0"
     },
@@ -132334,7 +132489,7 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 12625,
+      "offset": 13646,
       "length": 1,
       "value": "0"
     },
@@ -133678,7 +133833,7 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRAudioPlayer.swift",
       "kind": "IntegerLiteral",
-      "offset": 82546,
+      "offset": 82811,
       "length": 1,
       "value": "0"
     },

@@ -514,13 +514,13 @@ SWIFT_CLASS("_TtC11YaqutReader17PDFViewController")
 - (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 @end
 
-
 @class UIScrollView;
 
 @interface PDFViewController (SWIFT_EXTENSION(YaqutReader)) <UIScrollViewDelegate>
 - (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)decelerate;
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
+
 
 
 SWIFT_CLASS("_TtC11YaqutReader13RRAudioPlayer")
@@ -670,15 +670,20 @@ SWIFT_CLASS("_TtC11YaqutReader12RRReaderView")
 
 
 
-
-
-
 @interface RRReaderView (SWIFT_EXTENSION(YaqutReader)) <UICollectionViewDelegate>
 - (void)collectionView:(UICollectionView * _Nonnull)collectionView willDisplayCell:(UICollectionViewCell * _Nonnull)cell forItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+@end
+
+
+@interface RRReaderView (SWIFT_EXTENSION(YaqutReader)) <UIScrollViewDelegate>
 - (void)scrollViewWillBeginDragging:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)decelerate;
 @end
+
+
+
 
 
 
