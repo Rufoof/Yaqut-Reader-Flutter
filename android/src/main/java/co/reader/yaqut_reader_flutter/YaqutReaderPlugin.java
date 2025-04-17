@@ -130,8 +130,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
 
                 for (FileSizeInfo fileInfo : filesInfo) {
                     Map<String, Object> fileData = new HashMap<>();
-                    fileData.put("id", fileInfo.getId());
-                    fileData.put("size", fileInfo.getSize());
+                    fileData.put("id", fileInfo.getFileName());
+                    fileData.put("size", fileInfo.getFileSize());
                     serializedFilesInfo.add(fileData);
                 }
 
