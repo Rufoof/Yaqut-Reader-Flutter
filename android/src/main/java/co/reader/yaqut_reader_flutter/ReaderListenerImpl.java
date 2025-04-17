@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
@@ -21,7 +22,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     private final int bookId;
 
     // Constructor
-    public ReaderListenerImpl( int bookId) {
+    public ReaderListenerImpl(int bookId) {
         this.bookId = bookId;
         Log.i(TAG, "ReaderListenerImpl: initialized");
     }
@@ -83,7 +84,7 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
             data.put("book_id", bookId);
             Log.i(TAG, "onPositionChanged: channel invoked");
             channel.invokeMethod("onPositionChanged", data);
-        }else Log.i(TAG, "onPositionChanged: channel is null");
+        } else Log.i(TAG, "onPositionChanged: channel is null");
     }
 
     @Override
@@ -107,7 +108,6 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     }
 
 
-
     @Override
     public void onUpdateLastOpened(long timestamp) {
         MethodChannel channel = ChannelManager.getInstance().getChannel();
@@ -117,10 +117,14 @@ public class ReaderListenerImpl implements ReaderListener, Parcelable {
     }
 
     @Override
-    public void onShareBook() {
+    public void onShareBook(String quote) {
         MethodChannel channel = ChannelManager.getInstance().getChannel();
         if (channel != null) {
-            channel.invokeMethod("onShareBook", new HashMap<String, Object>());
+            if (quote.isEmpty())
+                channel.invokeMethod("onShareBook", new HashMap<String, Object>());
+            else
+                channel.invokeMethod("onShareQuotes", quote);
+
         }
     }
 
