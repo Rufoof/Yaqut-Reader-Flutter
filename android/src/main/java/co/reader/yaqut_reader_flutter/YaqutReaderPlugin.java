@@ -123,7 +123,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                 return;
 
             case "getLocalBooksInfo":
-                List<FileSizeInfo> filesInfo = BookStorage.getLocalBookFilesInfo();
+                List<FileSizeInfo> filesInfo = BookStorage.getLocalBookFilesInfo(applicationContext);
                 List<Map<String, Object>> serializedFilesInfo = new ArrayList<>();
 
                 for (FileSizeInfo fileInfo : filesInfo) {
