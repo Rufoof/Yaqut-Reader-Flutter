@@ -1,0 +1,1 @@
+./gradlew -p publishing publish
