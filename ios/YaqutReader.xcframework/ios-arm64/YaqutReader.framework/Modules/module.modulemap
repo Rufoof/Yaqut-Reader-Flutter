@@ -1,0 +1,11 @@
+framework module YaqutReader {
+  umbrella header "YaqutReader.h"
+  export *
+
+  module * { export * }
+}
+
+module YaqutReader.Swift {
+  header "YaqutReader-Swift.h"
+  requires objc
+}
