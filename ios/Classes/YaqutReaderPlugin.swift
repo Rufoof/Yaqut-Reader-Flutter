@@ -156,13 +156,25 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
     }
 
     private func updateMarks(notesAndMarksData: [[String: Any]]) {
-        var notesAndMarks = [NotesAndMarks]()
-        for item in notesAndMarksData {
-            let newItem: [String: Any] = ["bookId": bookId, "markId": item["id"] as? Int ?? 0, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
-            let noteAndMark = NotesAndMarks(data: newItem)
-            notesAndMarks.append(noteAndMark)
-        }
+        let notesAndMarks = parseMarksFromFlutter(notesAndMarksData)
         self.readerBuilder?.updateMarks(allMarks: notesAndMarks)
+    }
+
+    private func parseMarksFromFlutter(_ data: [[String: Any]]) -> [NotesAndMarks] {
+        return data.map { item in
+            let newItem: [String: Any] = [
+                "bookId": bookId ?? 0,
+                "markId": item["id"] as? Int ?? 0,
+                "fromOffset": item["location"] as? Int ?? 0,
+                "toOffset": item["length"] as? Int ?? 0,
+                "markColor": item["color"] as? Int ?? 0,
+                "displayText": item["note"] as? String ?? "",
+                "type": item["type"] as? Int ?? 0,
+                "deleted": item["deleted"] as? Int ?? 0,
+                "local": 1
+            ]
+            return NotesAndMarks(data: newItem)
+        }
     }
 
     private func offlineDownloadComplete(bookId: Int) {
@@ -203,12 +215,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
             self.readerBuilder?.setSaveState(saveState: .DISABLED)
         }
         let notesAndMarksData = bookData["notesAndMarks"] as? [[String: Any]] ?? []
-        var notesAndMarks = [NotesAndMarks]()
-        for item in notesAndMarksData {
-            let newItem: [String: Any] = ["bookId": bookId, "markId": item["id"] as? Int ?? 0, "fromOffset": item["location"] as? Int ?? 0, "toOffset": item["length"] as? Int ?? 0, "markColor": item["color"] as? Int ?? 0, "displayText": item["note"] as? String ?? "", "type": item["type"] as? Int ?? 0, "deleted": item["deleted"] as? Int ?? 0, "local": 1]
-            let noteAndMark = NotesAndMarks(data: newItem)
-            notesAndMarks.append(noteAndMark)
-        }
+        let notesAndMarks = parseMarksFromFlutter(notesAndMarksData)
         self.readerBuilder?.setMarks(allMarks: notesAndMarks)
 
         let readerColor = style["readerColor"] as? Int ?? 0
