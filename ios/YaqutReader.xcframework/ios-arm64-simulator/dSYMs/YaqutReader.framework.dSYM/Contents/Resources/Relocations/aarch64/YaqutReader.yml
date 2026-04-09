@@ -6420,7 +6420,7 @@ relocations:
   - { offset: 0xEB321, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC21onStopDownloadLoadingyyFyycfU_TA', symObjAddr: 0x10054, symBinAddr: 0x16D78C, symSize: 0x8 }
   - { offset: 0xEB335, size: 0x8, addend: 0x0, symName: _block_copy_helper, symObjAddr: 0x101D8, symBinAddr: 0x16D7D8, symSize: 0x44 }
   - { offset: 0xEB349, size: 0x8, addend: 0x0, symName: _block_destroy_helper, symObjAddr: 0x1021C, symBinAddr: 0x16D81C, symSize: 0x18 }
-  - { offset: 0xEB35D, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBook33_FA2EA85B9FF3CF46E5D8C21308F2D735LLyyFySbcfU0_TA', symObjAddr: 0x10270, symBinAddr: 0x16D870, symSize: 0xC }
+  - { offset: 0xEB35D, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBookyyFySbcfU0_TA', symObjAddr: 0x10270, symBinAddr: 0x16D870, symSize: 0xC }
   - { offset: 0xEB371, size: 0x8, addend: 0x0, symName: _block_copy_helper.4, symObjAddr: 0x1027C, symBinAddr: 0x16D87C, symSize: 0x44 }
   - { offset: 0xEB385, size: 0x8, addend: 0x0, symName: _block_destroy_helper.5, symObjAddr: 0x102C0, symBinAddr: 0x16D8C0, symSize: 0x18 }
   - { offset: 0xEB399, size: 0x8, addend: 0x0, symName: _block_copy_helper.10, symObjAddr: 0x1043C, symBinAddr: 0x16D91C, symSize: 0x44 }
@@ -6434,7 +6434,7 @@ relocations:
   - { offset: 0xEB439, size: 0x8, addend: 0x0, symName: '_$s10Foundation3URLVSgWOb', symObjAddr: 0x1140C, symBinAddr: 0x16DF8C, symSize: 0xBC }
   - { offset: 0xEB44D, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderCMa', symObjAddr: 0x115C8, symBinAddr: 0x16E048, symSize: 0x24 }
   - { offset: 0xEB461, size: 0x8, addend: 0x0, symName: '_$sSa22_allocateUninitializedySayxG_SpyxGtSiFZSo20NSDataWritingOptionsV_Tt0gq5', symObjAddr: 0x11974, symBinAddr: 0x16E3F4, symSize: 0xD4 }
-  - { offset: 0xEB48E, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBook33_FA2EA85B9FF3CF46E5D8C21308F2D735LLyyFySbcfU0_ySiXEfU_TA', symObjAddr: 0x11A48, symBinAddr: 0x16E4C8, symSize: 0x24 }
+  - { offset: 0xEB48E, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBookyyFySbcfU0_ySiXEfU_TA', symObjAddr: 0x11A48, symBinAddr: 0x16E4C8, symSize: 0x24 }
   - { offset: 0xEB838, size: 0x8, addend: 0x0, symName: '_$sSo7UIImageC10systemNameABSgSS_tcfCTO', symObjAddr: 0x0, symBinAddr: 0x15ECC4, symSize: 0x6C }
   - { offset: 0xEB84C, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC14readerDelegate33_FA2EA85B9FF3CF46E5D8C21308F2D735LLAA0bE0_pSgvg', symObjAddr: 0xC5C, symBinAddr: 0x15F850, symSize: 0x64 }
   - { offset: 0xEB87B, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC14readerDelegate33_FA2EA85B9FF3CF46E5D8C21308F2D735LLAA0bE0_pSgvs', symObjAddr: 0xCC0, symBinAddr: 0x15F8B4, symSize: 0x84 }
@@ -6517,9 +6517,9 @@ relocations:
   - { offset: 0xEC914, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC22onHideDownloadProgressyyFyycfU_', symObjAddr: 0x7B9C, symBinAddr: 0x166090, symSize: 0x170 }
   - { offset: 0xEC92F, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC02onB6Closed8positionySi_tF', symObjAddr: 0x7D0C, symBinAddr: 0x166200, symSize: 0x1AC }
   - { offset: 0xEC978, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC20restoreAppAppearance33_FA2EA85B9FF3CF46E5D8C21308F2D735LLyyF', symObjAddr: 0x7EB8, symBinAddr: 0x1663AC, symSize: 0xA0 }
-  - { offset: 0xEC99D, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBook33_FA2EA85B9FF3CF46E5D8C21308F2D735LLyyF', symObjAddr: 0x7F58, symBinAddr: 0x16644C, symSize: 0x488 }
-  - { offset: 0xECA13, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBook33_FA2EA85B9FF3CF46E5D8C21308F2D735LLyyFySbcfU0_', symObjAddr: 0x89B4, symBinAddr: 0x166E80, symSize: 0x5E8 }
-  - { offset: 0xECA80, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBook33_FA2EA85B9FF3CF46E5D8C21308F2D735LLyyFySbcfU0_ySiXEfU_', symObjAddr: 0x8F9C, symBinAddr: 0x167468, symSize: 0x8C }
+  - { offset: 0xEC99D, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBookyyF', symObjAddr: 0x7F58, symBinAddr: 0x16644C, symSize: 0x488 }
+  - { offset: 0xECA13, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBookyyFySbcfU0_', symObjAddr: 0x89B4, symBinAddr: 0x166E80, symSize: 0x5E8 }
+  - { offset: 0xECA80, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC9closeBookyyFySbcfU0_ySiXEfU_', symObjAddr: 0x8F9C, symBinAddr: 0x167468, symSize: 0x8C }
   - { offset: 0xECAC3, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC17onPositionChanged8positionySi_tF', symObjAddr: 0x83E0, symBinAddr: 0x1668D4, symSize: 0x204 }
   - { offset: 0xECB0C, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC19onSyncNotesAndMarks4listySayAA0fgH0CG_tF', symObjAddr: 0x85E4, symBinAddr: 0x166AD8, symSize: 0xAC }
   - { offset: 0xECB3F, size: 0x8, addend: 0x0, symName: '_$s11YaqutReader0B7BuilderC17onSaveBookClicked8positionySi_tF', symObjAddr: 0x8690, symBinAddr: 0x166B84, symSize: 0xAC }

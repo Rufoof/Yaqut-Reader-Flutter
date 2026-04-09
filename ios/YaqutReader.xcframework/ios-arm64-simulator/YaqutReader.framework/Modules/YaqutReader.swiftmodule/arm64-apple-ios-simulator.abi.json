@@ -18884,6 +18884,27 @@
           },
           {
             "kind": "Function",
+            "name": "closeBook",
+            "printedName": "closeBook()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:11YaqutReader0B7BuilderC9closeBookyyF",
+            "mangledName": "$s11YaqutReader0B7BuilderC9closeBookyyF",
+            "moduleName": "YaqutReader",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "onShareQuotes",
             "printedName": "onShareQuotes(text:)",
             "children": [
@@ -40460,14 +40481,14 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/RRReaderBuilder.swift",
       "kind": "IntegerLiteral",
-      "offset": 19523,
+      "offset": 19530,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/RRReaderBuilder.swift",
       "kind": "BooleanLiteral",
-      "offset": 24569,
+      "offset": 24576,
       "length": 4,
       "value": "true"
     },

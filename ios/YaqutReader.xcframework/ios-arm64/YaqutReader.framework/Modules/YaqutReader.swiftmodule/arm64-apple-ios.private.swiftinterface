@@ -559,6 +559,9 @@ public class ReaderBuilder {
   public func onEndOfSample()
   @objc deinit
 }
+extension YaqutReader.ReaderBuilder {
+  public func closeBook()
+}
 extension YaqutReader.ReaderBuilder : YaqutReader.RRReaderViewDelegate {
   public func onShareQuotes(text: Swift.String)
   public func onOrientationChanged()

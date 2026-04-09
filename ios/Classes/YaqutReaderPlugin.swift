@@ -208,11 +208,11 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         self.readerBuilder?.setDownloadEnabled(downloadEnabled: true)
 
         if saved == "true" {
-            self.readerBuilder?.setSaveState(saveState: .SAVED)
+            self.readerBuilder?.setSaveState(saveState: .saved)
         } else if saved == "false" {
-            self.readerBuilder?.setSaveState(saveState: .NOT_SAVED)
+            self.readerBuilder?.setSaveState(saveState: .notSaved)
         } else {
-            self.readerBuilder?.setSaveState(saveState: .DISABLED)
+            self.readerBuilder?.setSaveState(saveState: .disabled)
         }
         let notesAndMarksData = bookData["notesAndMarks"] as? [[String: Any]] ?? []
         let notesAndMarks = parseMarksFromFlutter(notesAndMarksData)
@@ -222,9 +222,9 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let textSize = style["textSize"] as? Int ?? 22
         let isJustified = style["isJustified"] as? Bool ?? true
         let lineSpacingValue = style["lineSpacing"] as? Int ?? 1
-        let lineSpacing = LineSpacing(rawValue: lineSpacingValue) ?? LineSpacing.LINESPACE_MEDIUM
+        let lineSpacing = LineSpacing(rawValue: lineSpacingValue) ?? LineSpacing.medium
         let font = style["font"] as? Int ?? 0
-        let readerStyle = ReaderStyle(readerColor: readerColor, readerTextSize: textSize, isJustified: isJustified, lineSpacing: lineSpacing, font: font)
+        let readerStyle = ReaderStyle(readerColor: readerColor, textSize: textSize, isJustified: isJustified, lineSpacing: lineSpacing, font: font)
         self.readerBuilder?.setReaderStyle(readerStyle: readerStyle)
 
         if (path ?? "") == "" {
