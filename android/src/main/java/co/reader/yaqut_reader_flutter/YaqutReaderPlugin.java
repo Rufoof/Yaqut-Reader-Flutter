@@ -336,9 +336,11 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         int bookId = (Integer) arguments.get("book_id");
         BookInfo bookInfo = BookStorage.getBookInfo(applicationContext, bookId);
         if (bookInfo == null) {
+            Log.d(TAG, "getBookLength: bookId=" + bookId + ", bookInfo=null");
             result.success(0);
             return;
         }
+        Log.d(TAG, "getBookLength: bookId=" + bookId + ", fileType=" + bookInfo.getFileType() + ", length=" + bookInfo.getLength() + ", pages=" + bookInfo.getPages() + ", isSample=" + bookInfo.isSample());
         if ("pdf".equals(bookInfo.getFileType())) {
             result.success(bookInfo.getPages());
         } else {
