@@ -339,7 +339,11 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
             result.success(0);
             return;
         }
-        result.success(bookInfo.getLength());
+        if ("pdf".equals(bookInfo.getFileType())) {
+            result.success(bookInfo.getPages());
+        } else {
+            result.success(bookInfo.getLength());
+        }
     }
 
     private void handleDeleteSampleBook(MethodCall call, MethodChannel.Result result) {
