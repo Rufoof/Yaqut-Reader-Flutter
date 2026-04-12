@@ -55,7 +55,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
                    if let bookId = arguments["book_id"] as? Int {
                        let bookStorage = BookStorage()
                        let bookInfo = bookStorage.getBookInfo(bookId: bookId)
-                       result(bookInfo.length)
+                       result(bookInfo.type == "pdf" ? bookInfo.pages : bookInfo.length)
                        return
                    }
                    result(0)
