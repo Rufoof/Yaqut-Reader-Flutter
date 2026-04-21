@@ -259,6 +259,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
             Map<String, Object> book = (Map<String, Object>) arguments.get("book");
             Map<String, Object> style = (Map<String, Object>) arguments.get("style");
             boolean isDarkMode = getBooleanValue(arguments, "is_dark_mode", false);
+            boolean isEInkDevice = getBooleanValue(arguments, "is_eink_device", false);
 
             if (book == null) {
                 result.error("INVALID_ARGUMENTS", "Book data cannot be null", null);
@@ -266,7 +267,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                 return;
             }
 
-            startReader(header, path, token, book, style, saved, isDarkMode);
+            startReader(header, path, token, book, style, saved, isDarkMode, isEInkDevice);
             isReaderOpen.set(true);
             result.success(null);
         } catch (Exception e) {
@@ -440,7 +441,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         }
     }
 
-    private void startReader(String header, String path, String token, Map<String, Object> bookData, Map<String, Object> styleData, String saved, boolean isDarkMode) {
+    private void startReader(String header, String path, String token, Map<String, Object> bookData, Map<String, Object> styleData, String saved, boolean isDarkMode, boolean isEInkDevice) {
         if (activity == null || channel == null) {
             Log.e(TAG, "Cannot start reader: Activity or Channel is null");
             ChannelManager.getInstance().sendError("READER_ERROR", "Activity or Channel is null", null);
@@ -510,7 +511,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                 .setNotesAndMarks(notesAndMarks)
                 .setReadingStatsListener(new StatsSessionListenerImpl())
                 .setFileId(bookFileId)
-                .setDarkMode(isDarkMode);
+                .setDarkMode(isDarkMode)
+                .setEInkMode(isEInkDevice);
 
         // Set save state
         if ("true".equals(saved)) {
