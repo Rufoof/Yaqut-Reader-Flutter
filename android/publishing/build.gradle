@@ -1,0 +1,24 @@
+plugins {
+    id 'maven-publish'
+}
+
+group = 'co.yaqut.reader'
+version = '1.6.9' // Set the version for your library
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = project.group
+            artifactId = 'reader'
+            version = project.version
+
+            artifact(file('app-release.aar')) {
+                extension 'aar'
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal() // Publishes to ~/.m2/repository
+    }
+}
