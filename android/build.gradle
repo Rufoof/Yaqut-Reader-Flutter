@@ -20,6 +20,10 @@ rootProject.allprojects {
         google()
         mavenCentral()
         mavenLocal()
+        // Onyx Boox SDK — needed at runtime for the reader's pen integration on
+        // Boox e-ink devices. Inert on non-Boox devices: PenInputControllerFactory
+        // probes class availability via Class.forName before touching the SDK.
+        maven { url 'https://repo.boox.com/repository/maven-public/' }
     }
 }
 
@@ -42,8 +46,13 @@ android {
     }
 
     dependencies {
-        
-        implementation 'co.yaqut.reader:reader:1.7.24'
+
+        implementation 'co.yaqut.reader:reader:1.7.25'
+        // Exposed as `api` so the consuming Flutter app gets the Onyx classes on
+        // its runtime classpath without re-declaring the dep itself —
+        // PenInputControllerFactory.isOnyxSdkAvailable() requires com.onyx.android.sdk
+        // to be reachable at runtime, otherwise pen integration is silently disabled.
+        api 'com.onyx.android.sdk:onyxsdk-pen:1.5.4'
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.mockito:mockito-core:5.0.0")
         implementation 'androidx.appcompat:appcompat:1.6.1'
