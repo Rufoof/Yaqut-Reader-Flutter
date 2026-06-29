@@ -453,6 +453,7 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
         String title = (String) bookData.get("title");
         int bookFileId = getIntValue(bookData, "bookFileId", 0);
         double previewPercentage = getDoubleValue(bookData, "previewPercentage", 0.15);
+        boolean hasFullAccess = getBooleanValue(bookData, "hasFullAccess", false);
         int position = getIntValue(bookData, "position", 0);
         String cover = (String) bookData.get("coverThumbUrl");
 
@@ -512,7 +513,8 @@ public class YaqutReaderPlugin implements FlutterPlugin, MethodChannel.MethodCal
                 .setReadingStatsListener(new StatsSessionListenerImpl())
                 .setFileId(bookFileId)
                 .setDarkMode(isDarkMode)
-                .setEInkMode(isEInkDevice);
+                .setEInkMode(isEInkDevice)
+                .setHasFullAccess(hasFullAccess);
 
         // Set save state
         if ("true".equals(saved)) {

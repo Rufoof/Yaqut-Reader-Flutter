@@ -192,6 +192,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         let bookFileId = bookData["bookFileId"] as? Int ?? 0
         let title = bookData["title"] as? String ?? ""
         let previewPercentage = bookData["previewPercentage"] as? Double ?? 0.15
+        let hasFullAccess = bookData["hasFullAccess"] as? Bool ?? false
         let position = bookData["position"] as? Int ?? 0
         self.bookId = bookId
 
@@ -208,6 +209,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
         }
         self.readerBuilder?.setPosition(startPosition: position)
         self.readerBuilder?.setPercentageView(previewPercentage: previewPercentage)
+        self.readerBuilder?.setHasFullAccess(hasFullAccess: hasFullAccess)
         self.readerBuilder?.setDownloadEnabled(downloadEnabled: true)
 
         if saved == "true" {

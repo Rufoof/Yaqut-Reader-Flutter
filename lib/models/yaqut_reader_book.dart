@@ -11,6 +11,7 @@ class YaqutReaderBook {
   final double? retailPrice;
   final double? rating;
   double? previewPercentage;
+  final bool hasFullAccess;
   int position;
   List<Map<String, dynamic>>? notesAndMarks;
 
@@ -27,6 +28,7 @@ class YaqutReaderBook {
     this.retailPrice,
     this.rating,
     this.previewPercentage,
+    this.hasFullAccess = false,
     this.position = 0,
     this.notesAndMarks,
   });
@@ -66,6 +68,7 @@ class YaqutReaderBook {
       'retailPrice': retailPrice,
       'rating': rating,
       'previewPercentage': previewPercentage,
+      'hasFullAccess': hasFullAccess,
       'position': position,
       'notesAndMarks': notesAndMarks
           ?.map((item) => Map<String, dynamic>.from(item))
