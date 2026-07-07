@@ -6,6 +6,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
     var readerBuilder: ReaderBuilder?
     var channel: FlutterMethodChannel?
     var bookId: Int?
+    var shareText: String?
 
     public static func register(with registrar: FlutterPluginRegistrar) {
         let instance = YaqutReaderPlugin()
@@ -27,6 +28,7 @@ public class YaqutReaderPlugin: NSObject, FlutterPlugin {
                 let token = arguments["access_token"] as? String
                 let saved = arguments["saved"] as? String
                 let isDarkMode = arguments["is_dark_mode"] as? Bool ?? false
+                self.shareText = arguments["share_text"] as? String
                 self.startReader(header: header, path: path, accessToken: token, bookData: book, style: style, saved: saved == nil ? "disabled" : saved!, isDarkMode: isDarkMode)
             }
         case "checkIfLocal":
@@ -321,7 +323,42 @@ extension YaqutReaderPlugin: ReaderDelegate {
     }
 
     public func onShareBook() {
-        channel?.invokeMethod("onShareBook", arguments: [:])
+        // The native reader lives as a subview of the key window (not a presented
+        // view controller). A share sheet presented later from Flutter via a
+        // method-channel callback (e.g. share_plus) does not surface over it, so
+        // we present the activity sheet natively and synchronously here — the same
+        // pattern the reader uses for quote sharing. Falls back to Flutter if the
+        // share text wasn't supplied at launch.
+        guard let text = shareText, !text.isEmpty else {
+            channel?.invokeMethod("onShareBook", arguments: [:])
+            return
+        }
+        presentShareSheet(with: text)
+    }
+
+    private func presentShareSheet(with text: String) {
+        guard let presenter = Self.topViewController() else { return }
+        let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad,
+           let popover = activityVC.popoverPresentationController {
+            popover.sourceView = presenter.view
+            popover.sourceRect = CGRect(x: presenter.view.bounds.midX,
+                                        y: presenter.view.bounds.midY,
+                                        width: 0, height: 0)
+            popover.permittedArrowDirections = []
+        }
+        presenter.present(activityVC, animated: true, completion: nil)
+    }
+
+    private static func topViewController() -> UIViewController? {
+        let keyWindow = UIApplication.shared.connectedScenes
+            .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+            .first
+        var top = keyWindow?.rootViewController
+        while let presented = top?.presentedViewController {
+            top = presented
+        }
+        return top
     }
 
     public func onShareQuotes(text: String) {
