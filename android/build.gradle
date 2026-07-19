@@ -47,7 +47,7 @@ android {
 
     dependencies {
 
-        implementation 'co.yaqut.reader:reader:1.7.39'
+        implementation 'co.yaqut.reader:reader:1.7.40'
         // Exposed as `api` so the consuming Flutter app gets the Onyx classes on
         // its runtime classpath without re-declaring the dep itself —
         // PenInputControllerFactory.isOnyxSdkAvailable() requires com.onyx.android.sdk
