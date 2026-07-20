@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'co.yaqut.reader'
-version = '1.7.40' // Set the version for your library
+version = '1.7.41' // Set the version for your library
 
 publishing {
     publications {
