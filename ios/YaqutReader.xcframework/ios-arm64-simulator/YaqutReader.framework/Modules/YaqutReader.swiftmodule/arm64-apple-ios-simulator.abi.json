@@ -39623,35 +39623,35 @@
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "FloatLiteral",
-      "offset": 28195,
+      "offset": 28340,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "StringLiteral",
-      "offset": 35402,
+      "offset": 35547,
       "length": 12,
       "value": "\"rr-ic-note\""
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 35490,
+      "offset": 35635,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 35502,
+      "offset": 35647,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/amer\/Documents\/IOS Workspace\/YaqutReader\/YaqutReader\/Classes\/ReaderComponents\/RRPageCell.swift",
       "kind": "IntegerLiteral",
-      "offset": 35582,
+      "offset": 35727,
       "length": 2,
       "value": "40"
     },
